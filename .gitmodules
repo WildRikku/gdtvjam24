@@ -1,0 +1,3 @@
+[submodule "Assets/Scripts/Editor/WildRikku"]
+	path = Assets/Scripts/Editor/WildRikku
+	url = git@github.com:WildRikku/unity-editor-scripts.git
