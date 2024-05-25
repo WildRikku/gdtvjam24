@@ -17,7 +17,6 @@ namespace DTerrain
 
         protected override void OnLeftMouseButtonClick()
         {
-
             Vector3 p = Camera.main.ScreenToWorldPoint(Input.mousePosition) - primaryLayer.transform.position;
 
             primaryLayer?.Paint(new PaintingParameters() 
