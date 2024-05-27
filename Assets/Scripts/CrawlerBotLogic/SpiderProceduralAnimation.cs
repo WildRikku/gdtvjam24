@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpiderProceduralAnimation : MonoBehaviour
@@ -22,13 +23,15 @@ public class SpiderProceduralAnimation : MonoBehaviour
 
     private float velocityMultiplier = 7f;
 
+    public List<ParticleSystem> stepParticles;
+
     Vector2[] MatchToSurfaceFromAbove(Vector2 point, float halfRange, Vector2 up)
     {
         Vector2[] res = new Vector2[2];
         res[1] = Vector3.zero;
         RaycastHit2D hit;
         hit = Physics2D.Raycast(point + halfRange * up / 2f, -up, 2f * halfRange);
-        
+
         Debug.DrawRay(point + halfRange * up / 2f, -up * 2f * halfRange, Color.red, smoothness * Time.deltaTime);
 
         if (hit.collider)
@@ -72,6 +75,9 @@ public class SpiderProceduralAnimation : MonoBehaviour
         legTargets[index].position = targetPoint;
         lastLegPositions[index] = legTargets[index].position;
         legMoving[0] = false;
+
+        // TODO: Check is leg on ground?
+        stepParticles[index].Emit(5);
     }
 
 
@@ -106,25 +112,18 @@ public class SpiderProceduralAnimation : MonoBehaviour
 
         if (indexToMove != -1 && !legMoving[0])
         {
-            Vector2 targetPoint = desiredPositions[indexToMove] + Mathf.Clamp(velocity.magnitude * velocityMultiplier, 0.0f, 1.5f) * (desiredPositions[indexToMove] - 
+            Vector2 targetPoint = desiredPositions[indexToMove] + Mathf.Clamp(velocity.magnitude * velocityMultiplier, 0.0f, 1.5f) * (desiredPositions[indexToMove] -
                 (Vector2)legTargets[indexToMove].position) + velocity * velocityMultiplier;
 
-            Vector2[] positionAndNormalFwd = MatchToSurfaceFromAbove(targetPoint + velocity * velocityMultiplier, raycastRange, 
+            Vector2[] positionAndNormalFwd = MatchToSurfaceFromAbove(targetPoint + velocity * velocityMultiplier, raycastRange,
                 ((Vector2)transform.parent.up - velocity * 10).normalized);
 
-            Vector2[] positionAndNormalBwd = MatchToSurfaceFromAbove(targetPoint + velocity * velocityMultiplier, raycastRange * (1f + velocity.magnitude), 
+            Vector2[] positionAndNormalBwd = MatchToSurfaceFromAbove(targetPoint + velocity * velocityMultiplier, raycastRange * (1f + velocity.magnitude),
                 ((Vector2)transform.parent.up + velocity * 10).normalized);
 
             legMoving[0] = true;
 
-            if (positionAndNormalFwd[1] == Vector2.zero)
-            {
-                StartCoroutine(PerformStep(indexToMove, positionAndNormalBwd[0]));
-            }
-            else
-            {
-                StartCoroutine(PerformStep(indexToMove, positionAndNormalFwd[0]));
-            }
+            StartCoroutine(PerformStep(indexToMove, positionAndNormalBwd[0]));
         }
 
         lastBodyPos = transform.position;
@@ -136,8 +135,7 @@ public class SpiderProceduralAnimation : MonoBehaviour
             Vector3 normal = Vector3.Cross(v1, v2).normalized;
             Vector3 up = Vector3.Lerp(lastBodyUp, normal, 1f / (float)(smoothness + 1));
 
-            // Begrenzung der Neigung
-            float maxTiltAngle = 30f; // Maximaler Neigungswinkel in Grad
+            float maxTiltAngle = 30f;
             Vector3 constrainedUp = ConstrainTilt(up, maxTiltAngle);
 
             transform.up = constrainedUp;
@@ -148,15 +146,12 @@ public class SpiderProceduralAnimation : MonoBehaviour
 
     Vector3 ConstrainTilt(Vector3 up, float maxTiltAngle)
     {
-        // Konvertiere den up-Vektor in Euler-Winkel
         Quaternion upRotation = Quaternion.LookRotation(transform.parent.forward, up);
         Vector3 euler = upRotation.eulerAngles;
 
-        // Begrenze die Neigungswinkel
         euler.x = ClampAngle(euler.x, -maxTiltAngle, maxTiltAngle);
         euler.z = ClampAngle(euler.z, -maxTiltAngle, maxTiltAngle);
 
-        // Konvertiere zurück in einen Quaternion und returniere den neuen up-Vektor
         Quaternion constrainedRotation = Quaternion.Euler(euler);
         return constrainedRotation * Vector3.up;
     }

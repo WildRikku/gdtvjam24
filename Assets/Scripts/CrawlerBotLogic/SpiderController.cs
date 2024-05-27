@@ -23,6 +23,11 @@ public class SpiderController : MonoBehaviour
             {
                 rb.AddForce(-Vector2.right * 50f);
             }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                rb.AddForce(Vector2.up * 25f);
+            }
+
         }
     }
 }
