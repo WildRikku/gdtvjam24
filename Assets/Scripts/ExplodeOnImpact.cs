@@ -4,13 +4,12 @@ using UnityEngine;
 public class ExplodeOnImpact : MonoBehaviour
 {
     [SerializeField]
-    protected BasicPaintableLayer primaryLayer;
+    public BasicPaintableLayer primaryLayer;
     [SerializeField]
-    protected BasicPaintableLayer secondaryLayer;
+    public BasicPaintableLayer secondaryLayer;
 
     private void OnCollisionEnter2D(Collision2D col) 
     {
-        Debug.Log("BdOOM");
         int circleSize = 50;
         Shape destroyCircle = Shape.GenerateShapeCircle(circleSize);
 

@@ -7,7 +7,7 @@ public class WeaponAirstrike : Weapon
     public GameObject rocketPrefab;
     public BattleField battleField;
 
-    private void Awake()
+    private void Start()
     {
         battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
     }
@@ -16,8 +16,10 @@ public class WeaponAirstrike : Weapon
     {
         for (short i = 1; i < 5; i++)
         {
-            Instantiate(rocketPrefab,
-                new Vector3(Random.Range(battleField._width / -2f, battleField._width / 2f), battleField._height / 2f), quaternion.identity);
+            GameObject rocket = Instantiate(rocketPrefab, new Vector3(Random.Range(0, battleField._width), battleField._height), Quaternion.identity);
+            ExplodeOnImpact eoi = rocket.GetComponent<ExplodeOnImpact>();
+            eoi.primaryLayer = battleField.collidableLayer;
+            eoi.secondaryLayer = battleField.visibleLayer;
         }
     }
 }

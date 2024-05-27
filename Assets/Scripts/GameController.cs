@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public BasicPaintableLayer collidableLayer;
-    
     public List<Team> Teams;
 
     private int _activeTeam;
@@ -17,7 +15,7 @@ public class GameController : MonoBehaviour
 
     void MatchBegin()
     {
-        _activeTeam = 1;
+        _activeTeam = 0;
         Turn();
     }
 
@@ -33,7 +31,7 @@ public class GameController : MonoBehaviour
 
     void TurnEnded()
     {
-        _activeTeam = (_activeTeam == 1) ? 2 : 1;
+        _activeTeam = (_activeTeam == 1) ? 0 : 1;
         Turn();
     }
 }

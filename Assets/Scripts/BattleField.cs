@@ -1,3 +1,4 @@
+using DTerrain;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -7,6 +8,8 @@ public class BattleField : MonoBehaviour
 
     public float _width;
     public float _height;
+    public BasicPaintableLayer collidableLayer;
+    public BasicPaintableLayer visibleLayer;
     
     // Start is called before the first frame update
     void Start()

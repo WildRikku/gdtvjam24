@@ -9,6 +9,8 @@ public class Team : MonoBehaviour
     
     void Start()
     {
+        members = new();
+        
         for (short i = 0; i < 5; i++)
         {
             GameObject newPlayer = Instantiate(playerPrefab);
