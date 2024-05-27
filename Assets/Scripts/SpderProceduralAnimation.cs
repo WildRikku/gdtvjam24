@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpiderProceduralAnimation : MonoBehaviour
@@ -157,7 +156,7 @@ public class SpiderProceduralAnimation : MonoBehaviour
         euler.x = ClampAngle(euler.x, -maxTiltAngle, maxTiltAngle);
         euler.z = ClampAngle(euler.z, -maxTiltAngle, maxTiltAngle);
 
-        // Konvertiere zurück in einen Quaternion und returniere den neuen up-Vektor
+        // Konvertiere zurÃ¼ck in einen Quaternion und returniere den neuen up-Vektor
         Quaternion constrainedRotation = Quaternion.Euler(euler);
         return constrainedRotation * Vector3.up;
     }
