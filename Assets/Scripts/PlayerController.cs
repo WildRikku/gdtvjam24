@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        GameObject weaponInstance = Instantiate(mainWeapon);
+        GameObject weaponInstance = Instantiate(mainWeapon, transform);
         _weapon = weaponInstance.GetComponent<Weapon>();
     }
 

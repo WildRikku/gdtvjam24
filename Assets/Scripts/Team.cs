@@ -13,7 +13,7 @@ public class Team : MonoBehaviour
         
         for (short i = 0; i < 5; i++)
         {
-            GameObject newPlayer = Instantiate(playerPrefab);
+            GameObject newPlayer = Instantiate(playerPrefab, transform);
             members.Add(newPlayer.GetComponent<PlayerController>());
         }
 
