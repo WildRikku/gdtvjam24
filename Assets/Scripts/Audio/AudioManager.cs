@@ -82,12 +82,12 @@ public class AudioManager : MonoBehaviour
         sfxSource.mute = !sfxSource.mute;
     }
 
-    public void MusicVolume(float volume)
+    public void SetMusicVolume(float volume)
     {
         musicSource.volume = volume;
     }
 
-    public void SFXVolume(float volume)
+    public void SetSFXVolume(float volume)
     {
         sfxSource.volume = volume;
     }

@@ -5347,7 +5347,7 @@ Transform:
   m_GameObject: {fileID: 294427878}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.00000011920926, w: -1}
-  m_LocalPosition: {x: 0.002, y: 0.018, z: -0.11}
+  m_LocalPosition: {x: 0.024, y: 0.018, z: -0.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10657,7 +10657,7 @@ Transform:
   m_GameObject: {fileID: 417569159}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.461, y: 0.996, z: 0}
+  m_LocalPosition: {x: -7.305, y: -0.176, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11036,6 +11036,16 @@ PrefabInstance:
         type: 3}
       propertyPath: <PPU>k__BackingField
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640216060027896663, guid: 62b1f9556a02e8645abda989fa32b810,
+        type: 3}
+      propertyPath: <ChunkCountX>k__BackingField
+      value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640216060027896663, guid: 62b1f9556a02e8645abda989fa32b810,
+        type: 3}
+      propertyPath: <ChunkCountY>k__BackingField
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 8640216060027896663, guid: 62b1f9556a02e8645abda989fa32b810,
         type: 3}
@@ -12014,6 +12024,16 @@ PrefabInstance:
         type: 3}
       propertyPath: <PPU>k__BackingField
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903818146178738457, guid: f0b93ec83940aea45aade030c4f4633d,
+        type: 3}
+      propertyPath: <ChunkCountX>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903818146178738457, guid: f0b93ec83940aea45aade030c4f4633d,
+        type: 3}
+      propertyPath: <ChunkCountY>k__BackingField
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7903818146178738457, guid: f0b93ec83940aea45aade030c4f4633d,
         type: 3}
