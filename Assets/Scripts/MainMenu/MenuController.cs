@@ -1,18 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
     public CanvasGroup mainMenuCG;
     public CanvasGroup creditsCG;
     public CanvasGroup openLevelCG;
+    public CanvasGroup levelTransitonCG;
 
     public Slider musicSlider, sfxSlider;
 
     private float musicVolume;
     private float sfxVolume;
+
+    public string strLevel1;
+    public string strLevel2;
+    public string strLevel3;
 
     private void Awake()
     {
@@ -22,6 +27,8 @@ public class MenuController : MonoBehaviour
         creditsCG.blocksRaycasts = false;
         openLevelCG.alpha = 0;
         openLevelCG.blocksRaycasts = false;
+        levelTransitonCG.alpha = 0;
+        levelTransitonCG.blocksRaycasts = false;
     }
 
     private void Start()
@@ -60,8 +67,6 @@ public class MenuController : MonoBehaviour
         creditsCG.blocksRaycasts = false;
         openLevelCG.DOFade(0, 0.5f);
         openLevelCG.blocksRaycasts = false;
-
-
     }
 
 
@@ -73,8 +78,6 @@ public class MenuController : MonoBehaviour
         creditsCG.blocksRaycasts = true;
         openLevelCG.DOFade(0, 0.5f);
         openLevelCG.blocksRaycasts = false;
-
-
     }
 
     public void OpenLevel()
@@ -85,8 +88,6 @@ public class MenuController : MonoBehaviour
         creditsCG.blocksRaycasts = false;
         openLevelCG.DOFade(1, 0.5f);
         openLevelCG.blocksRaycasts = true;
-
-
     }
 
     public void GameQuit()
@@ -95,5 +96,34 @@ public class MenuController : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    public void StartLevel(int level = 0)
+    {
+        mainMenuCG.DOFade(0, 0.1f);
+        mainMenuCG.blocksRaycasts = false;
+        creditsCG.DOFade(0, 0.1f);
+        creditsCG.blocksRaycasts = false;
+        openLevelCG.DOFade(0, 0.1f);
+        openLevelCG.blocksRaycasts = false;
+        levelTransitonCG.blocksRaycasts = true;
+
+        levelTransitonCG.DOFade(1, 0.25f).OnComplete(() =>
+        {
+            switch (level)
+            {
+                case 0:
+                    SceneManager.LoadScene(strLevel1);
+                    break;
+
+                case 1:
+                    SceneManager.LoadScene(strLevel2);
+                    break;
+
+                case 2:
+                    SceneManager.LoadScene(strLevel3);
+                    break;
+            }
+        });
     }
 }

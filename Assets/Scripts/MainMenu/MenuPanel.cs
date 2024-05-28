@@ -13,6 +13,7 @@ public class MenuPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public Image panelBKImage;
     private Vector3 panelSize;
     public TMP_Text text;
+    public int index = 0;
 
     private void Start()
     {
@@ -45,6 +46,6 @@ public class MenuPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Panel clicked");
+        menuController.StartLevel(index);
     }
 }
