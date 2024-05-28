@@ -1,13 +1,12 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public class SpiderBazookaController : MonoBehaviour
 {
     public Transform weaponRotationPoint;
     public Transform shotTriggerPoint;
     public GameObject bombPrefab;
-    private BattleField battleField;
 
     public float minZRotation = -20f;
     public float maxZRotation = 200f;
@@ -16,14 +15,15 @@ public class SpiderBazookaController : MonoBehaviour
     public float shootingFactor = 10f;
     public KeyCode activationKey = KeyCode.A;
 
-    private bool isRotating = false;
-    private bool rotatingToMax = true;
-    private bool isShootingState = false;
-    private bool isShooting = false;
-
     public ParticleSystem muzzleParticle;
     public CanvasGroup speedBarCG;
     public Image speedBar;
+    private BattleField battleField;
+
+    private bool isRotating;
+    private bool isShooting;
+    private bool isShootingState;
+    private bool rotatingToMax = true;
 
 
     private void Start()
@@ -32,16 +32,13 @@ public class SpiderBazookaController : MonoBehaviour
         speedBarCG.alpha = 0;
     }
 
-    void Update()
+    private void Update()
     {
-        if (isShootingState == true && isRotating == true)
-        {
-            ShootingState();
-        }
+        if (isShootingState && isRotating) ShootingState();
 
         if (Input.GetKeyDown(activationKey) && isShootingState == false && isShooting == false)
         {
-            if (isRotating == true)
+            if (isRotating)
             {
                 isShootingState = true;
                 shootingFactor = 0;
@@ -53,14 +50,11 @@ public class SpiderBazookaController : MonoBehaviour
             }
         }
 
-        if (isRotating == true && isShootingState == false)
-        {
-            RotateState();
-        }
+        if (isRotating && isShootingState == false) RotateState();
     }
 
 
-    void ShootingState()
+    private void ShootingState()
     {
         float pendulumFrequency = 0.5f;
 
@@ -72,11 +66,10 @@ public class SpiderBazookaController : MonoBehaviour
             Invoke(nameof(TriggerShot), 0.1f);
             isShooting = true;
             isShootingState = false;
-            
         }
     }
 
-    void RotateState()
+    private void RotateState()
     {
         float currentZRotation = weaponRotationPoint.localEulerAngles.z;
 
@@ -84,25 +77,18 @@ public class SpiderBazookaController : MonoBehaviour
         {
             currentZRotation = Mathf.MoveTowards(currentZRotation, maxZRotation, rotationSpeed * Time.deltaTime);
 
-            if (currentZRotation >= maxZRotation)
-            {
-                rotatingToMax = false;
-
-            }
+            if (currentZRotation >= maxZRotation) rotatingToMax = false;
         }
         else
         {
             currentZRotation = Mathf.MoveTowards(currentZRotation, minZRotation, rotationSpeed * Time.deltaTime);
 
-            if (currentZRotation <= minZRotation)
-            {
-                rotatingToMax = true;
-            }
+            if (currentZRotation <= minZRotation) rotatingToMax = true;
         }
 
-        weaponRotationPoint.localEulerAngles = new Vector3(weaponRotationPoint.localEulerAngles.x, weaponRotationPoint.localEulerAngles.y, currentZRotation);
+        weaponRotationPoint.localEulerAngles = new Vector3(weaponRotationPoint.localEulerAngles.x,
+            weaponRotationPoint.localEulerAngles.y, currentZRotation);
     }
-
 
 
     private void TriggerShot()
@@ -113,12 +99,10 @@ public class SpiderBazookaController : MonoBehaviour
         eoi.primaryLayer = battleField.collidableLayer;
         eoi.secondaryLayer = battleField.visibleLayer;
         MinigunBullet mb = bomb.GetComponent<MinigunBullet>();
-        mb.speed = 5 + (shootingSpeed * shootingFactor * 1.3f);
+        mb.speed = 5 + shootingSpeed * shootingFactor * 1.3f;
         speedBarCG.DOFade(0, 0.2f);
 
         isRotating = false;
         isShooting = false;
     }
-
-
 }
