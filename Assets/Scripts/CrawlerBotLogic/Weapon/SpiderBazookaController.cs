@@ -19,6 +19,7 @@ public class SpiderBazookaController : MonoBehaviour
     private bool isRotating = false;
     private bool rotatingToMax = true;
     private bool isShootingState = false;
+    private bool isShooting = false;
 
     public ParticleSystem muzzleParticle;
     public CanvasGroup speedBarCG;
@@ -38,11 +39,12 @@ public class SpiderBazookaController : MonoBehaviour
             ShootingState();
         }
 
-        if (Input.GetKeyDown(activationKey) && isShootingState == false)
+        if (Input.GetKeyDown(activationKey) && isShootingState == false && isShooting == false)
         {
             if (isRotating == true)
             {
                 isShootingState = true;
+                shootingFactor = 0;
                 speedBarCG.DOFade(1, 0.2f);
             }
             else
@@ -68,6 +70,7 @@ public class SpiderBazookaController : MonoBehaviour
         if (Input.GetKeyDown(activationKey))
         {
             Invoke(nameof(TriggerShot), 0.1f);
+            isShooting = true;
             isShootingState = false;
             
         }
@@ -110,10 +113,11 @@ public class SpiderBazookaController : MonoBehaviour
         eoi.primaryLayer = battleField.collidableLayer;
         eoi.secondaryLayer = battleField.visibleLayer;
         MinigunBullet mb = bomb.GetComponent<MinigunBullet>();
-        mb.speed = 5 + (shootingSpeed * shootingFactor * 1.5f);
+        mb.speed = 5 + (shootingSpeed * shootingFactor * 1.3f);
         speedBarCG.DOFade(0, 0.2f);
 
         isRotating = false;
+        isShooting = false;
     }
 
 
