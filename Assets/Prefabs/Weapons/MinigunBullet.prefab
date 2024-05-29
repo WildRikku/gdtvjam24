@@ -341,4 +341,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primaryLayer: {fileID: 0}
   secondaryLayer: {fileID: 0}
+  explosionPrefab: {fileID: 369896592912511247, guid: bad957c2724fe774d90909d011705c5a,
+    type: 3}
   radius: 30
