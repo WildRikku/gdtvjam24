@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
+  isActive: 0
 --- !u!58 &2657926860529634655
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11051,6 +11052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eyeCenter: {fileID: 475283786943065955}
   radius: 1
+  spiderController: {fileID: 4069876234473721646}
 --- !u!1 &9117498094657201947
 GameObject:
   m_ObjectHideFlags: 0
