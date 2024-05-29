@@ -5779,6 +5779,7 @@ GameObject:
   - component: {fileID: 4709275405262456066}
   - component: {fileID: 7859044924558109229}
   - component: {fileID: 6807504077972184380}
+  - component: {fileID: 5013706101680802394}
   m_Layer: 2
   m_Name: Spider
   m_TagString: Untagged
@@ -5872,6 +5873,18 @@ MonoBehaviour:
   stepParticles:
   - {fileID: 3483273373069013808}
   - {fileID: 599472374989847878}
+--- !u!114 &5013706101680802394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6348902813117912170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2163a3cbc7c7444bfd50510ffafbf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6618382734431163300
 GameObject:
   m_ObjectHideFlags: 0
