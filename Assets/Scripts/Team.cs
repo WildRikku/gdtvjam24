@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Team : MonoBehaviour
 {
+    public const short MaxTeamMembers = 5;
+    
     public GameObject playerPrefab;
-    private List<PlayerController> members;
-    private int activeMember;
-    public short maxTeamMembers = 5;
+    private Dictionary<short, PlayerController> members;
+    private short activeMember;
+    
     public List<GameObject> weaponPrefabs;
     public event EventHandler turnEnded;
     [HideInInspector]
@@ -21,23 +24,35 @@ public class Team : MonoBehaviour
         members = new();
         
         Bounds bounds = spawnZone.bounds;
-        for (short i = 0; i < maxTeamMembers; i++)
+        for (short i = 0; i < MaxTeamMembers; i++)
         {
-            GameObject newPlayer = Instantiate(playerPrefab, bounds.min + bounds.size/maxTeamMembers * i, Quaternion.identity, transform);
+            GameObject newPlayer = Instantiate(playerPrefab, bounds.min + bounds.size/MaxTeamMembers * i, Quaternion.identity, transform);
             PlayerController pc = newPlayer.GetComponent<PlayerController>();
             SpiderChangeTeamColor spiderChangeTeamColor = newPlayer.GetComponentInChildren<SpiderChangeTeamColor>();
             spiderChangeTeamColor.teamColor = teamColor;
-            pc.mainWeapon = weaponPrefabs[Random.Range(0, weaponPrefabs.Count)]; 
-            members.Add(pc);
+            pc.mainWeapon = weaponPrefabs[Random.Range(0, weaponPrefabs.Count)];
+            pc.index = i;
+            pc.HealthUpdated += TeamMemberOnHealthUpdated;
+            members.Add(i, pc);
         }
 
         activeMember = 0;
     }
 
+    private void TeamMemberOnHealthUpdated(object sender, EventArgs e)
+    {
+        PlayerController pc = (PlayerController)sender;
+        if (pc.Health <= 0)
+        {
+            // RIP
+            members.Remove(pc.index);
+        }
+    }
+
     public void PlayerAction()
     {
-        members[activeMember].Attack();
-        members[activeMember].AttackFinished += OnAttackFinished;
+        members.ElementAt(activeMember).Value.Attack();
+        members.ElementAt(activeMember).Value.AttackFinished += OnAttackFinished;
     }
 
     public PlayerController GetActivePlayer()

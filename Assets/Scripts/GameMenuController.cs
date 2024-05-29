@@ -22,7 +22,7 @@ public class GameMenuController : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        teams[0] = GameObject.Find("Team1").GetComponent<Team>();
+        teams[0] = GameObject.Find("Team0").GetComponent<Team>();
         teams[1] = GameObject.Find("Team1").GetComponent<Team>();
 
         transitionHUDCG.alpha = 1;
@@ -33,8 +33,8 @@ public class GameMenuController : MonoBehaviour
         SetMemberbarColor(0, teamColorIndex[0]);
         SetMemberbarColor(1, teamColorIndex[1]);
 
-        SetMemberbar(0, teams[0].maxTeamMembers, teams[0].maxTeamMembers);
-        SetMemberbar(1, teams[1].maxTeamMembers, teams[1].maxTeamMembers);
+        SetMemberbar(0, Team.MaxTeamMembers, Team.MaxTeamMembers);
+        SetMemberbar(1, Team.MaxTeamMembers, Team.MaxTeamMembers);
     }
 
     private void Update()
