@@ -2,29 +2,26 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpiderBazookaController : MonoBehaviour
+public class SpiderBazookaController : RotatingWeapon
 {
-    public Transform weaponRotationPoint;
     public Transform shotTriggerPoint;
     public GameObject bombPrefab;
 
-    public float minZRotation = -20f;
-    public float maxZRotation = 200f;
-    public float rotationSpeed = 10f;
     public float shootingSpeed = 10f;
     public float shootingFactor = 10f;
-    public KeyCode activationKey = KeyCode.A;
 
     public ParticleSystem muzzleParticle;
     public CanvasGroup speedBarCG;
     public Image speedBar;
-    private BattleField battleField;
 
-    private bool isRotating;
     private bool isShooting;
     private bool isShootingState;
-    private bool rotatingToMax = true;
 
+    private void Awake()
+    {
+        battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
+        rotationTempSpeed = rotationSpeed;
+    }
 
     private void Start()
     {
@@ -50,9 +47,8 @@ public class SpiderBazookaController : MonoBehaviour
             }
         }
 
-        if (isRotating && isShootingState == false) RotateState();
+        if (isRotating && isShootingState == false) Rotate();
     }
-
 
     private void ShootingState()
     {
@@ -68,31 +64,7 @@ public class SpiderBazookaController : MonoBehaviour
             isShootingState = false;
         }
     }
-
-    private void RotateState()
-    {
-        float currentZRotation = weaponRotationPoint.localEulerAngles.z;
-
-        if (rotatingToMax)
-        {
-            currentZRotation = Mathf.MoveTowards(currentZRotation, maxZRotation, rotationSpeed * Time.deltaTime);
-
-            if (currentZRotation >= maxZRotation) rotatingToMax = false;
-        }
-        else
-        {
-            currentZRotation = Mathf.MoveTowards(currentZRotation, minZRotation, rotationSpeed * Time.deltaTime);
-
-            if (currentZRotation <= minZRotation) rotatingToMax = true;
-        }
-
-        Vector3 localEulerAngles = weaponRotationPoint.localEulerAngles;
-        localEulerAngles = new Vector3(localEulerAngles.x,
-            localEulerAngles.y, currentZRotation);
-        weaponRotationPoint.localEulerAngles = localEulerAngles;
-    }
-
-
+    
     private void TriggerShot()
     {
         muzzleParticle.Emit(40);

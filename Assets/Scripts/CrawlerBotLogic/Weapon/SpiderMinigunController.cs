@@ -1,25 +1,14 @@
 using UnityEngine;
 
-public class SpiderMinigunController : MonoBehaviour
+public class SpiderMinigunController : RotatingWeapon
 {
-    public Transform weaponRotationPoint;
     public Transform shotTriggerPoint;
     public GameObject bulletPrefab;
 
-    public float minZRotation = -20f;
-    public float maxZRotation = 200f;
-    public float rotationSpeed = 10f;
-    public KeyCode activationKey = KeyCode.A;
-
     public ParticleSystem muzzleParticle;
-    private BattleField battleField;
-    private bool isFadeOutRotation;
 
-    private bool isRotating;
-    private bool rotatingToMax = true;
-    private float rotationTempSpeed;
     private int salve;
-
+    
     private void Awake()
     {
         battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
@@ -43,30 +32,7 @@ public class SpiderMinigunController : MonoBehaviour
                 FadeOutRotation();
         }
     }
-
-    private void Rotate()
-    {
-        float currentZRotation = weaponRotationPoint.localEulerAngles.z;
-
-        if (rotatingToMax)
-        {
-            currentZRotation = Mathf.MoveTowards(currentZRotation, maxZRotation, rotationTempSpeed * Time.deltaTime);
-
-            if (currentZRotation >= maxZRotation) rotatingToMax = false;
-        }
-        else
-        {
-            currentZRotation = Mathf.MoveTowards(currentZRotation, minZRotation, rotationTempSpeed * Time.deltaTime);
-
-            if (currentZRotation <= minZRotation) rotatingToMax = true;
-        }
-
-        Vector3 localEulerAngles = weaponRotationPoint.localEulerAngles;
-        localEulerAngles = new Vector3(localEulerAngles.x,
-            localEulerAngles.y, currentZRotation);
-        weaponRotationPoint.localEulerAngles = localEulerAngles;
-    }
-
+    
     private void TriggerShot()
     {
         muzzleParticle.Emit(15);
@@ -84,15 +50,5 @@ public class SpiderMinigunController : MonoBehaviour
         }
     }
 
-    private void FadeOutRotation()
-    {
-        rotationTempSpeed--;
-
-        if (rotationTempSpeed <= 1)
-        {
-            rotationTempSpeed = rotationSpeed;
-            isRotating = false;
-            isFadeOutRotation = false;
-        }
-    }
+    
 }
