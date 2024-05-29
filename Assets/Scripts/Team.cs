@@ -10,15 +10,19 @@ public class Team : MonoBehaviour
     private int activeMember;
     public List<GameObject> weaponPrefabs;
     public event EventHandler turnEnded;
+    [HideInInspector]
     public int teamColor;
+
+    public Collider2D spawnZone;
     
     void Start()
     {
         members = new();
-        
-        for (short i = 0; i < 5; i++)
+        short maxTeamMembers = 5;
+        Bounds bounds = spawnZone.bounds;
+        for (short i = 0; i < maxTeamMembers; i++)
         {
-            GameObject newPlayer = Instantiate(playerPrefab, transform);
+            GameObject newPlayer = Instantiate(playerPrefab, bounds.min + bounds.size/maxTeamMembers * i, Quaternion.identity, transform);
             PlayerController pc = newPlayer.GetComponent<PlayerController>();
             pc.mainWeapon = weaponPrefabs[Random.Range(0, weaponPrefabs.Count)]; 
             members.Add(pc);
