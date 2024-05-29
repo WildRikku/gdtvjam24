@@ -11087,6 +11087,9 @@ MonoBehaviour:
   eyeCenter: {fileID: 475283786943065955}
   radius: 1
   spiderController: {fileID: 4069876234473721646}
+  activSpiderMat: {fileID: 2100000, guid: c03d3c6617e622b4fb82497c01f0a25d, type: 2}
+  inactivSpiderMat: {fileID: 2100000, guid: b823f2ecfd1aabe4f833f37314e2f814, type: 2}
+  sphereRenderer: {fileID: 4244784304356767132}
 --- !u!1 &9117498094657201947
 GameObject:
   m_ObjectHideFlags: 0

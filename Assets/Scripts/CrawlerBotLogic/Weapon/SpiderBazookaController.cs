@@ -8,10 +8,11 @@ public class SpiderBazookaController : RotatingWeapon
     public GameObject bombPrefab;
 
     public float shootingSpeed = 10f;
-    public float shootingFactor = 10f;
+    private float shootingforce = 5f;
 
     public ParticleSystem muzzleParticle;
     public CanvasGroup speedBarCG;
+    public CanvasGroup crosshairCG;
     public Image speedBar;
 
     private bool isShooting;
@@ -27,6 +28,7 @@ public class SpiderBazookaController : RotatingWeapon
     {
         battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
         speedBarCG.alpha = 0;
+        crosshairCG.alpha = 0;
     }
 
     private void Update()
@@ -40,12 +42,12 @@ public class SpiderBazookaController : RotatingWeapon
             if (isRotating)
             {
                 isShootingState = true;
-                shootingFactor = 0;
                 speedBarCG.DOFade(1, 0.2f);
             }
             else
             {
                 isRotating = true;
+                crosshairCG.alpha = 1;
             }
         }
 
@@ -56,8 +58,8 @@ public class SpiderBazookaController : RotatingWeapon
     {
         float pendulumFrequency = 0.5f;
 
-        shootingFactor = Mathf.Lerp(0, 1, (Mathf.Sin(Time.time * pendulumFrequency * Mathf.PI * 2) + 1) / 2);
-        speedBar.fillAmount = shootingFactor;
+        shootingforce = Mathf.Lerp(0, 1, (Mathf.Sin(Time.time * pendulumFrequency * Mathf.PI * 2) + 1) / 2);
+        speedBar.fillAmount = shootingforce;
 
         if (Input.GetKeyDown(activationKey))
         {
@@ -74,9 +76,17 @@ public class SpiderBazookaController : RotatingWeapon
         ExplodeOnImpact eoi = bomb.GetComponent<ExplodeOnImpact>();
         eoi.primaryLayer = battleField.collidableLayer;
         eoi.secondaryLayer = battleField.visibleLayer;
-        MinigunBullet mb = bomb.GetComponent<MinigunBullet>();
-        mb.speed = 5 + shootingSpeed * shootingFactor * 1.3f;
+
+        Rigidbody2D rb = bomb.GetComponent<Rigidbody2D>();
+        shootingforce = 5f + (shootingSpeed * shootingforce * 1.8f);
+
+        if (rb != null)
+        {
+            rb.AddForce(shotTriggerPoint.up * shootingforce, ForceMode2D.Impulse);
+        }
+
         speedBarCG.DOFade(0, 0.2f);
+        crosshairCG.DOFade(0, 0.2f);
 
         isRotating = false;
         isShooting = false;

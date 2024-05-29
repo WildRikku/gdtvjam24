@@ -5,6 +5,7 @@ public class ExplodeOnImpact : MonoBehaviour
 {
     [SerializeField] public BasicPaintableLayer primaryLayer;
     [SerializeField] public BasicPaintableLayer secondaryLayer;
+    public GameObject explosionPrefab;
 
     public int radius = 60;
 
@@ -35,5 +36,11 @@ public class ExplodeOnImpact : MonoBehaviour
         );
 
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (explosionPrefab != null)
+            Instantiate(explosionPrefab, transform.position, transform.rotation);
     }
 }

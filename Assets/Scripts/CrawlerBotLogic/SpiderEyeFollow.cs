@@ -7,14 +7,23 @@ public class SpiderEyeFollow : MonoBehaviour
     public float radius = 1f;
     public SpiderController spiderController;
 
+    public Material activSpiderMat;
+    public Material inactivSpiderMat;
+    public MeshRenderer sphereRenderer;
+
     private void Awake()
     {
         mainCamera = Camera.main;
+        sphereRenderer.material = inactivSpiderMat;
     }
 
     void Update()
     {
-        if (!spiderController.isActive) return;
+        if (!spiderController.isActive)
+        {
+            sphereRenderer.material = inactivSpiderMat;
+            return;
+        }
         
         Vector3 mousePosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, eyeCenter.position.z - mainCamera.transform.position.z));
         Vector3 direction = mousePosition - eyeCenter.position;
@@ -23,6 +32,7 @@ public class SpiderEyeFollow : MonoBehaviour
         {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
+            sphereRenderer.material = activSpiderMat;
         }
     }
 }

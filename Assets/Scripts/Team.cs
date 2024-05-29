@@ -8,6 +8,7 @@ public class Team : MonoBehaviour
     public GameObject playerPrefab;
     private List<PlayerController> members;
     private int activeMember;
+    public short maxTeamMembers = 5;
     public List<GameObject> weaponPrefabs;
     public event EventHandler turnEnded;
     [HideInInspector]
@@ -18,7 +19,7 @@ public class Team : MonoBehaviour
     void Start()
     {
         members = new();
-        short maxTeamMembers = 5;
+        
         Bounds bounds = spawnZone.bounds;
         for (short i = 0; i < maxTeamMembers; i++)
         {

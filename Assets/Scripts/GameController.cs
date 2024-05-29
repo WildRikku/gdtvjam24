@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public List<Team> Teams;
     public CinemachineVirtualCamera cinemachineVirtualCamera;
+    public GameMenuController menuController;
 
     private int _activeTeam;
 
@@ -25,6 +26,7 @@ public class GameController : MonoBehaviour
             } while (usedTeamColors[teamColor]);
 
             Teams[i].teamColor = teamColor;
+            menuController.teamColorIndex[i] = teamColor;
             usedTeamColors[teamColor] = true;
         }
     }
