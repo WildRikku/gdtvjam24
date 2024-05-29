@@ -10,6 +10,7 @@ public class Team : MonoBehaviour
     private int activeMember;
     public List<GameObject> weaponPrefabs;
     public event EventHandler turnEnded;
+    public int teamColor;
     
     void Start()
     {

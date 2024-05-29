@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using DTerrain;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
@@ -14,6 +15,19 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         Invoke(nameof(MatchBegin), 2f);
+        bool[] usedTeamColors = new bool[4];
+        
+        for (short i = 0; i < Teams.Count; i++)
+        {
+            int teamColor;
+            do
+            {
+                teamColor = Random.Range(0, 4);
+            } while (usedTeamColors[teamColor]);
+
+            Teams[i].teamColor = teamColor;
+            usedTeamColors[teamColor] = true;
+        }
     }
 
     void MatchBegin()
