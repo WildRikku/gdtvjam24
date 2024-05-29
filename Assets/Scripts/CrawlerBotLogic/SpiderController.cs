@@ -4,7 +4,7 @@ public class SpiderController : MonoBehaviour
 {
     public float speed = 1f;
     private Rigidbody2D rb;
-
+    public bool isActive;
 
     private void Awake()
     {
@@ -13,6 +13,8 @@ public class SpiderController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isActive) return;
+        
         if(Mathf.Abs(rb.velocity.x) < speed)
         {
             if (Input.GetKey(KeyCode.RightArrow))

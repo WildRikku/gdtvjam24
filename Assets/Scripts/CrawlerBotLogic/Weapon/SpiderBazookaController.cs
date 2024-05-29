@@ -31,6 +31,8 @@ public class SpiderBazookaController : RotatingWeapon
 
     private void Update()
     {
+        if (!isActive) return;
+        
         if (isShootingState && isRotating) ShootingState();
 
         if (Input.GetKeyDown(activationKey) && isShootingState == false && isShooting == false)
@@ -78,5 +80,6 @@ public class SpiderBazookaController : RotatingWeapon
 
         isRotating = false;
         isShooting = false;
+        OnAttackFinished();
     }
 }

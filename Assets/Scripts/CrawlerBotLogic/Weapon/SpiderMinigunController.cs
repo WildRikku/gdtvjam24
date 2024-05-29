@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SpiderMinigunController : RotatingWeapon
@@ -17,6 +18,8 @@ public class SpiderMinigunController : RotatingWeapon
 
     private void Update()
     {
+        if (!isActive) return;
+        
         if (Input.GetKeyDown(activationKey))
         {
             if (isRotating)
@@ -47,6 +50,7 @@ public class SpiderMinigunController : RotatingWeapon
             salve = 0;
             isFadeOutRotation = true;
             CancelInvoke(nameof(TriggerShot));
+            OnAttackFinished();
         }
     }
 

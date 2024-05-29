@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 305229633575588701}
   - component: {fileID: 4069876234473721646}
   - component: {fileID: 2657926860529634655}
+  - component: {fileID: -4247587392948642449}
   m_Layer: 2
   m_Name: SpiderController
   m_TagString: Untagged
@@ -142,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 632655614212495751}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.65, y: 1.85, z: 0}
+  m_LocalPosition: {x: 10, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -224,6 +225,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.19}
   serializedVersion: 2
   m_Radius: 0.3421055
+--- !u!114 &-4247587392948642449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632655614212495751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979f66262eab3ca4080aee7291a8d4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainWeapon: {fileID: 0}
+  weaponSpawnPoint: {fileID: 5374031209549792931}
+  spiderController: {fileID: 4069876234473721646}
 --- !u!1 &1315296111812254541
 GameObject:
   m_ObjectHideFlags: 0
