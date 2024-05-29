@@ -86,8 +86,10 @@ public class SpiderBazookaController : MonoBehaviour
             if (currentZRotation <= minZRotation) rotatingToMax = true;
         }
 
-        weaponRotationPoint.localEulerAngles = new Vector3(weaponRotationPoint.localEulerAngles.x,
-            weaponRotationPoint.localEulerAngles.y, currentZRotation);
+        Vector3 localEulerAngles = weaponRotationPoint.localEulerAngles;
+        localEulerAngles = new Vector3(localEulerAngles.x,
+            localEulerAngles.y, currentZRotation);
+        weaponRotationPoint.localEulerAngles = localEulerAngles;
     }
 
 

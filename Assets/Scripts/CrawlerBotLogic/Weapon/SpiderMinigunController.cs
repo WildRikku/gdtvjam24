@@ -5,51 +5,46 @@ public class SpiderMinigunController : MonoBehaviour
     public Transform weaponRotationPoint;
     public Transform shotTriggerPoint;
     public GameObject bulletPrefab;
-    private BattleField battleField;
 
     public float minZRotation = -20f;
     public float maxZRotation = 200f;
     public float rotationSpeed = 10f;
-    private float rotationTempSpeed = 0;
     public KeyCode activationKey = KeyCode.A;
 
-    private bool isRotating = false;
-    private bool rotatingToMax = true;
-    private bool isFadeOutRotation = false;
-
     public ParticleSystem muzzleParticle;
+    private BattleField battleField;
+    private bool isFadeOutRotation;
+
+    private bool isRotating;
+    private bool rotatingToMax = true;
+    private float rotationTempSpeed;
     private int salve;
 
     private void Awake()
     {
         battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
         rotationTempSpeed = rotationSpeed;
-
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(activationKey))
         {
-            if (isRotating == true)
-            {
+            if (isRotating)
                 InvokeRepeating(nameof(TriggerShot), 0, 0.1f);
-            }
             else
-            {
-                isRotating = !isRotating;
-            }
+                isRotating = true;
         }
 
         if (isRotating)
         {
             Rotate();
-            if (isFadeOutRotation == true)
+            if (isFadeOutRotation)
                 FadeOutRotation();
         }
     }
 
-    void Rotate()
+    private void Rotate()
     {
         float currentZRotation = weaponRotationPoint.localEulerAngles.z;
 
@@ -57,23 +52,19 @@ public class SpiderMinigunController : MonoBehaviour
         {
             currentZRotation = Mathf.MoveTowards(currentZRotation, maxZRotation, rotationTempSpeed * Time.deltaTime);
 
-            if (currentZRotation >= maxZRotation)
-            {
-                rotatingToMax = false;
-
-            }
+            if (currentZRotation >= maxZRotation) rotatingToMax = false;
         }
         else
         {
             currentZRotation = Mathf.MoveTowards(currentZRotation, minZRotation, rotationTempSpeed * Time.deltaTime);
 
-            if (currentZRotation <= minZRotation)
-            {
-                rotatingToMax = true;
-            }
+            if (currentZRotation <= minZRotation) rotatingToMax = true;
         }
 
-        weaponRotationPoint.localEulerAngles = new Vector3(weaponRotationPoint.localEulerAngles.x, weaponRotationPoint.localEulerAngles.y, currentZRotation);
+        Vector3 localEulerAngles = weaponRotationPoint.localEulerAngles;
+        localEulerAngles = new Vector3(localEulerAngles.x,
+            localEulerAngles.y, currentZRotation);
+        weaponRotationPoint.localEulerAngles = localEulerAngles;
     }
 
     private void TriggerShot()
@@ -89,13 +80,13 @@ public class SpiderMinigunController : MonoBehaviour
         {
             salve = 0;
             isFadeOutRotation = true;
-            CancelInvoke("TriggerShot");
+            CancelInvoke(nameof(TriggerShot));
         }
     }
 
     private void FadeOutRotation()
     {
-        rotationTempSpeed --;
+        rotationTempSpeed--;
 
         if (rotationTempSpeed <= 1)
         {
