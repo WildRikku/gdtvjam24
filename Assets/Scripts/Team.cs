@@ -24,6 +24,8 @@ public class Team : MonoBehaviour
         {
             GameObject newPlayer = Instantiate(playerPrefab, bounds.min + bounds.size/maxTeamMembers * i, Quaternion.identity, transform);
             PlayerController pc = newPlayer.GetComponent<PlayerController>();
+            SpiderChangeTeamColor spiderChangeTeamColor = newPlayer.GetComponentInChildren<SpiderChangeTeamColor>();
+            spiderChangeTeamColor.teamColor = teamColor;
             pc.mainWeapon = weaponPrefabs[Random.Range(0, weaponPrefabs.Count)]; 
             members.Add(pc);
         }

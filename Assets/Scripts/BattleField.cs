@@ -1,13 +1,15 @@
 using DTerrain;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BattleField : MonoBehaviour
 {
-    [FormerlySerializedAs("OriginalTexture")] public Sprite BackgroundSprite;
+    public Sprite BackgroundSprite;
 
-    public float _width;
-    public float _height;
+    [DoNotSerialize, HideInInspector]
+    public float width;
+    [DoNotSerialize, HideInInspector]
+    public float height;
     public BasicPaintableLayer collidableLayer;
     public BasicPaintableLayer visibleLayer;
     
@@ -16,14 +18,8 @@ public class BattleField : MonoBehaviour
     {
         if (BackgroundSprite != null)
         {
-            _width = BackgroundSprite.texture.width / BackgroundSprite.pixelsPerUnit;
-            _height = BackgroundSprite.texture.height / BackgroundSprite.pixelsPerUnit;
+            width = BackgroundSprite.texture.width / BackgroundSprite.pixelsPerUnit;
+            height = BackgroundSprite.texture.height / BackgroundSprite.pixelsPerUnit;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
