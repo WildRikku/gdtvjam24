@@ -5446,16 +5446,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a345ba4d18555a04a8050808cd5c4a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleField: {fileID: 0}
+  activationKey: 97
+  isActive: 0
   weaponRotationPoint: {fileID: 6867387976718280892}
+  minZRotation: 65
+  maxZRotation: 305
+  rotationSpeed: 80
   shotTriggerPoint: {fileID: 7859103626720996382}
   bombPrefab: {fileID: 3689770828418205119, guid: a7ea5410745224141949fb5eb1701152,
     type: 3}
-  minZRotation: 80
-  maxZRotation: 280
-  rotationSpeed: 100
   shootingSpeed: 10
   shootingFactor: 10
-  activationKey: 97
   muzzleParticle: {fileID: 4752925076103590940}
   speedBarCG: {fileID: 2483682328441399197}
   speedBar: {fileID: 6458374301954443578}
