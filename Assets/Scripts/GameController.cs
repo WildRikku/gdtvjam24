@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
 
     private int _activeTeam;
 
-    private void Start()
+    private void Awake()
     {
         Invoke(nameof(MatchBegin), 2f);
         bool[] usedTeamColors = new bool[4];
