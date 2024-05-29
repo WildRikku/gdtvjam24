@@ -6,16 +6,20 @@ public class ExplodeOnImpact : MonoBehaviour
     [SerializeField] public BasicPaintableLayer primaryLayer;
     [SerializeField] public BasicPaintableLayer secondaryLayer;
 
-    [SerializeField] public static int radius = 50;
+    public int radius = 60;
 
-    private PaintingParameters _paintingParameters = new PaintingParameters()
+    private PaintingParameters _paintingParameters = new()
     {
         Color = Color.clear,
         Position = new Vector2Int(),
-        Shape = Shape.GenerateShapeCircle(radius),
         PaintingMode = PaintingMode.REPLACE_COLOR,
         DestructionMode = DestructionMode.DESTROY
     };
+
+    private void Start()
+    {
+        _paintingParameters.Shape = Shape.GenerateShapeCircle(radius);
+    }
 
     private void OnCollisionEnter2D(Collision2D col)
     {

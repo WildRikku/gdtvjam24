@@ -97,7 +97,7 @@ public class SpiderBazookaController : MonoBehaviour
     {
         muzzleParticle.Emit(40);
         GameObject bomb = Instantiate(bombPrefab, shotTriggerPoint.position, shotTriggerPoint.rotation);
-        BazookaImpact eoi = bomb.GetComponent<BazookaImpact>();
+        ExplodeOnImpact eoi = bomb.GetComponent<ExplodeOnImpact>();
         eoi.primaryLayer = battleField.collidableLayer;
         eoi.secondaryLayer = battleField.visibleLayer;
         MinigunBullet mb = bomb.GetComponent<MinigunBullet>();

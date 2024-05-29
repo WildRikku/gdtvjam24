@@ -5,7 +5,6 @@ using Random = UnityEngine.Random;
 public class WeaponAirstrike : Weapon
 {
     public GameObject rocketPrefab;
-    public BattleField battleField;
 
     private void Start()
     {

@@ -71,7 +71,7 @@ public class SpiderMinigunController : MonoBehaviour
     {
         muzzleParticle.Emit(15);
         GameObject bullet = Instantiate(bulletPrefab, shotTriggerPoint.position, shotTriggerPoint.rotation);
-        MinigunImpact eoi = bullet.GetComponent<MinigunImpact>();
+        ExplodeOnImpact eoi = bullet.GetComponent<ExplodeOnImpact>();
         eoi.primaryLayer = battleField.collidableLayer;
         eoi.secondaryLayer = battleField.visibleLayer;
         salve += 1;

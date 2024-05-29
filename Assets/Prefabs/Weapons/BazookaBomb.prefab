@@ -350,8 +350,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3689770828418205119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 483d68bd9982be4439296b4fe11f4a95, type: 3}
+  m_Script: {fileID: 11500000, guid: c44eb398fb634114798d43106e0cf559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   primaryLayer: {fileID: 0}
   secondaryLayer: {fileID: 0}
+  radius: 60
