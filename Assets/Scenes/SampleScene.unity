@@ -136,10 +136,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1089089318765956074, guid: 221d4a46ad69ef941bbb323c04804a7e,
+        type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.9786897
+      objectReference: {fileID: 0}
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.0684214
+      value: 5.0826073
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417311475867233259, guid: 221d4a46ad69ef941bbb323c04804a7e,
+        type: 3}
+      propertyPath: orthographic size
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4866768135128222745, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
@@ -195,6 +210,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8933439901007226666, guid: 221d4a46ad69ef941bbb323c04804a7e,
+        type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
+      value: 19.74664
+      objectReference: {fileID: 0}
+    - target: {fileID: 8933439901007226666, guid: 221d4a46ad69ef941bbb323c04804a7e,
+        type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
+      value: 17.509598
+      objectReference: {fileID: 0}
+    - target: {fileID: 8933439901007226666, guid: 221d4a46ad69ef941bbb323c04804a7e,
+        type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
+      value: -11.811572
+      objectReference: {fileID: 0}
+    - target: {fileID: 8933439901007226666, guid: 221d4a46ad69ef941bbb323c04804a7e,
+        type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
+      value: 19.203524
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -790,7 +825,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.74733114, y: 1.6194577}
@@ -987,7 +1022,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 2.1597776, y: 1.0961685}
