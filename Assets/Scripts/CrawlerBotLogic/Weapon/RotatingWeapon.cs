@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RotatingWeapon : Weapon
+public class RotatingWeapon : ProjectileWeapon
 {
     public Transform weaponRotationPoint;
     

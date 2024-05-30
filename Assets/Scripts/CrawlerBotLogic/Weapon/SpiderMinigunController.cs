@@ -10,7 +10,7 @@ public class SpiderMinigunController : RotatingWeapon
     public float bulletforce = 15;
 
     public CanvasGroup crosshairCG;
-    private int salve;
+    private int firedProjectiles;
     
     private void Awake()
     {
@@ -26,12 +26,14 @@ public class SpiderMinigunController : RotatingWeapon
         if (Input.GetKeyDown(activationKey))
         {
             if (isRotating)
+            {
+                ProjectileCount = 3;
                 InvokeRepeating(nameof(TriggerShot), 0, 0.1f);
+            }
             else
             {
                 isRotating = true;
                 crosshairCG.alpha = 1;
-
             }
         }
 
@@ -46,11 +48,8 @@ public class SpiderMinigunController : RotatingWeapon
     private void TriggerShot()
     {
         muzzleParticle.Emit(15);
-        GameObject bullet = Instantiate(bulletPrefab, shotTriggerPoint.position, shotTriggerPoint.rotation);
-        ExplodeOnImpact eoi = bullet.GetComponent<ExplodeOnImpact>();
-        eoi.primaryLayer = battleField.collidableLayer;
-        eoi.secondaryLayer = battleField.visibleLayer;
-        salve += 1;
+        GameObject bullet = SpawnProjectile(bulletPrefab, shotTriggerPoint.position, shotTriggerPoint.rotation);
+        firedProjectiles++;
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (rb != null)
@@ -58,15 +57,14 @@ public class SpiderMinigunController : RotatingWeapon
             rb.AddForce(shotTriggerPoint.up * bulletforce, ForceMode2D.Impulse);
         }
 
-        if (salve == 3)
+        if (firedProjectiles == 3)
         {
-            salve = 0;
+            // stop firing. attack will end when all projectiles hit something via parent class
+            firedProjectiles = 0;
             isFadeOutRotation = true;
             CancelInvoke(nameof(TriggerShot));
-            OnAttackFinished();
             crosshairCG.DOFade(0, 0.2f);
         }
-
     }
 
     

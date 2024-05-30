@@ -71,11 +71,9 @@ public class SpiderBazookaController : RotatingWeapon
     
     private void TriggerShot()
     {
+        ProjectileCount = 1;
         muzzleParticle.Emit(40);
-        GameObject bomb = Instantiate(bombPrefab, shotTriggerPoint.position, shotTriggerPoint.rotation);
-        ExplodeOnImpact eoi = bomb.GetComponent<ExplodeOnImpact>();
-        eoi.primaryLayer = battleField.collidableLayer;
-        eoi.secondaryLayer = battleField.visibleLayer;
+        GameObject bomb = SpawnProjectile(bombPrefab, shotTriggerPoint.position, shotTriggerPoint.rotation);
 
         Rigidbody2D rb = bomb.GetComponent<Rigidbody2D>();
         shootingforce = 5f + (shootingSpeed * shootingforce * 1.8f);
@@ -90,6 +88,5 @@ public class SpiderBazookaController : RotatingWeapon
 
         isRotating = false;
         isShooting = false;
-        OnAttackFinished();
     }
 }

@@ -31,6 +31,15 @@ public class ExplodeOnImpact : MonoBehaviour
         _paintingParameters.Shape = Shape.GenerateShapeCircle(radius);
     }
 
+    private void FixedUpdate()
+    {
+        if (transform.position.y < -1)
+        {
+            Impact?.Invoke(0);
+            Destroy(gameObject);
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!(col.collider.CompareTag("DestructibleTerrain") || col.collider.CompareTag("Player"))) return;
@@ -68,8 +77,6 @@ public class ExplodeOnImpact : MonoBehaviour
 
         Impact?.Invoke(damage); // TODO: damage is currently meaningless
         Destroy(gameObject);
-
-        // TODO: Handle falling out of the map
     }
 
     private void OnDestroy()
