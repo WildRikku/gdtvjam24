@@ -23,11 +23,14 @@ public class Team : MonoBehaviour
     public short index;
 
     public Collider2D spawnZone;
+
+    private GameController gameController;
     
     void Start()
     {
         _members = new();
-        
+        gameController = GameObject.Find("GameManagement").GetComponent<GameController>();
+
         Bounds bounds = spawnZone.bounds;
         for (short i = 0; i < MaxTeamMembers; i++)
         {
@@ -38,6 +41,12 @@ public class Team : MonoBehaviour
             pc.mainWeapon = weaponPrefabs[Random.Range(0, weaponPrefabs.Count)];
             pc.index = i;
             pc.HealthUpdated += TeamMemberOnHealthUpdated;
+            if (gameController.botNames.Count > 0)
+            {
+                int value = Random.Range(0, gameController.botNames.Count);
+                pc.botName = gameController.botNames[value];
+                gameController.botNames.RemoveAt(value);
+            }
             _members.Add(i, pc);
         }
 

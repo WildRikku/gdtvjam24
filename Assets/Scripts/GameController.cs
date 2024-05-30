@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
     private int _activeTeam;
     private bool _trackingProjectile;
 
+    public List<String> botNames;  // use in PlayerController
+
     private void Awake()
     {
         Invoke(nameof(MatchBegin), 2f);

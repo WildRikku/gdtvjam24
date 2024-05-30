@@ -306,9 +306,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainWeapon: {fileID: 0}
+  weapon: {fileID: 0}
   weaponSpawnPoint: {fileID: 5374031209549792931}
   index: 0
   spiderController: {fileID: 4069876234473721646}
+  botName: 
+  healthCG: {fileID: 6285627453313326539}
+  nameTxt: {fileID: 4588214474070966581}
+  healthTxt: {fileID: 8368478899129171312}
+  damagePopupPrefab: {fileID: 7875439195797511936, guid: 5c088d275793b744b94f97146bb73345,
+    type: 3}
 --- !u!1 &1106373121195591626
 GameObject:
   m_ObjectHideFlags: 0
@@ -5625,7 +5632,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0.003, y: -0.394}
-  m_SizeDelta: {x: 1.3, y: 1}
+  m_SizeDelta: {x: 1.4, y: 0.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4965094484269185224
 CanvasRenderer:
@@ -5648,7 +5655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.05490196}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15806,6 +15813,7 @@ Transform:
   - {fileID: 4385179753263515964}
   - {fileID: 413584607892912288}
   - {fileID: 5374031209549792931}
+  - {fileID: 6041819461580031574}
   m_Father: {fileID: 2815451194085432992}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4709275405262456066
@@ -21097,7 +21105,7 @@ GameObject:
   - component: {fileID: 7199728947877506666}
   - component: {fileID: 1117496475586837563}
   m_Layer: 2
-  m_Name: Canvas
+  m_Name: HealthCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21112,15 +21120,15 @@ RectTransform:
   m_GameObject: {fileID: 8385824672761662718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1533896103028482140}
-  m_Father: {fileID: 8486620092894112140}
+  m_Father: {fileID: 5430453665543231639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -1.261}
+  m_AnchoredPosition: {x: 0, y: -0.24129999}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7199728947877506666
@@ -21333,7 +21341,6 @@ Transform:
   - {fileID: 475283786943065955}
   - {fileID: 4679024956723844702}
   - {fileID: 3492258199105258622}
-  - {fileID: 6041819461580031574}
   m_Father: {fileID: 5430453665543231639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7819214709658690541

@@ -7,6 +7,7 @@ public class SpiderController : MonoBehaviour
     public bool isActive;
     public ParticleSystem[] boostParticleSystem;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

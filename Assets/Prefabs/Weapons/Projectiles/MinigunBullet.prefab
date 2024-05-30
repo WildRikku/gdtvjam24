@@ -344,5 +344,5 @@ MonoBehaviour:
   explosionFXPrefab: {fileID: 369896592912511247, guid: bad957c2724fe774d90909d011705c5a,
     type: 3}
   radius: 30
-  damage: 10
+  damage: 5
   projectileCollider: {fileID: -7856862537576219866}
