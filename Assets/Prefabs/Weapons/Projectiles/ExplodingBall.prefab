@@ -120,7 +120,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.5
 --- !u!50 &2838611224409438104
 Rigidbody2D:
   serializedVersion: 4
@@ -162,6 +162,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primaryLayer: {fileID: 0}
   secondaryLayer: {fileID: 0}
-  explosionPrefab: {fileID: 661518735592215544, guid: b13ba5db757e1af49a3034846b730f5e,
+  explosionFXPrefab: {fileID: 661518735592215544, guid: b13ba5db757e1af49a3034846b730f5e,
     type: 3}
   radius: 60
+  damage: 100
+  projectileCollider: {fileID: 4468152444659184784}

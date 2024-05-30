@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: -4247587392948642449}
   m_Layer: 2
   m_Name: SpiderController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -307,6 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainWeapon: {fileID: 0}
   weaponSpawnPoint: {fileID: 5374031209549792931}
+  index: 0
   spiderController: {fileID: 4069876234473721646}
 --- !u!1 &1106373121195591626
 GameObject:

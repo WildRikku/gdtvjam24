@@ -13,21 +13,23 @@ public class PlayerController : MonoBehaviour
     public float Health
     {
         get => _health;
-        set
+        private set
         {
             _health = value;
             HealthUpdated?.Invoke(this);
+            if (_health <= 0)
+            {
+                Die();
+            }
         }
     }
 
     public short index;
 
-    public event SimplePlayerEvent AttackFinished;
+    public event SimplePlayerEvent TurnFinished;
     public event SimplePlayerEvent HealthUpdated;
     
     public SpiderController spiderController;
-
-    
 
     void Start()
     {
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         if (transform.position.y < -0.7f)
         {
-            Die();
+            Health = 0;
         }
     }
 
@@ -52,15 +54,25 @@ public class PlayerController : MonoBehaviour
 
     private void WeaponOnAttackFinished(object sender, EventArgs e)
     {
+        _weapon.AttackFinished -= WeaponOnAttackFinished;
         _weapon.isActive = false;
         spiderController.isActive = false;
-        AttackFinished?.Invoke(this);
+        TurnFinished?.Invoke(this);
+    }
+
+    public void TakeDamage(float amount)
+    {
+        Health -= amount;
     }
 
     private void Die()
     {
-        Health = 0; // do this first as it triggers the event
-        AttackFinished?.Invoke(this); // we can call this always because Team will only listen to the active player
+        if (_weapon.isActive)
+        {
+            _weapon.AttackFinished -= WeaponOnAttackFinished;
+        }
+
+        TurnFinished?.Invoke(this); // we can call this always because Team will only listen to the active player
         Destroy(gameObject);
     }
 }

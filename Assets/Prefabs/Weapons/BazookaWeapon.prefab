@@ -5500,8 +5500,8 @@ MonoBehaviour:
   activationKey: 97
   isActive: 0
   weaponRotationPoint: {fileID: 6867387976718280892}
-  minZRotation: 120
-  maxZRotation: 255
+  minZRotation: 90
+  maxZRotation: 290
   rotationSpeed: 80
   shotTriggerPoint: {fileID: 7859103626720996382}
   bombPrefab: {fileID: 3689770828418205119, guid: a7ea5410745224141949fb5eb1701152,

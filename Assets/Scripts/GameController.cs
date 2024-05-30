@@ -29,13 +29,22 @@ public class GameController : MonoBehaviour
             } while (usedTeamColors[teamColor]);
 
             teams[i].teamColor = teamColor;
-            teams[i].index = i;
             if (menuController != null)
             {
                 menuController.teamColorIndex[i] = teamColor;
             }
-
             usedTeamColors[teamColor] = true;
+            
+            teams[i].index = i;
+            teams[i].TeamUpdated += OnTeamUpdated;
+        }
+    }
+
+    private void OnTeamUpdated(short teamindex, int membercount)
+    {
+        if (membercount == 0)
+        {
+            Debug.Log("Game over");
         }
     }
 
@@ -63,6 +72,7 @@ public class GameController : MonoBehaviour
     private void OnturnEnded(object sender, EventArgs e)
     {
         _activeTeam = (_activeTeam == 1) ? 0 : 1;
-        Turn();
+        Debug.Log("wait for next turn");
+        Invoke(nameof(Turn), 1f);
     }
 }

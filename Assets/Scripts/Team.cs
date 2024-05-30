@@ -12,7 +12,7 @@ public class Team : MonoBehaviour
     
     public GameObject playerPrefab;
     private Dictionary<short, PlayerController> _members;
-    private short _activeMember;
+    private int _activeMember;
     
     public List<GameObject> weaponPrefabs;
     public event EventHandler TurnEnded;
@@ -57,17 +57,18 @@ public class Team : MonoBehaviour
     public void PlayerAction()
     {
         _members.ElementAt(_activeMember).Value.Attack();
-        _members.ElementAt(_activeMember).Value.AttackFinished += OnAttackFinished;
+        _members.ElementAt(_activeMember).Value.TurnFinished += OnTurnFinished;
     }
 
     public PlayerController GetActivePlayer()
     {
+        if (_activeMember >= _members.Count) _activeMember = _members.Count - 1; // a team member died between turns
         return _members.ElementAt(_activeMember).Value;
     }
 
-    private void OnAttackFinished(PlayerController pc)
+    private void OnTurnFinished(PlayerController pc)
     {
-        GetActivePlayer().AttackFinished -= OnAttackFinished;
+        GetActivePlayer().TurnFinished -= OnTurnFinished;
         _activeMember++;
         if (_activeMember == _members.Count)
             _activeMember = 0;

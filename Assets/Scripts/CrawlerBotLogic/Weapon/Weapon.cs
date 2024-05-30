@@ -20,3 +20,17 @@ public class Weapon : MonoBehaviour
         AttackFinished?.Invoke(this, EventArgs.Empty);
     }
 }
+
+public class ProjectileWeapon : Weapon
+{
+    protected int ProjectileCount;
+    
+    protected void OnProjectileImpact(float damage)
+    {
+        ProjectileCount--;
+        if (ProjectileCount == 0)
+        {
+            OnAttackFinished();
+        }
+    }
+}
