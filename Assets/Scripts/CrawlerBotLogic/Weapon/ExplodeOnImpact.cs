@@ -37,8 +37,10 @@ public class ExplodeOnImpact : MonoBehaviour
         
         if (_impacted) return;
         _impacted = true;
+        
+        Vector2 position = col.GetContact(0).point;
 
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(col.GetContact(0).point, (float)radius/primaryLayer.PPU, Physics2D.AllLayers);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, (float)radius/primaryLayer.PPU, Physics2D.AllLayers);
         bool terrainHit = false;
         foreach (Collider2D c in hitColliders)
         {
@@ -56,7 +58,6 @@ public class ExplodeOnImpact : MonoBehaviour
         
         if (terrainHit)
         {
-            Vector2 position = col.GetContact(0).point;
             _paintingParameters.DestructionMode = DestructionMode.DESTROY;
             _paintingParameters.Position.x = (int)(position.x * primaryLayer.PPU) - radius;
             _paintingParameters.Position.y = (int)(position.y * primaryLayer.PPU) - radius;
