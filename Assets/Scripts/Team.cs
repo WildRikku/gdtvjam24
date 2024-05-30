@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public delegate void TeamUpdated(short teamIndex, int memberCount);
+
 public class Team : MonoBehaviour
 {
     public const short MaxTeamMembers = 5;
@@ -14,8 +16,11 @@ public class Team : MonoBehaviour
     
     public List<GameObject> weaponPrefabs;
     public event EventHandler turnEnded;
+    public event TeamUpdated TeamUpdated;
     [HideInInspector]
     public int teamColor;
+
+    public short index;
 
     public Collider2D spawnZone;
     
@@ -46,6 +51,7 @@ public class Team : MonoBehaviour
         {
             // RIP
             members.Remove(pc.index);
+            TeamUpdated?.Invoke(index, members.Count);
         }
     }
 

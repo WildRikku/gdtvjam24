@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     public CinemachineVirtualCamera cinemachineVirtualCamera;
     public GameMenuController menuController;
 
+    public event EventHandler MatchStarted;
+
     private int _activeTeam;
 
     private void Awake()
@@ -26,6 +28,7 @@ public class GameController : MonoBehaviour
             } while (usedTeamColors[teamColor]);
 
             Teams[i].teamColor = teamColor;
+            Teams[i].index = i;
             menuController.teamColorIndex[i] = teamColor;
             usedTeamColors[teamColor] = true;
         }
@@ -39,6 +42,7 @@ public class GameController : MonoBehaviour
             Teams[i].turnEnded += OnturnEnded;
         }
 
+        MatchStarted?.Invoke(this, EventArgs.Empty);
         Turn();
     }
 
