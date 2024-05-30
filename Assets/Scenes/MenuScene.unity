@@ -514,7 +514,7 @@ MonoBehaviour:
   musicSlider: {fileID: 284038201}
   sfxSlider: {fileID: 1951612085}
   strLevel1: TestScene
-  strLevel2: SampleScene
+  strLevel2: Level2
   strLevel3: SampleScene
 --- !u!1 &227888630
 GameObject:
