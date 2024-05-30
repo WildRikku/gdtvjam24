@@ -45,6 +45,9 @@ public class GameController : MonoBehaviour
         if (membercount == 0)
         {
             Debug.Log("Game over");
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
         }
     }
 
