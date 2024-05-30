@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,6 +11,17 @@ public class SpiderAirstrikeController : Weapon
         battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
     }
 
+    private void Update()
+    {
+        if (!isActive) return;
+        
+        if (Input.GetKeyDown(activationKey))
+        {
+            isActive = false;
+            Trigger();
+        }
+    }
+
     public override void Trigger()
     {
         for (short i = 1; i < 5; i++)
@@ -19,5 +31,6 @@ public class SpiderAirstrikeController : Weapon
             eoi.primaryLayer = battleField.collidableLayer;
             eoi.secondaryLayer = battleField.visibleLayer;
         }
+        OnAttackFinished();
     }
 }
