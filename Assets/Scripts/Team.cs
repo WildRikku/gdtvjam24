@@ -44,9 +44,8 @@ public class Team : MonoBehaviour
         _activeMember = 0;
     }
 
-    private void TeamMemberOnHealthUpdated(object sender, EventArgs e)
+    private void TeamMemberOnHealthUpdated(PlayerController pc)
     {
-        PlayerController pc = (PlayerController)sender;
         if (pc.Health <= 0)
         {
             // RIP
@@ -66,7 +65,7 @@ public class Team : MonoBehaviour
         return _members.ElementAt(_activeMember).Value;
     }
 
-    private void OnAttackFinished(object sender, EventArgs e)
+    private void OnAttackFinished(PlayerController pc)
     {
         GetActivePlayer().AttackFinished -= OnAttackFinished;
         _activeMember++;

@@ -30,7 +30,11 @@ public class GameController : MonoBehaviour
 
             teams[i].teamColor = teamColor;
             teams[i].index = i;
-            menuController.teamColorIndex[i] = teamColor;
+            if (menuController != null)
+            {
+                menuController.teamColorIndex[i] = teamColor;
+            }
+
             usedTeamColors[teamColor] = true;
         }
     }

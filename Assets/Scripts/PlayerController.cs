@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+public delegate void SimplePlayerEvent(PlayerController playerController);
+
 public class PlayerController : MonoBehaviour
 {
     public GameObject mainWeapon;
@@ -14,14 +16,14 @@ public class PlayerController : MonoBehaviour
         set
         {
             _health = value;
-            HealthUpdated?.Invoke(this, EventArgs.Empty);
+            HealthUpdated?.Invoke(this);
         }
     }
 
     public short index;
 
-    public event EventHandler AttackFinished;
-    public event EventHandler HealthUpdated;
+    public event SimplePlayerEvent AttackFinished;
+    public event SimplePlayerEvent HealthUpdated;
     
     public SpiderController spiderController;
 
@@ -52,12 +54,13 @@ public class PlayerController : MonoBehaviour
     {
         _weapon.isActive = false;
         spiderController.isActive = false;
-        AttackFinished?.Invoke(this, EventArgs.Empty);
+        AttackFinished?.Invoke(this);
     }
 
     private void Die()
     {
         Health = 0; // do this first as it triggers the event
+        AttackFinished?.Invoke(this); // we can call this always because Team will only listen to the active player
         Destroy(gameObject);
     }
 }
