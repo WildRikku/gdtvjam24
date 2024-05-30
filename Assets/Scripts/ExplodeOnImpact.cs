@@ -41,6 +41,9 @@ public class ExplodeOnImpact : MonoBehaviour
     private void OnDestroy()
     {
         if (explosionPrefab != null)
-            Instantiate(explosionPrefab, transform.position, transform.rotation);
+        {
+            Transform transform1 = transform;
+            Instantiate(explosionPrefab, transform1.position, transform1.rotation);
+        }
     }
 }

@@ -11,11 +11,11 @@ public class Team : MonoBehaviour
     public const short MaxTeamMembers = 5;
     
     public GameObject playerPrefab;
-    private Dictionary<short, PlayerController> members;
-    private short activeMember;
+    private Dictionary<short, PlayerController> _members;
+    private short _activeMember;
     
     public List<GameObject> weaponPrefabs;
-    public event EventHandler turnEnded;
+    public event EventHandler TurnEnded;
     public event TeamUpdated TeamUpdated;
     [HideInInspector]
     public int teamColor;
@@ -26,7 +26,7 @@ public class Team : MonoBehaviour
     
     void Start()
     {
-        members = new();
+        _members = new();
         
         Bounds bounds = spawnZone.bounds;
         for (short i = 0; i < MaxTeamMembers; i++)
@@ -38,10 +38,10 @@ public class Team : MonoBehaviour
             pc.mainWeapon = weaponPrefabs[Random.Range(0, weaponPrefabs.Count)];
             pc.index = i;
             pc.HealthUpdated += TeamMemberOnHealthUpdated;
-            members.Add(i, pc);
+            _members.Add(i, pc);
         }
 
-        activeMember = 0;
+        _activeMember = 0;
     }
 
     private void TeamMemberOnHealthUpdated(object sender, EventArgs e)
@@ -50,28 +50,28 @@ public class Team : MonoBehaviour
         if (pc.Health <= 0)
         {
             // RIP
-            members.Remove(pc.index);
-            TeamUpdated?.Invoke(index, members.Count);
+            _members.Remove(pc.index);
+            TeamUpdated?.Invoke(index, _members.Count);
         }
     }
 
     public void PlayerAction()
     {
-        members.ElementAt(activeMember).Value.Attack();
-        members.ElementAt(activeMember).Value.AttackFinished += OnAttackFinished;
+        _members.ElementAt(_activeMember).Value.Attack();
+        _members.ElementAt(_activeMember).Value.AttackFinished += OnAttackFinished;
     }
 
     public PlayerController GetActivePlayer()
     {
-        return members.ElementAt(activeMember).Value;
+        return _members.ElementAt(_activeMember).Value;
     }
 
     private void OnAttackFinished(object sender, EventArgs e)
     {
         GetActivePlayer().AttackFinished -= OnAttackFinished;
-        activeMember++;
-        if (activeMember == members.Count)
-            activeMember = 0;
-        turnEnded?.Invoke(this, EventArgs.Empty);
+        _activeMember++;
+        if (_activeMember == _members.Count)
+            _activeMember = 0;
+        TurnEnded?.Invoke(this, EventArgs.Empty);
     }
 }

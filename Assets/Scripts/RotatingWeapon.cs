@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RotatingWeapon : Weapon
@@ -11,7 +9,7 @@ public class RotatingWeapon : Weapon
     public float rotationSpeed = 10f;
     
     protected bool isRotating;
-    private bool rotatingToMax = true;
+    private bool _rotatingToMax = true;
     protected float rotationTempSpeed;
     protected bool isFadeOutRotation;
     
@@ -21,17 +19,17 @@ public class RotatingWeapon : Weapon
     {
         float currentZRotation = weaponRotationPoint.localEulerAngles.z;
 
-        if (rotatingToMax)
+        if (_rotatingToMax)
         {
             currentZRotation = Mathf.MoveTowards(currentZRotation, maxZRotation, rotationTempSpeed * Time.deltaTime);
 
-            if (currentZRotation >= maxZRotation) rotatingToMax = false;
+            if (currentZRotation >= maxZRotation) _rotatingToMax = false;
         }
         else
         {
             currentZRotation = Mathf.MoveTowards(currentZRotation, minZRotation, rotationTempSpeed * Time.deltaTime);
 
-            if (currentZRotation <= minZRotation) rotatingToMax = true;
+            if (currentZRotation <= minZRotation) _rotatingToMax = true;
         }
 
         Vector3 localEulerAngles = weaponRotationPoint.localEulerAngles;

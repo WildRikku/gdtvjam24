@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
-    public List<Team> Teams;
+    [FormerlySerializedAs("Teams")] public List<Team> teams;
     public CinemachineVirtualCamera cinemachineVirtualCamera;
     public GameMenuController menuController;
 
@@ -19,7 +20,7 @@ public class GameController : MonoBehaviour
         Invoke(nameof(MatchBegin), 2f);
         bool[] usedTeamColors = new bool[4];
         
-        for (short i = 0; i < Teams.Count; i++)
+        for (short i = 0; i < teams.Count; i++)
         {
             int teamColor;
             do
@@ -27,32 +28,32 @@ public class GameController : MonoBehaviour
                 teamColor = Random.Range(0, 4);
             } while (usedTeamColors[teamColor]);
 
-            Teams[i].teamColor = teamColor;
-            Teams[i].index = i;
+            teams[i].teamColor = teamColor;
+            teams[i].index = i;
             menuController.teamColorIndex[i] = teamColor;
             usedTeamColors[teamColor] = true;
         }
     }
 
-    void MatchBegin()
+    private void MatchBegin()
     {
         _activeTeam = 0;
-        for (int i = 0; i < Teams.Count; i++)
+        foreach (Team t in teams)
         {
-            Teams[i].turnEnded += OnturnEnded;
+            t.TurnEnded += OnturnEnded;
         }
 
         MatchStarted?.Invoke(this, EventArgs.Empty);
         Turn();
     }
 
-    void Turn()
+    private void Turn()
     {
-        cinemachineVirtualCamera.Follow = Teams[_activeTeam].GetActivePlayer().transform; 
+        cinemachineVirtualCamera.Follow = teams[_activeTeam].GetActivePlayer().transform; 
         // Give control to the next character of the active player
         
         // Wait for player action
-        Teams[_activeTeam].PlayerAction();
+        teams[_activeTeam].PlayerAction();
     }
 
     private void OnturnEnded(object sender, EventArgs e)

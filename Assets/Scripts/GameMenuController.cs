@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -16,7 +14,7 @@ public class GameMenuController : MonoBehaviour
     public Image[] memberBar;
     public Color[] teamColor;
 
-    private bool isBreak = false;
+    private bool _isBreak = false;
 
     public GameController gameController;
 
@@ -39,8 +37,8 @@ public class GameMenuController : MonoBehaviour
     {
         SetMemberbar(0, Team.MaxTeamMembers, Team.MaxTeamMembers);
         SetMemberbar(1, Team.MaxTeamMembers, Team.MaxTeamMembers);
-        gameController.Teams[0].TeamUpdated += OnTeamUpdated;
-        gameController.Teams[1].TeamUpdated += OnTeamUpdated; 
+        gameController.teams[0].TeamUpdated += OnTeamUpdated;
+        gameController.teams[1].TeamUpdated += OnTeamUpdated; 
     }
 
     private void OnTeamUpdated(short teamIndex, int memberCount)
@@ -50,7 +48,7 @@ public class GameMenuController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && isBreak == false)
+        if (Input.GetKeyDown(KeyCode.Escape) && _isBreak == false)
         {
             breakHUDCG.DOFade(1, 0.2f).SetUpdate(true);
             breakHUDCG.blocksRaycasts = true;
@@ -61,7 +59,7 @@ public class GameMenuController : MonoBehaviour
 
     // ------------------------------------
     // PlayerHUD
-    public void SetMemberbar(int memberBarIndex, int teamMaxValue, int teamCurrentValue)
+    private void SetMemberbar(int memberBarIndex, int teamMaxValue, int teamCurrentValue)
     {
         float currentFillAmount = (float)teamCurrentValue / teamMaxValue;
 

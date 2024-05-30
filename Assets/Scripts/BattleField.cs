@@ -1,10 +1,11 @@
 using DTerrain;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BattleField : MonoBehaviour
 {
-    public Sprite BackgroundSprite;
+    [FormerlySerializedAs("BackgroundSprite")] public Sprite backgroundSprite;
 
     [DoNotSerialize, HideInInspector]
     public float width;
@@ -16,10 +17,10 @@ public class BattleField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (BackgroundSprite != null)
+        if (backgroundSprite != null)
         {
-            width = BackgroundSprite.texture.width / BackgroundSprite.pixelsPerUnit;
-            height = BackgroundSprite.texture.height / BackgroundSprite.pixelsPerUnit;
+            width = backgroundSprite.texture.width / backgroundSprite.pixelsPerUnit;
+            height = backgroundSprite.texture.height / backgroundSprite.pixelsPerUnit;
         }
     }
 }
