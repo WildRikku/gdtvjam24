@@ -63,12 +63,12 @@ public class Team : MonoBehaviour
 
     public PlayerController GetActivePlayer()
     {
-        return members[activeMember];
+        return members.ElementAt(activeMember).Value;
     }
 
     private void OnAttackFinished(object sender, EventArgs e)
     {
-        members[activeMember].AttackFinished -= OnAttackFinished;
+        GetActivePlayer().AttackFinished -= OnAttackFinished;
         activeMember++;
         if (activeMember == members.Count)
             activeMember = 0;
