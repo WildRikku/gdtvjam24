@@ -1,7 +1,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class WeaponAirstrike : Weapon
+public class SpiderAirstrikeController : Weapon
 {
     public GameObject rocketPrefab;
 
