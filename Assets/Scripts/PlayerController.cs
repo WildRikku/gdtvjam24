@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 using TMPro;
-using UnityEngine.UI;
 
 public delegate void SimplePlayerEvent(PlayerController playerController);
 
@@ -12,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [FormerlySerializedAs("_weapon")] public Weapon weapon;
     public Transform weaponSpawnPoint;
 
-    private float _health = 10;
+    private float _health = 50;
     public float Health
     {
         get => _health;
@@ -35,7 +34,6 @@ public class PlayerController : MonoBehaviour
     public SpiderController spiderController;
 
     [HideInInspector] public String botName;
-    public CanvasGroup healthCG;
     public TMP_Text nameTxt;
     public TMP_Text healthTxt;
     public GameObject damagePopupPrefab;
@@ -44,7 +42,6 @@ public class PlayerController : MonoBehaviour
     {
         GameObject weaponInstance = Instantiate(mainWeapon, weaponSpawnPoint);
         weapon = weaponInstance.GetComponent<Weapon>();
-        healthCG.alpha = 1;
         nameTxt.text = botName;
         healthTxt.text = Health.ToString();
     }

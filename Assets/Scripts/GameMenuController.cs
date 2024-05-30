@@ -122,7 +122,7 @@ public class GameMenuController : MonoBehaviour
         });
     }
 
-    private void TriggerMassage(string maString, int maColor= 4)  // Color 4 = default)
+    public void TriggerMassage(string maString, int maColor= 4)  // Color 4 = default)
     {
         MassageContainer ma = new();
         ma.massageStr = maString;
