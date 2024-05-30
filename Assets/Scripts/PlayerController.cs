@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public delegate void SimplePlayerEvent(PlayerController playerController);
 
 public class PlayerController : MonoBehaviour
 {
     public GameObject mainWeapon;
-    private Weapon _weapon;
+    [FormerlySerializedAs("_weapon")] public Weapon weapon;
     public Transform weaponSpawnPoint;
 
     private float _health;
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         GameObject weaponInstance = Instantiate(mainWeapon, weaponSpawnPoint);
-        _weapon = weaponInstance.GetComponent<Weapon>();
+        weapon = weaponInstance.GetComponent<Weapon>();
     }
 
     private void FixedUpdate()
@@ -47,15 +48,15 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-        _weapon.isActive = true;
+        weapon.isActive = true;
         spiderController.isActive = true;
-        _weapon.AttackFinished += WeaponOnAttackFinished;
+        weapon.AttackFinished += WeaponOnAttackFinished;
     }
 
     private void WeaponOnAttackFinished(object sender, EventArgs e)
     {
-        _weapon.AttackFinished -= WeaponOnAttackFinished;
-        _weapon.isActive = false;
+        weapon.AttackFinished -= WeaponOnAttackFinished;
+        weapon.isActive = false;
         spiderController.isActive = false;
         TurnFinished?.Invoke(this);
     }
@@ -67,9 +68,9 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        if (_weapon.isActive)
+        if (weapon.isActive)
         {
-            _weapon.AttackFinished -= WeaponOnAttackFinished;
+            weapon.AttackFinished -= WeaponOnAttackFinished;
         }
 
         TurnFinished?.Invoke(this); // we can call this always because Team will only listen to the active player

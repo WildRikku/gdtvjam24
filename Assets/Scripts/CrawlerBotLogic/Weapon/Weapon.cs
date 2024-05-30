@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+public delegate void ProjectileFired(GameObject projectile);
+
 public class Weapon : MonoBehaviour
 {
     public BattleField battleField;
@@ -24,6 +26,7 @@ public class Weapon : MonoBehaviour
 public class ProjectileWeapon : Weapon
 {
     protected int ProjectileCount;
+    public event ProjectileFired ProjectileFired;
 
     protected void OnProjectileImpact(float damage)
     {
@@ -41,6 +44,7 @@ public class ProjectileWeapon : Weapon
         eoi.primaryLayer = battleField.collidableLayer;
         eoi.secondaryLayer = battleField.visibleLayer;
         eoi.Impact += OnProjectileImpact;
+        ProjectileFired?.Invoke(projectile);
         return projectile;
     }
 }

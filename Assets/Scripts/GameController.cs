@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     public event EventHandler MatchStarted;
 
     private int _activeTeam;
+    private bool _trackingProjectile;
 
     private void Awake()
     {
@@ -70,10 +71,22 @@ public class GameController : MonoBehaviour
         
         // Wait for player action
         teams[_activeTeam].PlayerAction();
+
+        // follow first projectile if there is one
+        ProjectileWeapon pw = teams[_activeTeam].GetActivePlayer().weapon as ProjectileWeapon;
+        if (pw != null) pw.ProjectileFired += OnProjectileFired;
+    }
+
+    private void OnProjectileFired(GameObject projectile)
+    {
+        if (_trackingProjectile) return;
+        _trackingProjectile = true;
+        cinemachineVirtualCamera.Follow = projectile.transform;
     }
 
     private void OnturnEnded(object sender, EventArgs e)
     {
+        _trackingProjectile = false;
         _activeTeam = (_activeTeam == 1) ? 0 : 1;
         Debug.Log("wait for next turn");
         Invoke(nameof(Turn), 1f);
