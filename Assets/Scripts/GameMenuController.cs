@@ -23,6 +23,10 @@ public class GameMenuController : MonoBehaviour
     public CanvasGroup weaponChooseCG;
     public CanvasGroup gameEndHudCG;
 
+    private List<GameObject> _weaponChooseLayoutPanels;
+    public GameObject weaponChooseLayoutPanelPrefab;
+    public GameObject weaponChooseButtonPrefab;
+
     [HideInInspector] public int[] teamColorIndex = new int[2];
     public Image[] memberBar;
     public Color[] teamColor;
@@ -40,7 +44,7 @@ public class GameMenuController : MonoBehaviour
     private float remainingTime = 0;
     private float timeSinceLastUpdate = -10;
 
-    public event EventHandler turnTimeIsUp;
+    public event EventHandler TurnTimeIsUp;
 
     private void Start()
     {
@@ -61,11 +65,41 @@ public class GameMenuController : MonoBehaviour
 
         SetMemberbarColor(0, teamColorIndex[0]);
         SetMemberbarColor(1, teamColorIndex[1]);
+        
+        // generate weapon choose buttons
+        _weaponChooseLayoutPanels = new();
+        foreach (Team t in gameController.teams)
+        {
+            GameObject lp = Instantiate(weaponChooseLayoutPanelPrefab, weaponChooseCG.transform);
+            _weaponChooseLayoutPanels.Add(lp);
+            for(int i = 0; i < t.weapons.Count; i++)
+            {
+                Weapon w = t.weapons[i];
+                GameObject btn = Instantiate(weaponChooseButtonPrefab, lp.transform);
+                WeaponChooseBtn btnclass = btn.GetComponent<WeaponChooseBtn>();
+                btnclass.btnName = w.name;
+                btnclass.btnDescription = w.description;
+                btnclass.btnSprite = w.buttonSprite;
+                btnclass.btnIndex = i;
+            }
+        }
 
         gameController.MatchStarted += OnMatchStarted;
+        gameController.TurnStarted += OnTurnStarted;
     }
 
-    private void OnMatchStarted(object sender, EventArgs e)
+    private void OnTurnStarted(GameController gameController)
+    {
+        ResetTurnTimerText(teamColorIndex[gameController.activeTeam]);
+        ShowWeaponHUD(teamColorIndex[gameController.activeTeam]);
+        foreach (GameObject lp in _weaponChooseLayoutPanels)
+        {
+            lp.SetActive(false);
+        }
+        _weaponChooseLayoutPanels[gameController.activeTeam].SetActive(true);
+    }
+
+    private void OnMatchStarted(GameController gameController)
     {
         SetMemberbar(0, Team.MaxTeamMembers, Team.MaxTeamMembers);
         SetMemberbar(1, Team.MaxTeamMembers, Team.MaxTeamMembers);
@@ -117,7 +151,7 @@ public class GameMenuController : MonoBehaviour
 
     public void ShowWeaponHUD(int panelColorIndex = 4)
     {
-        weaponChooseBarImage.color = teamColor[panelColorIndex];
+//        weaponChooseBarImage.color = teamColor[panelColorIndex];
 
         weaponChooseCG.DOFade(1, 0.4f);
         weaponChooseCG.blocksRaycasts = true;
@@ -129,7 +163,7 @@ public class GameMenuController : MonoBehaviour
         weaponChooseCG.blocksRaycasts = false;
     }
 
-    public void ResetRoundTimerText(int teamColorIndex, int timerValue = 30)
+    public void ResetTurnTimerText(int teamColorIndex, int timerValue = 30)
     {
         remainingTime = timerValue;
         timeSinceLastUpdate = 0f;
@@ -146,7 +180,7 @@ public class GameMenuController : MonoBehaviour
 
         if (remainingTime <= 0f)
         {
-            turnTimeIsUp?.Invoke(this, EventArgs.Empty);
+            TurnTimeIsUp?.Invoke(this, EventArgs.Empty);
         }
     }
 

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class WeaponChooseBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
     [Header ("Do this for every Btn")]
     public int btnIndex = 0;
     public string btnName = "button";

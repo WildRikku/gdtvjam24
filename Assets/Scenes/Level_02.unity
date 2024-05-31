@@ -195,6 +195,11 @@ PrefabInstance:
       objectReference: {fileID: 989687043}
     - target: {fileID: 5283130156148193183, guid: e0583b59d87d4004db9d3f9e444dd0c9,
         type: 3}
+      propertyPath: weapons.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283130156148193183, guid: e0583b59d87d4004db9d3f9e444dd0c9,
+        type: 3}
       propertyPath: Teams.Array.data[0]
       value: 
       objectReference: {fileID: 202399443}
@@ -5507,6 +5512,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
+        type: 3}
+      propertyPath: weaponPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
+        type: 3}
+      propertyPath: weaponPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 7904412063863603580, guid: a78b8da7c87436c4c80f0a2e535960c0,
+        type: 3}
     - target: {fileID: 4902690037320882239, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
         type: 3}
       propertyPath: m_Name
@@ -11830,6 +11846,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4235313741843627040, guid: 8857f49315aaf7346bceb10beff2e596,
+        type: 3}
+      propertyPath: m_Name
+      value: WeaponChooseLP
+      objectReference: {fileID: 0}
     - target: {fileID: 4272923206305349962, guid: 8857f49315aaf7346bceb10beff2e596,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -11965,6 +11986,18 @@ PrefabInstance:
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1774172127}
+    - target: {fileID: 8080186578197980441, guid: 8857f49315aaf7346bceb10beff2e596,
+        type: 3}
+      propertyPath: weaponChooseButtonPrefab
+      value: 
+      objectReference: {fileID: 818411882651842673, guid: ad28fee8d34f4a74fb573529ddc30b46,
+        type: 3}
+    - target: {fileID: 8080186578197980441, guid: 8857f49315aaf7346bceb10beff2e596,
+        type: 3}
+      propertyPath: weaponChooseLayoutPanelPrefab
+      value: 
+      objectReference: {fileID: 6096920731118230496, guid: 28f05a1d337975146952c419cc7004f3,
+        type: 3}
     - target: {fileID: 8211826557752792740, guid: 8857f49315aaf7346bceb10beff2e596,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -12006,7 +12039,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4678495095710225466, guid: 8857f49315aaf7346bceb10beff2e596, type: 3}
+    - {fileID: 6719749710317337811, guid: 8857f49315aaf7346bceb10beff2e596, type: 3}
+    - {fileID: 5599049184767882251, guid: 8857f49315aaf7346bceb10beff2e596, type: 3}
+    - {fileID: 907751230313010572, guid: 8857f49315aaf7346bceb10beff2e596, type: 3}
+    - {fileID: 2482091478639113226, guid: 8857f49315aaf7346bceb10beff2e596, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8857f49315aaf7346bceb10beff2e596, type: 3}
@@ -12099,12 +12137,12 @@ PrefabInstance:
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.140413
+      value: 9.03335
       objectReference: {fileID: 0}
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.1060286
+      value: 5.105235
       objectReference: {fileID: 0}
     - target: {fileID: 4417311475867233259, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}

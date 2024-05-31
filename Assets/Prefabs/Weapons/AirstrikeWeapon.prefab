@@ -47,8 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleField: {fileID: 0}
-  activationKey: 304
+  activationKey: 32
   isActive: 0
+  name: Airstrike
+  description: boom
+  buttonSprite: {fileID: 21300000, guid: af7f9093dfb4fb34a9659b3692e57977, type: 3}
+  ammo: 100
   rocketPrefab: {fileID: 675455061750858186, guid: 98fd2dbcbaa7bec4ab983794a3c128ce,
     type: 3}
 --- !u!212 &8422751025871512351
@@ -117,14 +121,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamColor: 0
   weaponplatform: {fileID: 8422751025871512351}
-  minigun: {fileID: 0}
-  bazooka: {fileID: 0}
-  airstike: {fileID: 0}
+  weapon: {fileID: 0}
   weaponplatforms:
   - {fileID: 21300000, guid: 5e842f1b3857a574087f9237bd45acdd, type: 3}
   - {fileID: 21300000, guid: b163b31aa68a5a04f9cd99b179c6affe, type: 3}
   - {fileID: 21300000, guid: b776f3ab79c7e64408c5e2b56d73fc6a, type: 3}
   - {fileID: 21300000, guid: b1086cc445fe53349ab15b5cc5125543, type: 3}
-  miniguns: []
-  bazookas: []
-  airstikes: []
+  weapons: []

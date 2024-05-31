@@ -8,7 +8,7 @@ public delegate void SimplePlayerEvent(PlayerController playerController);
 public class PlayerController : MonoBehaviour
 {
     public GameObject mainWeapon;
-    [FormerlySerializedAs("_weapon")] public Weapon weapon;
+    public Weapon weapon;
     public Transform weaponSpawnPoint;
 
     private float _health = 50;

@@ -15,6 +15,7 @@ public class Team : MonoBehaviour
     private int _activeMember;
     
     public List<GameObject> weaponPrefabs;
+    public List<Weapon> weapons;
     public event EventHandler TurnEnded;
     public event TeamUpdated TeamUpdated;
     [HideInInspector]
@@ -48,6 +49,11 @@ public class Team : MonoBehaviour
                 gameController.botNames.RemoveAt(value);
             }
             _members.Add(i, pc);
+        }
+
+        foreach (GameObject go in weaponPrefabs)
+        {
+            weapons.Add(go.GetComponent<Weapon>());
         }
 
         _activeMember = 0;

@@ -8,9 +8,16 @@ public class Weapon : MonoBehaviour
     public BattleField battleField;
     public KeyCode activationKey = KeyCode.A;
 
+    [HideInInspector]
     public bool isActive;
 
     public event EventHandler AttackFinished;
+
+    [Header("Configuration")]
+    public string name;
+    public string description;
+    public Sprite buttonSprite;
+    public int ammo;
 
     public virtual void Trigger()
     {

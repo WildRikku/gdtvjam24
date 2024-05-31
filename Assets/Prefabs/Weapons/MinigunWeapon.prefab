@@ -5054,6 +5054,10 @@ MonoBehaviour:
   battleField: {fileID: 0}
   activationKey: 32
   isActive: 0
+  name: Gun
+  description: 
+  buttonSprite: {fileID: 21300000, guid: 45f0b52c2b5c41b468f5795123de8c46, type: 3}
+  ammo: 100
   weaponRotationPoint: {fileID: 2615886611781964132}
   minZRotation: 65
   maxZRotation: 305

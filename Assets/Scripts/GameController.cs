@@ -5,15 +5,18 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+public delegate void GameplayEvent(GameController gameController);
+
 public class GameController : MonoBehaviour
 {
-    [FormerlySerializedAs("Teams")] public List<Team> teams;
+    public List<Team> teams;
     public CinemachineVirtualCamera cinemachineVirtualCamera;
     public GameMenuController menuController;
+    
+    public event GameplayEvent MatchStarted;
+    public event GameplayEvent TurnStarted;
 
-    public event EventHandler MatchStarted;
-
-    private int _activeTeam;
+    public int activeTeam;
     private bool _trackingProjectile;
 
     public List<String> botNames;  // use in PlayerController
@@ -42,7 +45,7 @@ public class GameController : MonoBehaviour
             teams[i].TeamUpdated += OnTeamUpdated;
         }
         
-        menuController.turnTimeIsUp += OnTurnEnded;
+        menuController.TurnTimeIsUp += OnTurnEnded;
     }
 
     private void OnTeamUpdated(short teamindex, int membercount)
@@ -59,29 +62,28 @@ public class GameController : MonoBehaviour
 
     private void MatchBegin()
     {
-        _activeTeam = 0;
+        activeTeam = 0;
         foreach (Team t in teams)
         {
             t.TurnEnded += OnTurnEnded;
         }
 
-        MatchStarted?.Invoke(this, EventArgs.Empty);
+        MatchStarted?.Invoke(this);
         Turn();
     }
 
     private void Turn()
     {
-        menuController.ResetRoundTimerText(teams[_activeTeam].teamColor);
-        menuController.ShowWeaponHUD(teams[_activeTeam].teamColor);
+        TurnStarted?.Invoke(this);
 
-        cinemachineVirtualCamera.Follow = teams[_activeTeam].GetActivePlayer().transform; 
+        cinemachineVirtualCamera.Follow = teams[activeTeam].GetActivePlayer().transform; 
         // Give control to the next character of the active player
         
         // Wait for player action
-        teams[_activeTeam].PlayerAction();
+        teams[activeTeam].PlayerAction();
 
         // follow first projectile if there is one
-        ProjectileWeapon pw = teams[_activeTeam].GetActivePlayer().weapon as ProjectileWeapon;
+        ProjectileWeapon pw = teams[activeTeam].GetActivePlayer().weapon as ProjectileWeapon;
         if (pw != null) pw.ProjectileFired += OnProjectileFired;
     }
 
@@ -97,7 +99,7 @@ public class GameController : MonoBehaviour
     private void OnTurnEnded(object sender, EventArgs e)
     {
         _trackingProjectile = false;
-        _activeTeam = (_activeTeam == 1) ? 0 : 1;
+        activeTeam = (activeTeam == 1) ? 0 : 1;
         Debug.Log("wait for next turn");
         Invoke(nameof(Turn), 1f);
     }
