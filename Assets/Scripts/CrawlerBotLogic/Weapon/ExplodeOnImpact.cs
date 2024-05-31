@@ -1,8 +1,6 @@
 using DTerrain;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 
 public delegate void Impact(float damage);
 
@@ -29,6 +27,7 @@ public class ExplodeOnImpact : MonoBehaviour
     private string[] _bounceSounds = new string[3] { "MouseHover1", "MouseHover2", "MouseHover3" };
     private int _boundsSoundCount = 0;
     private bool _canTriggerBounceSound = true;
+    private bool _isExplode = false;
 
     private PaintingParameters _paintingParameters = new()
     {
@@ -67,7 +66,7 @@ public class ExplodeOnImpact : MonoBehaviour
     {
         TriggerBounceSound();
         if (_canExplode == false) return;
-        if (!(col.collider.CompareTag("DestructibleTerrain") || col.collider.CompareTag("Player"))) return;
+        if (!(col.collider.CompareTag("DestructibleTerrain") || col.collider.CompareTag("DestructibleObjects") || col.collider.CompareTag("Player"))) return;
 
 
         _impacted = true;
@@ -87,6 +86,10 @@ public class ExplodeOnImpact : MonoBehaviour
             {
                 // Terrain has many colliders, save that we hit it and act later
                 terrainHit = true;
+            }
+            if (c.CompareTag("DestructibleObjects"))
+            {
+                c.SendMessage(nameof(ExplosivObjects.TakeDamage), damage);
             }
         }
 
@@ -109,10 +112,14 @@ public class ExplodeOnImpact : MonoBehaviour
 
     private void SpawnExplosion()
     {
-        if (explosionFXPrefab != null)
+        if (_isExplode == false)
         {
-            Transform transform1 = transform;
-            Instantiate(explosionFXPrefab, transform1.position, transform1.rotation);
+            if (explosionFXPrefab != null)
+            {
+                Transform transform1 = transform;
+                Instantiate(explosionFXPrefab, transform1.position, transform1.rotation);
+            }
+            _isExplode = true;
         }
     }
 
@@ -173,6 +180,11 @@ public class ExplodeOnImpact : MonoBehaviour
             {
                 // Terrain has many colliders, save that we hit it and act later
                 terrainHit = true;
+            }
+            if (c.CompareTag("DestructibleObjects"))
+            {
+                // Players only have one collider, send them damage
+                c.SendMessage(nameof(ExplosivObjects.TakeDamage), damage);
             }
         }
 

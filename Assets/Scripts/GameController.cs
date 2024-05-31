@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     public int activeTeam;
     private bool _trackingProjectile;
 
-    public List<String> botNames;  // use in PlayerController
+    public List<string> botNames;  // use in PlayerController
 
     private void Awake()
     {
