@@ -5305,7 +5305,7 @@ Transform:
   m_GameObject: {fileID: 7113406862627035668}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.176, y: -0.004, z: 0}
+  m_LocalPosition: {x: 0.007, y: -0.004, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5354,7 +5354,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 7
-  m_Sprite: {fileID: 21300000, guid: c42d17dd474e0a04b9483dc32acaa735, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38e75fb843ce34341bd5f88956f11719, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5410,7 +5410,7 @@ GameObject:
   - component: {fileID: 1238498791656236366}
   - component: {fileID: 4767774775377012542}
   m_Layer: 2
-  m_Name: BazookaWeapon
+  m_Name: GranadeWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5525,14 +5525,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamColor: 0
   weaponplatform: {fileID: 5196853988915305493}
-  weapon: {fileID: 8740232382057384780}
+  weapon: {fileID: 0}
   weaponplatforms:
   - {fileID: 21300000, guid: aff2b495d9f73994d9512f43f26f05fa, type: 3}
   - {fileID: 21300000, guid: 2292a4345da33d54fbba4c6bc9ee1587, type: 3}
   - {fileID: 21300000, guid: 94b5e5285da4a3f4da2e5a5800249924, type: 3}
   - {fileID: 21300000, guid: d9a5ac96a149b674c8a9252ab0a5c007, type: 3}
   weapons:
-  - {fileID: 21300000, guid: c42d17dd474e0a04b9483dc32acaa735, type: 3}
-  - {fileID: 21300000, guid: da94ca7ebc338044c809917a3b5d171e, type: 3}
-  - {fileID: 21300000, guid: c23862c28a518154eb7beb0c03ef5b5c, type: 3}
-  - {fileID: 21300000, guid: 19fac7d52ebcd12459d371eba5215af3, type: 3}
+  - {fileID: 21300000, guid: 38e75fb843ce34341bd5f88956f11719, type: 3}
+  - {fileID: 21300000, guid: fb99339065027854a8ec640e8a200339, type: 3}
+  - {fileID: 21300000, guid: 9e3e84ef1aee0654087be4e0c3ddec45, type: 3}
+  - {fileID: 21300000, guid: 11857e85262451a40a4be80140f79d76, type: 3}

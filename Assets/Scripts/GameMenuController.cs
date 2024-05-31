@@ -5,48 +5,57 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
-using UnityEditor.VersionControl;
-
-
-
-
 
 
 public class GameMenuController : MonoBehaviour
 {
-    public struct MassageContainer
+    public struct MessageContainer
     {
-        public string massageStr;
+        public string messageStr;
         public int colorInt;
     }
 
     public CanvasGroup playerHUDCG;
     public CanvasGroup breakHUDCG;
     public CanvasGroup transitionHUDCG;
-    public CanvasGroup massageCG;
-    public CanvasGroup massageTxtCG;
+    public CanvasGroup messageCG;
+    public CanvasGroup messageTxtCG;
+    public CanvasGroup weaponChooseCG;
+    public CanvasGroup gameEndHudCG;
 
     [HideInInspector] public int[] teamColorIndex = new int[2];
     public Image[] memberBar;
     public Color[] teamColor;
+    public Image weaponChooseBarImage;
+    public TMP_Text gameEndText;
+    public TMP_Text roundTimerText;
+    public Transform timerContainer;
 
     private bool _isBreak = false;
 
     public GameController gameController;
-    public TMP_Text massageTxt;
-    public List<MassageContainer> massageList = new();
-    public bool canTriggerNewMessage = true;
+    public TMP_Text messageTxt;
+    public List<MessageContainer> messageList = new();
+    private bool canTriggerNewMessage = true;
+    private float remainingTime = 0;
+    private float timeSinceLastUpdate = -10;
 
     private void Start()
     {
         Time.timeScale = 1;
 
-        massageTxtCG.alpha = 0;
-        massageCG.alpha = 0;
+        playerHUDCG.alpha = 0;
+        playerHUDCG.DOFade(1f, 2f);
+        weaponChooseCG.alpha = 0;
+        messageTxtCG.alpha = 0;
+        messageCG.alpha = 0;
         transitionHUDCG.alpha = 1;
         transitionHUDCG.blocksRaycasts = false;
         transitionHUDCG.DOFade(0, 0.2f).SetUpdate(true);
+        breakHUDCG.alpha = 0;
         breakHUDCG.blocksRaycasts = false;
+        gameEndHudCG.alpha = 0;
+        gameEndHudCG.blocksRaycasts = false;
 
         SetMemberbarColor(0, teamColorIndex[0]);
         SetMemberbarColor(1, teamColorIndex[1]);
@@ -75,8 +84,21 @@ public class GameMenuController : MonoBehaviour
             breakHUDCG.blocksRaycasts = true;
             Time.timeScale = 0;
         }
+
+        //timer
+        remainingTime -= Time.deltaTime;
+        timeSinceLastUpdate += Time.deltaTime;
+        if (timeSinceLastUpdate >= 1f)
+        {
+            UpdateTimerText();
+            timeSinceLastUpdate = 0f;
+        }
     }
 
+    private void OnDestroy()
+    {
+        Time.timeScale = 1;
+    }
 
     // ------------------------------------
     // PlayerHUD
@@ -91,7 +113,47 @@ public class GameMenuController : MonoBehaviour
         memberBar[memberBarIndex].color = teamColor[colorindex];
     }
 
+    public void ShowWeaponHUD(int panelColorIndex = 4)
+    {
+        weaponChooseBarImage.color = teamColor[panelColorIndex];
 
+        weaponChooseCG.DOFade(1, 0.4f);
+        weaponChooseCG.blocksRaycasts = true;
+    }
+
+    public void HideWeaponHUD()
+    {
+        weaponChooseCG.DOFade(0, 0.3f);
+        weaponChooseCG.blocksRaycasts = false;
+    }
+
+    public void ResetRoundTimerText(int teamColorIndex, int timerValue = 30)
+    {
+        remainingTime = timerValue;
+        timeSinceLastUpdate = 0f;
+        roundTimerText.color = teamColor[teamColorIndex];
+        UpdateTimerText();
+    }
+
+    public void UpdateTimerText()
+    {
+        int timerText = Mathf.Max(0, Mathf.RoundToInt(remainingTime));
+
+        roundTimerText.text = timerText.ToString();
+        timerContainer.DOShakeScale(0.5f, 0.1f,10,90,true,ShakeRandomnessMode.Harmonic);
+
+        // TODO: New Turn if the timer ends
+        if (remainingTime <= 0f)
+        {
+            Debug.Log("Timer - Christan, trigger a new turn please");
+        }
+    }
+
+    // TODO: Delete and use this from another place
+    void triggerWeaponBar()
+    {
+        ShowWeaponHUD(1);
+    }
 
     // ------------------------------------
     // BreakHUD
@@ -122,48 +184,63 @@ public class GameMenuController : MonoBehaviour
         });
     }
 
-    public void TriggerMassage(string maString, int maColor= 4)  // Color 4 = default)
+    // ------------------------------------
+    // Game End HUD
+    public void ShowGameEndHUD(short teamIndex)
     {
-        MassageContainer ma = new();
-        ma.massageStr = maString;
-        ma.colorInt = maColor;
+        // Teamindex loose
+        gameEndText.text = $"Congratulations Team {teamIndex+1} wins the competition.";
 
-        massageList.Add(ma);
-
-        if (canTriggerNewMessage) ShowMassage();
+        Time.timeScale = 0;
+        gameEndHudCG.DOFade(1,0.2f).SetUpdate(true);
+        gameEndHudCG.blocksRaycasts = true;
+        
     }
 
-  
+
+    // ------------------------------------
+    // Message System
+    public void TriggerMessage(string maString, int maColor = 4)  // Color 4 = default)
+    {
+        MessageContainer ma = new();
+        ma.messageStr = maString;
+        ma.colorInt = maColor;
+
+        messageList.Add(ma);
+
+        if (canTriggerNewMessage) ShowMessage();
+    }
+
     private void ResetTrigger()
     {
-        if (massageList.Count > 0) ShowMassage();
+        if (messageList.Count > 0) ShowMessage();
         else canTriggerNewMessage = true;
     }
 
-    private void ShowMassage()
+    private void ShowMessage()
     {
-        if (massageList.Count > 0)
+        if (messageList.Count > 0)
         {
             canTriggerNewMessage = false;
             Invoke(nameof(ResetTrigger), 2f);
 
-            massageTxtCG.DOKill();
-            massageTxtCG.alpha = 0;
+            messageTxtCG.DOKill();
+            messageTxtCG.alpha = 0;
 
-            massageTxt.text = massageList[0].massageStr;
-            massageTxt.color = teamColor[massageList[0].colorInt]; 
-            massageList.RemoveAt(0);
+            messageTxt.text = messageList[0].messageStr;
+            messageTxt.color = teamColor[messageList[0].colorInt];
+            messageList.RemoveAt(0);
 
-            massageCG.DOKill();
-            if (massageCG.alpha != 1)
+            messageCG.DOKill();
+            if (messageCG.alpha != 1)
             {
-                massageCG.DOFade(1f, 0.2f);
+                messageCG.DOFade(1f, 0.2f);
             }
 
-            massageTxtCG.DOFade(1, 0.2f);
-            massageTxtCG.DOFade(0f, 0.2f).SetDelay(2f).OnComplete(() =>
+            messageTxtCG.DOFade(1, 0.2f);
+            messageTxtCG.DOFade(0f, 0.2f).SetDelay(2f).OnComplete(() =>
             {
-                massageCG.DOFade(0f, 0.3f);
+                messageCG.DOFade(0f, 0.3f);
             });
         }
     }

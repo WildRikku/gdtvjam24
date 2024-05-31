@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6456528251431287529}
@@ -178,8 +178,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.1318698, y: 0.1367701}
+  m_Offset: {x: 0.00048661232, y: 0}
+  m_Size: {x: 0.3, y: 0.3}
   m_Direction: 0
 --- !u!114 &-4846907740268669323
 MonoBehaviour:
@@ -198,5 +198,5 @@ MonoBehaviour:
   explosionFXPrefab: {fileID: 8813890883548811946, guid: 8c1ee5db99ac1e946ad31090c2328057,
     type: 3}
   radius: 70
-  damage: 30
+  damage: 35
   projectileCollider: {fileID: -7856862537576219866}

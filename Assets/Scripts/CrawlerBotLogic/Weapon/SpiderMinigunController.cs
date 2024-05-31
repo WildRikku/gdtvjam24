@@ -11,7 +11,8 @@ public class SpiderMinigunController : RotatingWeapon
 
     public CanvasGroup crosshairCG;
     private int firedProjectiles;
-    
+    private bool shootigReset = false; 
+
     private void Awake()
     {
         crosshairCG.alpha = 0;
@@ -22,13 +23,13 @@ public class SpiderMinigunController : RotatingWeapon
     private void Update()
     {
         if (!isActive) return;
-        
-        if (Input.GetKeyDown(activationKey))
+
+        if (Input.GetKeyDown(activationKey) && shootigReset == false)
         {
             if (isRotating)
             {
                 ProjectileCount = 3;
-                InvokeRepeating(nameof(TriggerShot), 0, 0.1f);
+                InvokeRepeating(nameof(TriggerShot), 0, 0.05f);
             }
             else
             {
@@ -44,7 +45,7 @@ public class SpiderMinigunController : RotatingWeapon
                 FadeOutRotation();
         }
     }
-    
+
     private void TriggerShot()
     {
         muzzleParticle.Emit(15);
@@ -64,8 +65,16 @@ public class SpiderMinigunController : RotatingWeapon
             isFadeOutRotation = true;
             CancelInvoke(nameof(TriggerShot));
             crosshairCG.DOFade(0, 0.2f);
+            shootigReset = true;
+            Invoke(nameof(InvokeShootingReset), 3f);
+
         }
     }
 
-    
+    private void InvokeShootingReset()
+    {
+        shootigReset = false;
+    }
+
+
 }

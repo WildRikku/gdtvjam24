@@ -28,16 +28,16 @@ public class SpiderController : MonoBehaviour
 
         if (Mathf.Abs(rb.velocity.x) < speed)
         {
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             {
                 rb.AddForce(Vector2.right * 50f);
             }
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
                 rb.AddForce(-Vector2.right * 50f);
             }
         }
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
         {
             rb.AddForce(Vector2.up * 25f);
             boostParticleSystem[0].Emit(1);

@@ -48,9 +48,10 @@ public class GameController : MonoBehaviour
         if (membercount == 0)
         {
             Debug.Log("Game over");
-#if UNITY_EDITOR
+            menuController.ShowGameEndHUD(teamindex);
+/*#if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
-#endif
+#endif*/
         }
     }
 
@@ -68,6 +69,9 @@ public class GameController : MonoBehaviour
 
     private void Turn()
     {
+        menuController.ResetRoundTimerText(teams[_activeTeam].teamColor);
+        menuController.ShowWeaponHUD(teams[_activeTeam].teamColor);
+
         cinemachineVirtualCamera.Follow = teams[_activeTeam].GetActivePlayer().transform; 
         // Give control to the next character of the active player
         
@@ -81,6 +85,8 @@ public class GameController : MonoBehaviour
 
     private void OnProjectileFired(GameObject projectile)
     {
+        menuController.HideWeaponHUD();
+
         if (_trackingProjectile) return;
         _trackingProjectile = true;
         cinemachineVirtualCamera.Follow = projectile.transform;

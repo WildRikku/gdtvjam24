@@ -17,6 +17,7 @@ public class SpiderBazookaController : RotatingWeapon
 
     private bool isShooting;
     private bool isShootingState;
+    private bool shootigReset = false; //TODO
 
     private void Awake()
     {
@@ -37,7 +38,7 @@ public class SpiderBazookaController : RotatingWeapon
         
         if (isShootingState && isRotating) ShootingState();
 
-        if (Input.GetKeyDown(activationKey) && isShootingState == false && isShooting == false)
+        if (Input.GetKeyDown(activationKey) && isShootingState == false && isShooting == false && shootigReset == false)
         {
             if (isRotating)
             {
@@ -88,5 +89,12 @@ public class SpiderBazookaController : RotatingWeapon
 
         isRotating = false;
         isShooting = false;
+        shootigReset = true;
+        Invoke(nameof(InvokeShootingReset), 3f);
+    }
+
+    private void InvokeShootingReset()
+    {
+        shootigReset = false;
     }
 }
