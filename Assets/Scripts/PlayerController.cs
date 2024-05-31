@@ -10,8 +10,13 @@ public class PlayerController : MonoBehaviour
     public GameObject mainWeapon;
     public Weapon weapon;
     public Transform weaponSpawnPoint;
+    public GameObject dieExplosion;
+    private GameMenuController _gameMenuController;
+    public string[] dieMessages;
 
     private float _health = 50;
+
+    private string[] impactSounds = new string[3] { "Impact1", "Impact2", "Impact3" };
     public float Health
     {
         get => _health;
@@ -21,7 +26,15 @@ public class PlayerController : MonoBehaviour
             HealthUpdated?.Invoke(this);
             if (_health <= 0)
             {
+                Instantiate(dieExplosion, transform.position, transform.rotation);
+                //AudioManager.Instance.PlaySFX("BotDieSound");
                 Die();
+            }
+            else
+            {
+                // trigger impact sound
+                int ran = UnityEngine.Random.Range(0, 3);
+                AudioManager.Instance.PlaySFX(impactSounds[ran]);
             }
         }
     }
@@ -34,13 +47,15 @@ public class PlayerController : MonoBehaviour
     
     public SpiderController spiderController;
 
-    [HideInInspector] public String botName;
+    [HideInInspector] public string botName;
+    [HideInInspector] public int teamColor;
     public TMP_Text nameTxt;
     public TMP_Text healthTxt;
     public GameObject damagePopupPrefab;
 
     void Start()
     {
+        _gameMenuController = GameObject.Find("Canvas").GetComponent<GameMenuController>();
         GameObject weaponInstance = Instantiate(mainWeapon, weaponSpawnPoint);
         weapon = weaponInstance.GetComponent<Weapon>();
         nameTxt.text = botName;
@@ -74,6 +89,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+       
         Health -= amount;
         healthTxt.text = Health.ToString();
         GameObject dp = Instantiate(damagePopupPrefab, transform.position, damagePopupPrefab.transform.rotation);
@@ -91,6 +107,10 @@ public class PlayerController : MonoBehaviour
         {
             TurnFinished?.Invoke(this);
         }
+
+        // Trigger the Message system
+        string dM = botName + " " + dieMessages[UnityEngine.Random.Range(0, dieMessages.Length) ];
+        _gameMenuController.TriggerMessage(dM, teamColor);
 
         Destroy(gameObject);
     }

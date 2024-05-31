@@ -357,8 +357,10 @@ MonoBehaviour:
   messageTxtCG: {fileID: 8244625938981362258}
   weaponChooseCG: {fileID: 3988108079152642575}
   gameEndHudCG: {fileID: 8492141556853735047}
-  weaponChooseLayoutPanelPrefab: {fileID: 0}
-  weaponChooseButtonPrefab: {fileID: 0}
+  weaponChooseLayoutPanelPrefab: {fileID: 6096920731118230496, guid: 28f05a1d337975146952c419cc7004f3,
+    type: 3}
+  weaponChooseButtonPrefab: {fileID: 818411882651842673, guid: ad28fee8d34f4a74fb573529ddc30b46,
+    type: 3}
   teamColorIndex: 0000000000000000
   memberBar:
   - {fileID: 2519390198432186587}
@@ -1436,6 +1438,7 @@ GameObject:
   - component: {fileID: 3977249908868482644}
   - component: {fileID: 1712288268899244385}
   - component: {fileID: 7198451533563170441}
+  - component: {fileID: 7065985571103390136}
   m_Layer: 5
   m_Name: RetryBtn
   m_TagString: Untagged
@@ -1558,6 +1561,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7065985571103390136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459566919905569878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067b531ca780e954c955fa20cc4485f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3530180645945410866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,6 +1720,7 @@ GameObject:
   - component: {fileID: 9114883580783973405}
   - component: {fileID: 2903991767723506235}
   - component: {fileID: 8914763661429912198}
+  - component: {fileID: 2470452664057774982}
   m_Layer: 5
   m_Name: BackToMenu
   m_TagString: Untagged
@@ -1827,6 +1843,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2470452664057774982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3799599836764965651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067b531ca780e954c955fa20cc4485f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4153018343786272022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1974,6 +2002,7 @@ GameObject:
   - component: {fileID: 4275024507860963554}
   - component: {fileID: 6067529388524442796}
   - component: {fileID: 5748900999977027931}
+  - component: {fileID: 9032462387566288193}
   m_Layer: 5
   m_Name: BackToGame
   m_TagString: Untagged
@@ -2096,6 +2125,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &9032462387566288193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5115806967225474589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067b531ca780e954c955fa20cc4485f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5279228155207461357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,7 +2398,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5455961300384433457}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -2407,7 +2448,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5480629300371060990}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -2577,7 +2618,7 @@ GameObject:
   - component: {fileID: 3409893292462250497}
   - component: {fileID: 1723198200491361907}
   m_Layer: 0
-  m_Name: Background
+  m_Name: Butten
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

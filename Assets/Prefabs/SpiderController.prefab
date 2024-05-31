@@ -226,11 +226,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 1.8
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 851ebe01018664143bc94eb54f11ef0e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -308,9 +308,30 @@ MonoBehaviour:
   mainWeapon: {fileID: 0}
   weapon: {fileID: 0}
   weaponSpawnPoint: {fileID: 5374031209549792931}
+  dieExplosion: {fileID: 8322696212696052600, guid: 5f551e38bf6ac6c4ba22bb5ef80d58f4,
+    type: 3}
+  dieMessages:
+  - is now a ghost. Boo!
+  - has left the arena.
+  - is taking an extended dirt nap.
+  - has gone to the great respawn point in the sky
+  - is now pushing up daisies.
+  - is now a permanent resident of the afterlife.
+  - is experiencing the joys of the void.
+  - is having a long chat with the Grim Reaper.
+  - has entered spectator mode permanently.
+  - is now exploring the underworld.
+  - has taken an unscheduled break from living.
+  - has clocked out of the mortal coil.
+  - is now an honorary ghost.
+  - has achieved the status of ex-player.
+  - is taking a permanent vacation from life.
+  - has reached the end of their story.
+  - is now a full-time spirit.
   index: 0
   spiderController: {fileID: 4069876234473721646}
   botName: 
+  teamColor: 0
   nameTxt: {fileID: 4588214474070966581}
   healthTxt: {fileID: 8368478899129171312}
   damagePopupPrefab: {fileID: 7875439195797511936, guid: 5c088d275793b744b94f97146bb73345,

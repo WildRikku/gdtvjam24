@@ -38,6 +38,8 @@ public class WeaponChooseBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void ChooseBtn()
     {
+        AudioManager.Instance.PlaySFX("InstallWeapon");
+        
         Debug.Log( $"Christian hier musst du was mit dem index machen - {btnIndex}");
     }
 }

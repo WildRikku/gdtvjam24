@@ -76,6 +76,7 @@ public class GameController : MonoBehaviour
     {
         TurnStarted?.Invoke(this);
 
+        AudioManager.Instance.PlaySFX("CameraSwipe");
         cinemachineVirtualCamera.Follow = teams[activeTeam].GetActivePlayer().transform; 
         // Give control to the next character of the active player
         

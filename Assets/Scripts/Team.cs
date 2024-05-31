@@ -8,7 +8,7 @@ public delegate void TeamUpdated(short teamIndex, int memberCount);
 
 public class Team : MonoBehaviour
 {
-    public const short MaxTeamMembers = 5;
+    public const short MaxTeamMembers = 4;
     
     public GameObject playerPrefab;
     private Dictionary<short, PlayerController> _members;
@@ -25,12 +25,13 @@ public class Team : MonoBehaviour
 
     public Collider2D spawnZone;
 
-    private GameController gameController;
-    
+    private GameController _gameController;
+
+
     void Start()
     {
         _members = new();
-        gameController = GameObject.Find("GameManagement").GetComponent<GameController>();
+        _gameController = GameObject.Find("GameManagement").GetComponent<GameController>();
 
         Bounds bounds = spawnZone.bounds;
         for (short i = 0; i < MaxTeamMembers; i++)
@@ -39,14 +40,15 @@ public class Team : MonoBehaviour
             PlayerController pc = newPlayer.GetComponent<PlayerController>();
             SpiderChangeTeamColor spiderChangeTeamColor = newPlayer.GetComponentInChildren<SpiderChangeTeamColor>();
             spiderChangeTeamColor.teamColor = teamColor;
+            pc.teamColor = teamColor;
             pc.mainWeapon = weaponPrefabs[Random.Range(0, weaponPrefabs.Count)];
             pc.index = i;
             pc.HealthUpdated += TeamMemberOnHealthUpdated;
-            if (gameController.botNames.Count > 0)
+            if (_gameController.botNames.Count > 0)
             {
-                int value = Random.Range(0, gameController.botNames.Count);
-                pc.botName = gameController.botNames[value];
-                gameController.botNames.RemoveAt(value);
+                int value = Random.Range(0, _gameController.botNames.Count);
+                pc.botName = _gameController.botNames[value];
+                _gameController.botNames.RemoveAt(value);
             }
             _members.Add(i, pc);
         }

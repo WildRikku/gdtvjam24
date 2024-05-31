@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d544123cf94fff840b53c9540da45e56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionSound: MinigunExplosion
 --- !u!1 &463397947826171463
 GameObject:
   m_ObjectHideFlags: 0

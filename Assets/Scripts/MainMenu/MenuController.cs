@@ -18,6 +18,7 @@ public class MenuController : MonoBehaviour
     public string strLevel1;
     public string strLevel2;
     public string strLevel3;
+ 
 
     private void Awake()
     {
@@ -57,6 +58,16 @@ public class MenuController : MonoBehaviour
     {
         AudioManager.Instance.SetSFXVolume(sfxSlider.value);
         AudioManager.Instance.sfxVolume = sfxSlider.value;
+    }
+
+    public void ClickOnSlider()
+    {
+        AudioManager.Instance.PlaySFX("MouseSpecialHover");
+    }
+
+    public void EndTrackSlider()
+    {
+        AudioManager.Instance.PlaySFX("MouseClick");
     }
 
     public void OpenMenu()

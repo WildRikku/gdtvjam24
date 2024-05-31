@@ -23,6 +23,9 @@ public class SpiderProceduralAnimation : MonoBehaviour
 
     private float velocityMultiplier = 7f;
 
+    private bool resetStep = false;
+    private string[] stepsounds = new string[3] { "BotStep1", "BotStep2", "BotStep3" };
+
     public List<ParticleSystem> stepParticles;
 
     Vector2[] MatchToSurfaceFromAbove(Vector2 point, float halfRange, Vector2 up)
@@ -76,8 +79,15 @@ public class SpiderProceduralAnimation : MonoBehaviour
         lastLegPositions[index] = legTargets[index].position;
         legMoving[0] = false;
 
-        // TODO: Check is leg on ground?
-        stepParticles[index].Emit(5);
+
+        if (resetStep == false)
+        {
+            // TODO: Check is leg on ground?
+            int ran = Random.Range(0, stepsounds.Length);
+            AudioManager.Instance.PlaySFX(stepsounds[ran]);
+            stepParticles[index].Emit(5);
+        }
+        resetStep = true;
     }
 
 
@@ -124,9 +134,15 @@ public class SpiderProceduralAnimation : MonoBehaviour
             legMoving[0] = true;
 
             StartCoroutine(PerformStep(indexToMove, positionAndNormalBwd[0]));
+
+     
         }
+       
+
+        if (lastBodyPos != (Vector2)transform.position) { resetStep = false;}
 
         lastBodyPos = transform.position;
+
         if (nbLegs > 1 && bodyOrientation)
         {
             Vector2 v1 = (legTargets[1].position - legTargets[0].position).normalized;

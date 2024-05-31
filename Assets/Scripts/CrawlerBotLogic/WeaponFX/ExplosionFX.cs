@@ -7,8 +7,12 @@ public class ExplosionFX : MonoBehaviour
     private Animator expAnimator;
     private SpriteRenderer spriteRenderer;
 
+    public string explosionSound;
+
     void Start()
     {
+        AudioManager.Instance.PlaySFX(explosionSound);
+
         expAnimator = GetComponent<Animator>();
         expAnimator.SetTrigger("TrExplode");
         spriteRenderer = GetComponent<SpriteRenderer>();

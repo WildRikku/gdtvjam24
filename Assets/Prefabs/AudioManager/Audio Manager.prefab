@@ -308,15 +308,71 @@ MonoBehaviour:
   sfxSounds:
   - name: MouseClick
     clip: {fileID: 8300000, guid: 28c3e596600781c43944fc8476b9f8e4, type: 3}
-  - name: MouseHover
+  - name: MouseHover1
     clip: {fileID: 8300000, guid: 59b7b011f24f2884b9793b837090c5a4, type: 3}
+  - name: MouseHover2
+    clip: {fileID: 8300000, guid: 8bd57d9c2767b7b4e891492c7fc33a47, type: 3}
+  - name: MouseHover3
+    clip: {fileID: 8300000, guid: 953740372511e494e97c356c073f84d9, type: 3}
+  - name: MouseSpecialHover
+    clip: {fileID: 8300000, guid: c164932b16878954fbee849d6237b7ea, type: 3}
   - name: MouseGoBack1
     clip: {fileID: 8300000, guid: d41825dbc9b566e42a604e2266838edf, type: 3}
   - name: MouseGoBack2
     clip: {fileID: 8300000, guid: 7a3ae70d809b348408470dd63d800d9a, type: 3}
   - name: MouseGoBack3
     clip: {fileID: 8300000, guid: d44a7079603f88b40b0ee2cdab1b7f1b, type: 3}
+  - name: InstallWeapon
+    clip: {fileID: 8300000, guid: 0da5acc82bb20064488220cc56edc3e5, type: 3}
+  - name: CameraSwipe
+    clip: {fileID: 8300000, guid: 813ec8f0e9cd62847886c2103a7cd38f, type: 3}
+  - name: BazookaLoad
+    clip: {fileID: 8300000, guid: 62658d553f253fe4c8c8133ef842701e, type: 3}
+  - name: BazookaReload
+    clip: {fileID: 8300000, guid: cf56c4d3466b0524bb63e3d9cc9b1144, type: 3}
+  - name: BazookaShoot
+    clip: {fileID: 8300000, guid: 4b230561b603a7c4fa10a68974b1ec6e, type: 3}
+  - name: BazookaExplosion
+    clip: {fileID: 8300000, guid: fcab36bf65d4b64429914d8097219f0c, type: 3}
+  - name: MinigunRealod
+    clip: {fileID: 8300000, guid: b7b37cd1bf911ad47b853fa6136d72ff, type: 3}
+  - name: MinigunShoot1
+    clip: {fileID: 8300000, guid: 334d7f0aa0b4e3c42b9f391e6b2cff35, type: 3}
+  - name: MinigunShoot2
+    clip: {fileID: 8300000, guid: 6468d56ec605b3c44af7240bda71efd0, type: 3}
+  - name: MinigunExplosion
+    clip: {fileID: 8300000, guid: 53fc03c7cc69337409a077d7a1d61b45, type: 3}
+  - name: AirstrikeLoad
+    clip: {fileID: 8300000, guid: 8facde71be6b0614bbd286e583fd8e8e, type: 3}
+  - name: AirstrikeSpawn
+    clip: {fileID: 8300000, guid: 8cf8972aee2588f469d9be2e9a698ac7, type: 3}
+  - name: AirstrikeExplosion
+    clip: {fileID: 8300000, guid: 53fc03c7cc69337409a077d7a1d61b45, type: 3}
+  - name: GranadeShoot
+    clip: {fileID: 8300000, guid: 4d843e5b6cd488e4594bd24c86019686, type: 3}
+  - name: GranadeExplosion
+    clip: {fileID: 8300000, guid: 7cc4c049696bf114cbe8c69647d87d22, type: 3}
+  - name: Impact1
+    clip: {fileID: 8300000, guid: 2a6917cf6384f0b4a869add0140a8898, type: 3}
+  - name: Impact2
+    clip: {fileID: 8300000, guid: e1f411e88f6234b4e9d28b0a558c3677, type: 3}
+  - name: Impact3
+    clip: {fileID: 8300000, guid: ceabc6d22f0c2c342bbaf68cc2199fa1, type: 3}
+  - name: BotDieSound
+    clip: {fileID: 8300000, guid: fa85749b8adec63499fedd6210acb707, type: 3}
+  - name: AirStrikeImpact1
+    clip: {fileID: 8300000, guid: 43df158314895a045a65f780c8804019, type: 3}
+  - name: AirStrikeImpact2
+    clip: {fileID: 8300000, guid: 78c94c7246d98c4418cfd6689916b59f, type: 3}
+  - name: WeaponTimerAlert
+    clip: {fileID: 8300000, guid: 85f9b9db1ff23064284a351c997d27a8, type: 3}
+  - name: BotStep1
+    clip: {fileID: 8300000, guid: 94d774081d0a4664e9b1b296e34250c7, type: 3}
+  - name: BotStep2
+    clip: {fileID: 8300000, guid: b205c30648a835349815a6cf47af871e, type: 3}
+  - name: BotStep3
+    clip: {fileID: 8300000, guid: a54461146c3d9f345b8e175bbcb5817e, type: 3}
   musicSource: {fileID: 8877118180281007894}
   sfxSource: {fileID: 167429082245504369}
-  musicVolume: 0.4
-  sfxVolume: 0.6
+  musicVolume: 0.2
+  sfxVolume: 0.7

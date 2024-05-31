@@ -43,6 +43,7 @@ public class GameMenuController : MonoBehaviour
     private bool canTriggerNewMessage = true;
     private float remainingTime = 0;
     private float timeSinceLastUpdate = -10;
+    private string[] messageAlerts = new string[2] { "MessageAlert1", "MessageAlert2" };
 
     public event EventHandler TurnTimeIsUp;
 
@@ -65,14 +66,14 @@ public class GameMenuController : MonoBehaviour
 
         SetMemberbarColor(0, teamColorIndex[0]);
         SetMemberbarColor(1, teamColorIndex[1]);
-        
+
         // generate weapon choose buttons
         _weaponChooseLayoutPanels = new();
         foreach (Team t in gameController.teams)
         {
             GameObject lp = Instantiate(weaponChooseLayoutPanelPrefab, weaponChooseCG.transform);
             _weaponChooseLayoutPanels.Add(lp);
-            for(int i = 0; i < t.weapons.Count; i++)
+            for (int i = 0; i < t.weapons.Count; i++)
             {
                 Weapon w = t.weapons[i];
                 GameObject btn = Instantiate(weaponChooseButtonPrefab, lp.transform);
@@ -114,12 +115,22 @@ public class GameMenuController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && _isBreak == false)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            breakHUDCG.DOFade(1, 0.2f).SetUpdate(true);
-            breakHUDCG.blocksRaycasts = true;
-            Time.timeScale = 0;
+            if (_isBreak == false)
+            {
+                _isBreak = true;
+                AudioManager.Instance.PlaySFX("MouseGoBack3");
+                breakHUDCG.DOFade(1, 0.2f).SetUpdate(true);
+                breakHUDCG.blocksRaycasts = true;
+                Time.timeScale = 0;
+            }
+            else
+            {
+                BackToGame();
+            }
         }
+       
 
         //timer
         remainingTime -= Time.deltaTime;
@@ -151,7 +162,7 @@ public class GameMenuController : MonoBehaviour
 
     public void ShowWeaponHUD(int panelColorIndex = 4)
     {
-//        weaponChooseBarImage.color = teamColor[panelColorIndex];
+        //        weaponChooseBarImage.color = teamColor[panelColorIndex];
 
         weaponChooseCG.DOFade(1, 0.4f);
         weaponChooseCG.blocksRaycasts = true;
@@ -176,7 +187,7 @@ public class GameMenuController : MonoBehaviour
         int timerText = Mathf.Max(0, Mathf.RoundToInt(remainingTime));
 
         roundTimerText.text = timerText.ToString();
-        timerContainer.DOShakeScale(0.5f, 0.1f,10,90,true,ShakeRandomnessMode.Harmonic);
+        timerContainer.DOShakeScale(0.5f, 0.1f, 10, 90, true, ShakeRandomnessMode.Harmonic);
 
         if (remainingTime <= 0f)
         {
@@ -194,13 +205,16 @@ public class GameMenuController : MonoBehaviour
     // BreakHUD
     public void BackToGame()
     {
+        AudioManager.Instance.PlaySFX("MouseGoBack2");
         breakHUDCG.DOFade(0, 0.2f).SetUpdate(true);
         breakHUDCG.blocksRaycasts = false;
         Time.timeScale = 1;
+        _isBreak = false;
     }
 
     public void GameRetry()
     {
+        AudioManager.Instance.PlaySFX("MouseGoBack1");
         transitionHUDCG.blocksRaycasts = true;
         transitionHUDCG.DOFade(1, 0.2f).SetUpdate(true).OnComplete(() =>
         {
@@ -211,6 +225,7 @@ public class GameMenuController : MonoBehaviour
 
     public void BackToMenu()
     {
+        AudioManager.Instance.PlaySFX("MouseGoBack1");
         transitionHUDCG.blocksRaycasts = true;
         transitionHUDCG.DOFade(1, 0.2f).SetUpdate(true).OnComplete(() =>
         {
@@ -223,13 +238,16 @@ public class GameMenuController : MonoBehaviour
     // Game End HUD
     public void ShowGameEndHUD(short teamIndex)
     {
+        if (teamIndex == 0) teamIndex = 2;
+        if (teamIndex == 1) teamIndex = 1;
+
         // Teamindex loose
-        gameEndText.text = $"Congratulations Team {teamIndex+1} wins the competition.";
+        gameEndText.text = $"Congratulations Team {teamIndex} wins the competition.";
 
         Time.timeScale = 0;
-        gameEndHudCG.DOFade(1,0.2f).SetUpdate(true);
+        gameEndHudCG.DOFade(1, 0.2f).SetUpdate(true);
         gameEndHudCG.blocksRaycasts = true;
-        
+
     }
 
 
@@ -244,6 +262,7 @@ public class GameMenuController : MonoBehaviour
         messageList.Add(ma);
 
         if (canTriggerNewMessage) ShowMessage();
+
     }
 
     private void ResetTrigger()
@@ -263,8 +282,10 @@ public class GameMenuController : MonoBehaviour
             messageTxtCG.alpha = 0;
 
             messageTxt.text = messageList[0].messageStr;
+            AudioManager.Instance.PlaySFX(messageAlerts[UnityEngine.Random.Range(0, messageAlerts.Length)]);
             messageTxt.color = teamColor[messageList[0].colorInt];
             messageList.RemoveAt(0);
+
 
             messageCG.DOKill();
             if (messageCG.alpha != 1)

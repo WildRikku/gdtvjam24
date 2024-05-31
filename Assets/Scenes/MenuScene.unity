@@ -586,8 +586,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start Game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fdd72a181942bb4fb04ebfc88484f3b, type: 2}
-  m_sharedMaterial: {fileID: 3584385154073877098, guid: 3fdd72a181942bb4fb04ebfc88484f3b,
+  m_fontAsset: {fileID: 11400000, guid: ad1c95e7cc90e214f951a1e1e169914c, type: 2}
+  m_sharedMaterial: {fileID: 3584385154073877098, guid: ad1c95e7cc90e214f951a1e1e169914c,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -797,6 +797,7 @@ GameObject:
   - component: {fileID: 227888631}
   - component: {fileID: 227888633}
   - component: {fileID: 227888632}
+  - component: {fileID: 227888634}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -861,6 +862,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227888630}
   m_CullTransparentMesh: 1
+--- !u!114 &227888634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227888630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067b531ca780e954c955fa20cc4485f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &243392596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,6 +1096,7 @@ GameObject:
   m_Component:
   - component: {fileID: 284038200}
   - component: {fileID: 284038201}
+  - component: {fileID: 284038202}
   m_Layer: 5
   m_Name: MusicSlider
   m_TagString: Untagged
@@ -1175,6 +1189,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &284038202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284038199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 14
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 123305709}
+          m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+          m_MethodName: EndTrackSlider
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 123305709}
+          m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+          m_MethodName: ClickOnSlider
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &360828257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,8 +1423,8 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: e200ba0daeabb2b46971635bd7c4c34c, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: e200ba0daeabb2b46971635bd7c4c34c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1498,8 +1557,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back to Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fdd72a181942bb4fb04ebfc88484f3b, type: 2}
-  m_sharedMaterial: {fileID: 3584385154073877098, guid: 3fdd72a181942bb4fb04ebfc88484f3b,
+  m_fontAsset: {fileID: 11400000, guid: ad1c95e7cc90e214f951a1e1e169914c, type: 2}
+  m_sharedMaterial: {fileID: 3584385154073877098, guid: ad1c95e7cc90e214f951a1e1e169914c,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1778,141 +1837,6 @@ MonoBehaviour:
   text: {fileID: 1181922354}
   index: 1
   hoverColor: {r: 1, g: 0.64705884, b: 0.30980393, a: 1}
---- !u!1 &650186962
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 650186963}
-  - component: {fileID: 650186965}
-  - component: {fileID: 650186964}
-  m_Layer: 5
-  m_Name: Text (TMP) (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &650186963
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650186962}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 981563477}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 60}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &650186964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650186962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: Ring Explosion Spritesheet- by BenHickling
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fdd72a181942bb4fb04ebfc88484f3b, type: 2}
-  m_sharedMaterial: {fileID: 3584385154073877098, guid: 3fdd72a181942bb4fb04ebfc88484f3b,
-    type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -87.58444, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &650186965
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650186962}
-  m_CullTransparentMesh: 1
 --- !u!1 &681631261
 GameObject:
   m_ObjectHideFlags: 0
@@ -2541,8 +2465,8 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: e200ba0daeabb2b46971635bd7c4c34c, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: e200ba0daeabb2b46971635bd7c4c34c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -2688,8 +2612,8 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: e200ba0daeabb2b46971635bd7c4c34c, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: e200ba0daeabb2b46971635bd7c4c34c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -3092,8 +3016,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fdd72a181942bb4fb04ebfc88484f3b, type: 2}
-  m_sharedMaterial: {fileID: 3584385154073877098, guid: 3fdd72a181942bb4fb04ebfc88484f3b,
+  m_fontAsset: {fileID: 11400000, guid: ad1c95e7cc90e214f951a1e1e169914c, type: 2}
+  m_sharedMaterial: {fileID: 3584385154073877098, guid: ad1c95e7cc90e214f951a1e1e169914c,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3277,7 +3201,6 @@ RectTransform:
   - {fileID: 65468601}
   - {fileID: 926971633}
   - {fileID: 1164372747}
-  - {fileID: 650186963}
   - {fileID: 57629026}
   m_Father: {fileID: 1284119466}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3435,8 +3358,8 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: e200ba0daeabb2b46971635bd7c4c34c, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: e200ba0daeabb2b46971635bd7c4c34c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -3695,8 +3618,8 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 084021dba8d14004eba3a79e166ce012, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: e200ba0daeabb2b46971635bd7c4c34c, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: e200ba0daeabb2b46971635bd7c4c34c, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -3907,96 +3830,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxVolume
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: musicVolume
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[0].name
-      value: MouseClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 8bd57d9c2767b7b4e891492c7fc33a47, type: 3}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[1].name
-      value: MouseHover1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[2].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 59b7b011f24f2884b9793b837090c5a4, type: 3}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[2].name
-      value: MouseHover2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[3].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 59b7b011f24f2884b9793b837090c5a4, type: 3}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[3].name
-      value: MouseHover3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[4].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: c164932b16878954fbee849d6237b7ea, type: 3}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[4].name
-      value: MouseSpecialHover
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[5].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: d41825dbc9b566e42a604e2266838edf, type: 3}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[5].name
-      value: MouseGoBack1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[6].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 7a3ae70d809b348408470dd63d800d9a, type: 3}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[6].name
-      value: MouseGoBack2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[7].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: d44a7079603f88b40b0ee2cdab1b7f1b, type: 3}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[7].name
-      value: MouseGoBack3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5059,8 +4892,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Music
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fdd72a181942bb4fb04ebfc88484f3b, type: 2}
-  m_sharedMaterial: {fileID: 3584385154073877098, guid: 3fdd72a181942bb4fb04ebfc88484f3b,
+  m_fontAsset: {fileID: 11400000, guid: ad1c95e7cc90e214f951a1e1e169914c, type: 2}
+  m_sharedMaterial: {fileID: 3584385154073877098, guid: ad1c95e7cc90e214f951a1e1e169914c,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5433,8 +5266,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Credits
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fdd72a181942bb4fb04ebfc88484f3b, type: 2}
-  m_sharedMaterial: {fileID: 3584385154073877098, guid: 3fdd72a181942bb4fb04ebfc88484f3b,
+  m_fontAsset: {fileID: 11400000, guid: ad1c95e7cc90e214f951a1e1e169914c, type: 2}
+  m_sharedMaterial: {fileID: 3584385154073877098, guid: ad1c95e7cc90e214f951a1e1e169914c,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5643,8 +5476,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back to Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fdd72a181942bb4fb04ebfc88484f3b, type: 2}
-  m_sharedMaterial: {fileID: 3584385154073877098, guid: 3fdd72a181942bb4fb04ebfc88484f3b,
+  m_fontAsset: {fileID: 11400000, guid: ad1c95e7cc90e214f951a1e1e169914c, type: 2}
+  m_sharedMaterial: {fileID: 3584385154073877098, guid: ad1c95e7cc90e214f951a1e1e169914c,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5892,8 +5725,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SFX
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fdd72a181942bb4fb04ebfc88484f3b, type: 2}
-  m_sharedMaterial: {fileID: 3584385154073877098, guid: 3fdd72a181942bb4fb04ebfc88484f3b,
+  m_fontAsset: {fileID: 11400000, guid: ad1c95e7cc90e214f951a1e1e169914c, type: 2}
+  m_sharedMaterial: {fileID: 3584385154073877098, guid: ad1c95e7cc90e214f951a1e1e169914c,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5979,6 +5812,7 @@ GameObject:
   - component: {fileID: 1682958527}
   - component: {fileID: 1682958529}
   - component: {fileID: 1682958528}
+  - component: {fileID: 1682958530}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -6043,6 +5877,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682958526}
   m_CullTransparentMesh: 1
+--- !u!114 &1682958530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682958526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067b531ca780e954c955fa20cc4485f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1720535405
 GameObject:
   m_ObjectHideFlags: 0
@@ -6528,6 +6374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1951612084}
   - component: {fileID: 1951612085}
+  - component: {fileID: 1951612086}
   m_Layer: 5
   m_Name: SFXSlider
   m_TagString: Untagged
@@ -6620,6 +6467,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1951612086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951612083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 14
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 123305709}
+          m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+          m_MethodName: EndTrackSlider
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 123305709}
+          m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+          m_MethodName: ClickOnSlider
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1998409731
 GameObject:
   m_ObjectHideFlags: 0

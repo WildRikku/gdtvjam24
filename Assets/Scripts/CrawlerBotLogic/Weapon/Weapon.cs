@@ -46,7 +46,7 @@ public class ProjectileWeapon : Weapon
 
     protected GameObject SpawnProjectile(GameObject prefab, Vector3 translation, Quaternion rotation)
     {
-        GameObject projectile = Instantiate(prefab, translation, rotation, transform);
+        GameObject projectile = Instantiate(prefab, translation, rotation);
         ExplodeOnImpact eoi = projectile.GetComponent<ExplodeOnImpact>();
         eoi.primaryLayer = battleField.collidableLayer;
         eoi.secondaryLayer = battleField.visibleLayer;
