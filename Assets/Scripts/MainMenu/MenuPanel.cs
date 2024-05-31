@@ -14,6 +14,7 @@ public class MenuPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private Vector3 panelSize;
     public TMP_Text text;
     public int index = 0;
+    public Color hoverColor;
 
     private void Start()
     {
@@ -24,11 +25,13 @@ public class MenuPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        AudioManager.Instance.PlaySFX("MouseSpecialHover");
+
         if (isMouseOver == false)
         {
             panelBKImage.sprite = mouseOverSprite;
             gameObject.transform.DOScale(panelSize * 1.02f, 0.2f);
-            text.color = Color.green;
+            text.color = hoverColor;
         }
         isMouseOver = true;
     }
@@ -46,6 +49,7 @@ public class MenuPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        AudioManager.Instance.PlaySFX("MouseGoBack1");
         menuController.StartLevel(index);
     }
 }

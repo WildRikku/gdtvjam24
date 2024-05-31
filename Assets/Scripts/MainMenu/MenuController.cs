@@ -61,6 +61,8 @@ public class MenuController : MonoBehaviour
 
     public void OpenMenu()
     {
+        AudioManager.Instance.PlaySFX("MouseGoBack2");
+
         mainMenuCG.DOFade(1, 0.5f);
         mainMenuCG.blocksRaycasts = true;
         creditsCG.DOFade(0, 0.5f);
@@ -72,6 +74,8 @@ public class MenuController : MonoBehaviour
 
     public void OpenCredits()
     {
+        AudioManager.Instance.PlaySFX("MouseClick");
+
         mainMenuCG.DOFade(0, 0.5f);
         mainMenuCG.blocksRaycasts = false;
         creditsCG.DOFade(1, 0.5f);
@@ -82,6 +86,8 @@ public class MenuController : MonoBehaviour
 
     public void OpenLevel()
     {
+        AudioManager.Instance.PlaySFX("MouseGoBack3");
+
         mainMenuCG.DOFade(0, 0.5f);
         mainMenuCG.blocksRaycasts = false;
         creditsCG.DOFade(0, 0.5f);
@@ -108,6 +114,7 @@ public class MenuController : MonoBehaviour
         openLevelCG.blocksRaycasts = false;
         levelTransitonCG.blocksRaycasts = true;
 
+        AudioManager.Instance.PlaySFX("MouseGoBack1");
         levelTransitonCG.DOFade(1, 0.25f).OnComplete(() =>
         {
             switch (level)

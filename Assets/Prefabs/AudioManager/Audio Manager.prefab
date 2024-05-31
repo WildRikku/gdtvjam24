@@ -281,7 +281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2298081825366894009}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -302,9 +302,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87d710fbf4c5404baf05749f20c8fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSounds: []
-  sfxSounds: []
+  musicSounds:
+  - name: MainMenuSound
+    clip: {fileID: 8300000, guid: 64476a10eff915b45b978c2df3b4d691, type: 3}
+  sfxSounds:
+  - name: MouseClick
+    clip: {fileID: 8300000, guid: 28c3e596600781c43944fc8476b9f8e4, type: 3}
+  - name: MouseHover
+    clip: {fileID: 8300000, guid: 59b7b011f24f2884b9793b837090c5a4, type: 3}
+  - name: MouseGoBack1
+    clip: {fileID: 8300000, guid: d41825dbc9b566e42a604e2266838edf, type: 3}
+  - name: MouseGoBack2
+    clip: {fileID: 8300000, guid: 7a3ae70d809b348408470dd63d800d9a, type: 3}
+  - name: MouseGoBack3
+    clip: {fileID: 8300000, guid: d44a7079603f88b40b0ee2cdab1b7f1b, type: 3}
   musicSource: {fileID: 8877118180281007894}
   sfxSource: {fileID: 167429082245504369}
-  musicVolume: 0
-  sfxVolume: 0
+  musicVolume: 0.4
+  sfxVolume: 0.6

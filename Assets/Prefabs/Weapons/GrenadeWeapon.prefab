@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1544296603922722007}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.753, y: -0.006, z: 0}
+  m_LocalPosition: {x: 0.678, y: -0.006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4954,7 +4954,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 4.91}
+  m_AnchoredPosition: {x: 0, y: 3.73}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2483682328441399197
@@ -5145,7 +5145,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b2766a35776c0654887fed3fb16d2141, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 334832449f132f3419a0c582abb92ecf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5264,7 +5264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 11.61}
+  m_AnchoredPosition: {x: 0, y: 10.33}
   m_SizeDelta: {x: 3, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &6342499411830476798
@@ -5305,7 +5305,7 @@ Transform:
   m_GameObject: {fileID: 7113406862627035668}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.007, y: -0.004, z: 0}
+  m_LocalPosition: {x: 0.107, y: -0.004, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5407,7 +5407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2258277875162506968}
   - component: {fileID: 5196853988915305493}
-  - component: {fileID: 1238498791656236366}
+  - component: {fileID: 4118108408361587175}
   - component: {fileID: 4767774775377012542}
   m_Layer: 2
   m_Name: GrenadeWeapon
@@ -5484,7 +5484,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1238498791656236366
+--- !u!114 &4118108408361587175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5493,7 +5493,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8156034423572122681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a345ba4d18555a04a8050808cd5c4a47, type: 3}
+  m_Script: {fileID: 11500000, guid: 99423e152312b2146b496c56d08b145b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   battleField: {fileID: 0}
@@ -5504,11 +5504,11 @@ MonoBehaviour:
   buttonSprite: {fileID: 21300000, guid: 862fcd1f589eb654aabff29aa797eb99, type: 3}
   ammo: 0
   weaponRotationPoint: {fileID: 6867387976718280892}
-  minZRotation: 90
-  maxZRotation: 290
+  minZRotation: 120
+  maxZRotation: 270
   rotationSpeed: 80
   shotTriggerPoint: {fileID: 7859103626720996382}
-  bombPrefab: {fileID: 3689770828418205119, guid: a7ea5410745224141949fb5eb1701152,
+  bombPrefab: {fileID: 3689770828418205119, guid: 900bb730de16e3e4cafa2ab1567536fb,
     type: 3}
   shootingSpeed: 10
   muzzleParticle: {fileID: 4752925076103590940}
