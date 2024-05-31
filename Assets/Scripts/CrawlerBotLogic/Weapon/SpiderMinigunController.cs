@@ -10,8 +10,8 @@ public class SpiderMinigunController : RotatingWeapon
     public float bulletforce = 15;
 
     public CanvasGroup crosshairCG;
-    private int firedProjectiles;
-    private bool shootigReset = false; 
+    private int _firedProjectiles;
+    private bool _shootingReset; 
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class SpiderMinigunController : RotatingWeapon
     {
         if (!isActive) return;
 
-        if (Input.GetKeyDown(activationKey) && shootigReset == false)
+        if (Input.GetKeyDown(activationKey) && _shootingReset == false)
         {
             if (isRotating)
             {
@@ -38,19 +38,18 @@ public class SpiderMinigunController : RotatingWeapon
             }
         }
 
-        if (isRotating)
-        {
-            Rotate();
-            if (isFadeOutRotation)
-                FadeOutRotation();
-        }
+        if (!isRotating) return;
+        
+        Rotate();
+        if (isFadeOutRotation)
+            FadeOutRotation();
     }
 
     private void TriggerShot()
     {
         muzzleParticle.Emit(15);
         GameObject bullet = SpawnProjectile(bulletPrefab, shotTriggerPoint.position, shotTriggerPoint.rotation);
-        firedProjectiles++;
+        _firedProjectiles++;
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (rb != null)
@@ -58,14 +57,14 @@ public class SpiderMinigunController : RotatingWeapon
             rb.AddForce(shotTriggerPoint.up * bulletforce, ForceMode2D.Impulse);
         }
 
-        if (firedProjectiles == 3)
+        if (_firedProjectiles == 3)
         {
             // stop firing. attack will end when all projectiles hit something via parent class
-            firedProjectiles = 0;
+            _firedProjectiles = 0;
             isFadeOutRotation = true;
             CancelInvoke(nameof(TriggerShot));
             crosshairCG.DOFade(0, 0.2f);
-            shootigReset = true;
+            _shootingReset = true;
             Invoke(nameof(InvokeShootingReset), 3f);
 
         }
@@ -73,7 +72,7 @@ public class SpiderMinigunController : RotatingWeapon
 
     private void InvokeShootingReset()
     {
-        shootigReset = false;
+        _shootingReset = false;
     }
 
 
