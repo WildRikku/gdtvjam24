@@ -41,6 +41,8 @@ public class GameController : MonoBehaviour
             teams[i].index = i;
             teams[i].TeamUpdated += OnTeamUpdated;
         }
+        
+        menuController.turnTimeIsUp += OnTurnEnded;
     }
 
     private void OnTeamUpdated(short teamindex, int membercount)
@@ -60,7 +62,7 @@ public class GameController : MonoBehaviour
         _activeTeam = 0;
         foreach (Team t in teams)
         {
-            t.TurnEnded += OnturnEnded;
+            t.TurnEnded += OnTurnEnded;
         }
 
         MatchStarted?.Invoke(this, EventArgs.Empty);
@@ -92,7 +94,7 @@ public class GameController : MonoBehaviour
         cinemachineVirtualCamera.Follow = projectile.transform;
     }
 
-    private void OnturnEnded(object sender, EventArgs e)
+    private void OnTurnEnded(object sender, EventArgs e)
     {
         _trackingProjectile = false;
         _activeTeam = (_activeTeam == 1) ? 0 : 1;

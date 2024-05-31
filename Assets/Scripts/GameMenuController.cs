@@ -40,6 +40,8 @@ public class GameMenuController : MonoBehaviour
     private float remainingTime = 0;
     private float timeSinceLastUpdate = -10;
 
+    public event EventHandler turnTimeIsUp;
+
     private void Start()
     {
         Time.timeScale = 1;
@@ -90,7 +92,7 @@ public class GameMenuController : MonoBehaviour
         timeSinceLastUpdate += Time.deltaTime;
         if (timeSinceLastUpdate >= 1f)
         {
-            UpdateTimerText();
+            TimerStep();
             timeSinceLastUpdate = 0f;
         }
     }
@@ -132,20 +134,19 @@ public class GameMenuController : MonoBehaviour
         remainingTime = timerValue;
         timeSinceLastUpdate = 0f;
         roundTimerText.color = teamColor[teamColorIndex];
-        UpdateTimerText();
+        TimerStep();
     }
 
-    public void UpdateTimerText()
+    private void TimerStep()
     {
         int timerText = Mathf.Max(0, Mathf.RoundToInt(remainingTime));
 
         roundTimerText.text = timerText.ToString();
         timerContainer.DOShakeScale(0.5f, 0.1f,10,90,true,ShakeRandomnessMode.Harmonic);
 
-        // TODO: New Turn if the timer ends
         if (remainingTime <= 0f)
         {
-            Debug.Log("Timer - Christan, trigger a new turn please");
+            turnTimeIsUp?.Invoke(this, EventArgs.Empty);
         }
     }
 
