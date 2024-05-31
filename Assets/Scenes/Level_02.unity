@@ -335,7 +335,7 @@ PrefabInstance:
         type: 3}
       propertyPath: weaponPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 8156034423572122681, guid: 6e9ce9c006678f840bf397af13bbc984,
+      objectReference: {fileID: 8156034423572122681, guid: a29cadde733902a45a9ae2346d1bfced,
         type: 3}
     - target: {fileID: 4902690037320882239, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
         type: 3}
@@ -12099,12 +12099,12 @@ PrefabInstance:
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.140413
+      value: 14.06469
       objectReference: {fileID: 0}
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.1060286
+      value: 5.142506
       objectReference: {fileID: 0}
     - target: {fileID: 4417311475867233259, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
