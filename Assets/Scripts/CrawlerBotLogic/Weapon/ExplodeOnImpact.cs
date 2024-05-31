@@ -31,7 +31,7 @@ public class ExplodeOnImpact : MonoBehaviour
         _paintingParameters.Shape = Shape.GenerateShapeCircle(radius);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (transform.position.y < -1)
         {

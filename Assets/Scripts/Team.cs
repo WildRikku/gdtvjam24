@@ -77,13 +77,13 @@ public class Team : MonoBehaviour
 
     public PlayerController GetActivePlayer()
     {
-        if (_activeMember >= _members.Count) _activeMember = _members.Count - 1; // a team member died between turns
+        if (_activeMember >= _members.Count) _activeMember = 0; // a team member died between turns
         return _members.ElementAt(_activeMember).Value;
     }
 
     private void OnTurnFinished(PlayerController pc)
     {
-        GetActivePlayer().TurnFinished -= OnTurnFinished;
+        pc.TurnFinished -= OnTurnFinished;
         _activeMember++;
         if (_activeMember == _members.Count)
             _activeMember = 0;

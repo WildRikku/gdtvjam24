@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
         Debug.Log("Default Weapon base class Boom");
     }
 
-    protected void OnAttackFinished()
+    protected void FinishAttack()
     {
         AttackFinished?.Invoke(this, EventArgs.Empty);
     }
@@ -40,7 +40,7 @@ public class ProjectileWeapon : Weapon
         ProjectileCount--;
         if (ProjectileCount == 0)
         {
-            OnAttackFinished();
+            FinishAttack();
         }
     }
 

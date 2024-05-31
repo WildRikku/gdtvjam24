@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public short index;
+    private bool _myTurn;
 
     public event SimplePlayerEvent TurnFinished;
     public event SimplePlayerEvent HealthUpdated;
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
+        _myTurn = true;
         weapon.isActive = true;
         spiderController.isActive = true;
         weapon.AttackFinished += WeaponOnAttackFinished;
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
         weapon.AttackFinished -= WeaponOnAttackFinished;
         weapon.isActive = false;
         spiderController.isActive = false;
+        _myTurn = false;
         TurnFinished?.Invoke(this);
     }
 
@@ -84,7 +87,11 @@ public class PlayerController : MonoBehaviour
             weapon.AttackFinished -= WeaponOnAttackFinished;
         }
 
-        TurnFinished?.Invoke(this); // we can call this always because Team will only listen to the active player
+        if (_myTurn)
+        {
+            TurnFinished?.Invoke(this);
+        }
+
         Destroy(gameObject);
     }
 

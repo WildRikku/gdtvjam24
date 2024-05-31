@@ -100,7 +100,7 @@ public class GameController : MonoBehaviour
     {
         _trackingProjectile = false;
         activeTeam = (activeTeam == 1) ? 0 : 1;
-        Debug.Log("wait for next turn");
+        Debug.Log("wait for next turn, next up is team " + activeTeam);
         Invoke(nameof(Turn), 1f);
     }
 }
