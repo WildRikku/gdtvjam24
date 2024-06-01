@@ -1,11 +1,9 @@
 using UnityEngine;
 
-public class RotateAroundZ : MonoBehaviour
-{
+public class RotateAroundZ : MonoBehaviour {
     public float rotationSpeed = 10f; // Drehgeschwindigkeit in Grad pro Sekunde
 
-    void Update()
-    {
+    private void Update() {
         // Rotiert das GameObject um die Z-Achse
         transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
     }

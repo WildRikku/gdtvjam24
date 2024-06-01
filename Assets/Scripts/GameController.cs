@@ -79,13 +79,18 @@ public class GameController : MonoBehaviour {
 
         // follow first projectile if there is one
         ProjectileWeapon pw = teams[activeTeam].GetActivePlayer().weapon as ProjectileWeapon;
-        if (pw != null) pw.ProjectileFired += OnProjectileFired;
+        if (pw != null) {
+            pw.ProjectileFired += OnProjectileFired;
+        }
     }
 
     private void OnProjectileFired(GameObject projectile) {
         menuController.HideWeaponHUD();
 
-        if (_trackingProjectile) return;
+        if (_trackingProjectile) {
+            return;
+        }
+
         _trackingProjectile = true;
         cinemachineVirtualCamera.Follow = projectile.transform;
     }
@@ -96,7 +101,7 @@ public class GameController : MonoBehaviour {
 
     private void EndTurn() {
         _trackingProjectile = false;
-        activeTeam = (activeTeam == 1) ? 0 : 1;
+        activeTeam = activeTeam == 1 ? 0 : 1;
         Debug.Log("wait for next turn, next up is team " + activeTeam);
         Invoke(nameof(Turn), 1f);
     }

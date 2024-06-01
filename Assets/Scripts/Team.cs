@@ -25,21 +25,21 @@ public class Team : MonoBehaviour {
     public GameObject playerPrefab;
     private Dictionary<int, PlayerController> _members;
     private int _activeMember;
-    
+
     public List<GameObject> weaponPrefabs;
     public List<Weapon> weapons;
-    
+
     [HideInInspector]
     public int teamColor;
     public short index;
     public Collider2D spawnZone;
-    
+
     private GameController _gameController;
-    
+
     public event EventHandler TurnEnded;
     public event TeamUpdated TeamUpdated;
 
-    void Start() {
+    private void Start() {
         _members = new();
         _gameController = GameObject.Find("GameManagement").GetComponent<GameController>();
 
@@ -93,6 +93,7 @@ public class Team : MonoBehaviour {
         if (checkAlive && !_members.ContainsKey(_activeMember)) {
             throw new ActiveTeamMemberDeadException();
         }
+
         return !_members.ContainsKey(_activeMember) ? null : _members[_activeMember];
     }
 
@@ -105,7 +106,7 @@ public class Team : MonoBehaviour {
         if (force) {
             GetActivePlayer(false)?.EndTurn(true);
         }
-        
+
         NextPlayer();
     }
 

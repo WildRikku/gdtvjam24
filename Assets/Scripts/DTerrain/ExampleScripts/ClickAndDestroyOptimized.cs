@@ -1,60 +1,51 @@
 ﻿using UnityEngine;
 
-namespace DTerrain
-{
+namespace DTerrain {
     /// <summary>
     /// Destroys a circle and builds a circle but only on secondary layer.
     /// Primary serves as logical layer for reducing sprite renderers and only handles collisions.
     /// Used in SampleScene2.
     /// </summary>
-    public class ClickAndDestroyOptimized : ClickAndDestroy
-    {
-
-        protected override void OnLeftMouseButtonClick()
-        {
+    public class ClickAndDestroyOptimized : ClickAndDestroy {
+        protected override void OnLeftMouseButtonClick() {
             Vector3 p = Camera.main.ScreenToWorldPoint(Input.mousePosition) - primaryLayer.transform.position;
 
-            primaryLayer?.Paint(new PaintingParameters() 
-            { 
-                Color = Color.clear, 
-                Position = new Vector2Int((int)(p.x * primaryLayer.PPU) - circleSize, (int)(p.y * primaryLayer.PPU) - circleSize), 
-                Shape = destroyCircle, 
-                PaintingMode=PaintingMode.REPLACE_COLOR,
+            primaryLayer?.Paint(new() {
+                Color = Color.clear,
+                Position = new((int)(p.x * primaryLayer.PPU) - circleSize, (int)(p.y * primaryLayer.PPU) - circleSize),
+                Shape = destroyCircle,
+                PaintingMode = PaintingMode.REPLACE_COLOR,
                 DestructionMode = DestructionMode.DESTROY
             });
 
-            secondaryLayer?.Paint(new PaintingParameters() 
-            {
+            secondaryLayer?.Paint(new() {
                 Color = Color.clear,
-                Position = new Vector2Int((int)(p.x * secondaryLayer.PPU) - circleSize, (int)(p.y * secondaryLayer.PPU) - circleSize), 
-                Shape = destroyCircle, 
-                PaintingMode=PaintingMode.REPLACE_COLOR,
+                Position = new((int)(p.x * secondaryLayer.PPU) - circleSize,
+                    (int)(p.y * secondaryLayer.PPU) - circleSize),
+                Shape = destroyCircle,
+                PaintingMode = PaintingMode.REPLACE_COLOR,
                 DestructionMode = DestructionMode.NONE
             });
-            
         }
 
-        protected override void OnRightMouseButtonClick()
-        {
+        protected override void OnRightMouseButtonClick() {
             Vector3 p = Camera.main.ScreenToWorldPoint(Input.mousePosition) - primaryLayer.transform.position;
-            primaryLayer?.Paint(new PaintingParameters()
-            {
+            primaryLayer?.Paint(new() {
                 Color = Color.black,
-                Position = new Vector2Int((int)(p.x * primaryLayer.PPU) - circleSize, (int)(p.y * primaryLayer.PPU) - circleSize),
+                Position = new((int)(p.x * primaryLayer.PPU) - circleSize, (int)(p.y * primaryLayer.PPU) - circleSize),
                 Shape = destroyCircle,
                 PaintingMode = PaintingMode.NONE,
                 DestructionMode = DestructionMode.BUILD
             });
 
-            secondaryLayer?.Paint(new PaintingParameters()
-            {
+            secondaryLayer?.Paint(new() {
                 Color = Color.black,
-                Position = new Vector2Int((int)(p.x * secondaryLayer.PPU) - circleSize, (int)(p.y * secondaryLayer.PPU) - circleSize),
+                Position = new((int)(p.x * secondaryLayer.PPU) - circleSize,
+                    (int)(p.y * secondaryLayer.PPU) - circleSize),
                 Shape = destroyCircle,
                 PaintingMode = PaintingMode.REPLACE_COLOR,
                 DestructionMode = DestructionMode.BUILD
             });
-
         }
     }
 }

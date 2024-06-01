@@ -3,8 +3,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
-public class MenuController : MonoBehaviour
-{
+public class MenuController : MonoBehaviour {
     public CanvasGroup mainMenuCG;
     public CanvasGroup creditsCG;
     public CanvasGroup openLevelCG;
@@ -18,10 +17,8 @@ public class MenuController : MonoBehaviour
     public string strLevel1;
     public string strLevel2;
     public string strLevel3;
- 
 
-    private void Awake()
-    {
+    private void Awake() {
         mainMenuCG.alpha = 1;
         mainMenuCG.blocksRaycasts = true;
         creditsCG.alpha = 0;
@@ -32,10 +29,8 @@ public class MenuController : MonoBehaviour
         levelTransitonCG.blocksRaycasts = false;
     }
 
-    private void Start()
-    {
-        if (musicSlider != null)
-        {
+    private void Start() {
+        if (musicSlider != null) {
             musicVolume = AudioManager.Instance.musicVolume;
             sfxVolume = AudioManager.Instance.sfxVolume;
 
@@ -49,29 +44,25 @@ public class MenuController : MonoBehaviour
         AudioManager.Instance.PlayMusic("MainMenuSound");
     }
 
-    public void MusicVolume()
-    {
+    public void MusicVolume() {
         AudioManager.Instance.SetMusicVolume(musicSlider.value);
         AudioManager.Instance.musicVolume = musicSlider.value;
     }
-    public void SFXVolume()
-    {
+
+    public void SFXVolume() {
         AudioManager.Instance.SetSFXVolume(sfxSlider.value);
         AudioManager.Instance.sfxVolume = sfxSlider.value;
     }
 
-    public void ClickOnSlider()
-    {
+    public void ClickOnSlider() {
         AudioManager.Instance.PlaySFX("MouseSpecialHover");
     }
 
-    public void EndTrackSlider()
-    {
+    public void EndTrackSlider() {
         AudioManager.Instance.PlaySFX("MouseClick");
     }
 
-    public void OpenMenu()
-    {
+    public void OpenMenu() {
         AudioManager.Instance.PlaySFX("MouseGoBack2");
 
         mainMenuCG.DOFade(1, 0.5f);
@@ -82,9 +73,7 @@ public class MenuController : MonoBehaviour
         openLevelCG.blocksRaycasts = false;
     }
 
-
-    public void OpenCredits()
-    {
+    public void OpenCredits() {
         AudioManager.Instance.PlaySFX("MouseClick");
 
         mainMenuCG.DOFade(0, 0.5f);
@@ -95,8 +84,7 @@ public class MenuController : MonoBehaviour
         openLevelCG.blocksRaycasts = false;
     }
 
-    public void OpenLevel()
-    {
+    public void OpenLevel() {
         AudioManager.Instance.PlaySFX("MouseGoBack3");
 
         mainMenuCG.DOFade(0, 0.5f);
@@ -107,16 +95,14 @@ public class MenuController : MonoBehaviour
         openLevelCG.blocksRaycasts = true;
     }
 
-    public void GameQuit()
-    {
+    public void GameQuit() {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
     }
 
-    public void StartLevel(int level = 0)
-    {
+    public void StartLevel(int level = 0) {
         mainMenuCG.DOFade(0, 0.1f);
         mainMenuCG.blocksRaycasts = false;
         creditsCG.DOFade(0, 0.1f);
@@ -126,10 +112,8 @@ public class MenuController : MonoBehaviour
         levelTransitonCG.blocksRaycasts = true;
 
         AudioManager.Instance.PlaySFX("MouseGoBack1");
-        levelTransitonCG.DOFade(1, 0.25f).OnComplete(() =>
-        {
-            switch (level)
-            {
+        levelTransitonCG.DOFade(1, 0.25f).OnComplete(() => {
+            switch (level) {
                 case 0:
                     SceneManager.LoadScene(strLevel1);
                     break;

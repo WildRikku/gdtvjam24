@@ -6,11 +6,8 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
 
-
-public class GameMenuController : MonoBehaviour
-{
-    public struct MessageContainer
-    {
+public class GameMenuController : MonoBehaviour {
+    public struct MessageContainer {
         public string messageStr;
         public int colorInt;
     }
@@ -28,7 +25,8 @@ public class GameMenuController : MonoBehaviour
     public GameObject weaponChooseLayoutPanelPrefab;
     public GameObject weaponChooseButtonPrefab;
 
-    [HideInInspector] public int[] teamColorIndex = new int[2];
+    [HideInInspector]
+    public int[] teamColorIndex = new int[2];
     public Image[] memberBar;
     public Color[] teamColor;
     public Image weaponChooseBarImage;
@@ -48,8 +46,7 @@ public class GameMenuController : MonoBehaviour
 
     public event EventHandler TurnTimeIsUp;
 
-    private void Start()
-    {
+    private void Start() {
         Time.timeScale = 1;
 
         playerHUDCG.alpha = 0;
@@ -71,13 +68,11 @@ public class GameMenuController : MonoBehaviour
         // generate weapon choose buttons
         _weaponChooseLayoutPanels = new();
         _weaponChooseLayoutPanelsImages = new();
-        foreach (Team t in gameController.teams)
-        {
+        foreach (Team t in gameController.teams) {
             GameObject lp = Instantiate(weaponChooseLayoutPanelPrefab, weaponChooseCG.transform);
             _weaponChooseLayoutPanels.Add(lp);
             _weaponChooseLayoutPanelsImages.Add(lp.GetComponent<Image>());
-            for (int i = 0; i < t.weapons.Count; i++)
-            {
+            for (int i = 0; i < t.weapons.Count; i++) {
                 Weapon w = t.weapons[i];
                 GameObject btn = Instantiate(weaponChooseButtonPrefab, lp.transform);
                 WeaponChooseBtn btnclass = btn.GetComponent<WeaponChooseBtn>();
@@ -92,122 +87,104 @@ public class GameMenuController : MonoBehaviour
         gameController.TurnStarted += OnTurnStarted;
     }
 
-    private void OnTurnStarted(GameController gameController)
-    {
+    private void OnTurnStarted(GameController gameController) {
         ResetTurnTimerText(teamColorIndex[gameController.activeTeam]);
         ShowWeaponHUD(gameController.activeTeam, teamColorIndex[gameController.activeTeam]);
-        foreach (GameObject lp in _weaponChooseLayoutPanels)
-        {
+        foreach (GameObject lp in _weaponChooseLayoutPanels) {
             lp.SetActive(false);
         }
+
         _weaponChooseLayoutPanels[gameController.activeTeam].SetActive(true);
     }
 
-    private void OnMatchStarted(GameController gameController)
-    {
+    private void OnMatchStarted(GameController gameController) {
         SetMemberbar(0, Team.MaxTeamMembers, Team.MaxTeamMembers);
         SetMemberbar(1, Team.MaxTeamMembers, Team.MaxTeamMembers);
         gameController.teams[0].TeamUpdated += OnTeamUpdated;
         gameController.teams[1].TeamUpdated += OnTeamUpdated;
     }
 
-    private void OnTeamUpdated(short teamIndex, int memberCount)
-    {
+    private void OnTeamUpdated(short teamIndex, int memberCount) {
         SetMemberbar(teamIndex, Team.MaxTeamMembers, memberCount);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (_isBreak == false)
-            {
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (_isBreak == false) {
                 _isBreak = true;
                 AudioManager.Instance.PlaySFX("MouseGoBack3");
                 breakHUDCG.DOFade(1, 0.2f).SetUpdate(true);
                 breakHUDCG.blocksRaycasts = true;
                 Time.timeScale = 0;
             }
-            else
-            {
+            else {
                 BackToGame();
             }
         }
-       
+
 
         //timer
         remainingTime -= Time.deltaTime;
         timeSinceLastUpdate += Time.deltaTime;
-        if (timeSinceLastUpdate >= 1f)
-        {
+        if (timeSinceLastUpdate >= 1f) {
             TimerStep();
             timeSinceLastUpdate = 0f;
         }
     }
 
-    private void OnDestroy()
-    {
+    private void OnDestroy() {
         Time.timeScale = 1;
     }
 
     // ------------------------------------
     // PlayerHUD
-    private void SetMemberbar(int memberBarIndex, int teamMaxValue, int teamCurrentValue)
-    {
+    private void SetMemberbar(int memberBarIndex, int teamMaxValue, int teamCurrentValue) {
         float currentFillAmount = (float)teamCurrentValue / (float)teamMaxValue;
         memberBar[memberBarIndex].DOFillAmount(currentFillAmount, 0.2f);
     }
 
-    private void SetMemberbarColor(int memberBarIndex, int colorindex)
-    {
+    private void SetMemberbarColor(int memberBarIndex, int colorindex) {
         memberBar[memberBarIndex].color = teamColor[colorindex];
     }
 
-    public void ShowWeaponHUD(int activeTeam, int panelColorIndex = 4)
-    {
+    public void ShowWeaponHUD(int activeTeam, int panelColorIndex = 4) {
         _weaponChooseLayoutPanelsImages[activeTeam].color = teamColor[panelColorIndex];
 
         weaponChooseCG.DOFade(1, 0.4f);
         weaponChooseCG.blocksRaycasts = true;
     }
 
-    public void HideWeaponHUD()
-    {
+    public void HideWeaponHUD() {
         weaponChooseCG.DOFade(0, 0.3f);
         weaponChooseCG.blocksRaycasts = false;
     }
 
-    public void ResetTurnTimerText(int teamColorIndex, int timerValue = 30)
-    {
+    public void ResetTurnTimerText(int teamColorIndex, int timerValue = 30) {
         remainingTime = timerValue;
         timeSinceLastUpdate = 0f;
         roundTimerText.color = teamColor[teamColorIndex];
         TimerStep();
     }
 
-    private void TimerStep()
-    {
+    private void TimerStep() {
         int timerText = Mathf.Max(0, Mathf.RoundToInt(remainingTime));
 
         roundTimerText.text = timerText.ToString();
         timerContainer.DOShakeScale(0.5f, 0.1f, 10, 90, true, ShakeRandomnessMode.Harmonic);
 
-        if (remainingTime <= 0f)
-        {
+        if (remainingTime <= 0f) {
             TurnTimeIsUp?.Invoke(this, EventArgs.Empty);
         }
     }
 
     // TODO: Delete and use this from another place
-    void triggerWeaponBar()
-    {
+    private void triggerWeaponBar() {
         //ShowWeaponHUD(1);
     }
 
     // ------------------------------------
     // BreakHUD
-    public void BackToGame()
-    {
+    public void BackToGame() {
         AudioManager.Instance.PlaySFX("MouseGoBack2");
         breakHUDCG.DOFade(0, 0.2f).SetUpdate(true);
         breakHUDCG.blocksRaycasts = false;
@@ -215,23 +192,19 @@ public class GameMenuController : MonoBehaviour
         _isBreak = false;
     }
 
-    public void GameRetry()
-    {
+    public void GameRetry() {
         AudioManager.Instance.PlaySFX("MouseGoBack1");
         transitionHUDCG.blocksRaycasts = true;
-        transitionHUDCG.DOFade(1, 0.2f).SetUpdate(true).OnComplete(() =>
-        {
+        transitionHUDCG.DOFade(1, 0.2f).SetUpdate(true).OnComplete(() => {
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         });
     }
 
-    public void BackToMenu()
-    {
+    public void BackToMenu() {
         AudioManager.Instance.PlaySFX("MouseGoBack1");
         transitionHUDCG.blocksRaycasts = true;
-        transitionHUDCG.DOFade(1, 0.2f).SetUpdate(true).OnComplete(() =>
-        {
+        transitionHUDCG.DOFade(1, 0.2f).SetUpdate(true).OnComplete(() => {
             Time.timeScale = 1;
             SceneManager.LoadScene("MenuScene");
         });
@@ -239,10 +212,14 @@ public class GameMenuController : MonoBehaviour
 
     // ------------------------------------
     // Game End HUD
-    public void ShowGameEndHUD(short teamIndex)
-    {
-        if (teamIndex == 0) teamIndex = 2;
-        if (teamIndex == 1) teamIndex = 1;
+    public void ShowGameEndHUD(short teamIndex) {
+        if (teamIndex == 0) {
+            teamIndex = 2;
+        }
+
+        if (teamIndex == 1) {
+            teamIndex = 1;
+        }
 
         // Teamindex loose
         gameEndText.text = $"Congratulations Team {teamIndex} wins the competition.";
@@ -250,13 +227,11 @@ public class GameMenuController : MonoBehaviour
         Time.timeScale = 0;
         gameEndHudCG.DOFade(1, 0.2f).SetUpdate(true);
         gameEndHudCG.blocksRaycasts = true;
-
     }
-
 
     // ------------------------------------
     // Message System
-    public void TriggerMessage(string maString, int maColor = 4)  // Color 4 = default)
+    public void TriggerMessage(string maString, int maColor = 4) // Color 4 = default)
     {
         MessageContainer ma = new();
         ma.messageStr = maString;
@@ -264,20 +239,22 @@ public class GameMenuController : MonoBehaviour
 
         messageList.Add(ma);
 
-        if (canTriggerNewMessage) ShowMessage();
-
+        if (canTriggerNewMessage) {
+            ShowMessage();
+        }
     }
 
-    private void ResetTrigger()
-    {
-        if (messageList.Count > 0) ShowMessage();
-        else canTriggerNewMessage = true;
+    private void ResetTrigger() {
+        if (messageList.Count > 0) {
+            ShowMessage();
+        }
+        else {
+            canTriggerNewMessage = true;
+        }
     }
 
-    private void ShowMessage()
-    {
-        if (messageList.Count > 0)
-        {
+    private void ShowMessage() {
+        if (messageList.Count > 0) {
             canTriggerNewMessage = false;
             Invoke(nameof(ResetTrigger), 2f);
 
@@ -291,16 +268,12 @@ public class GameMenuController : MonoBehaviour
 
 
             messageCG.DOKill();
-            if (messageCG.alpha != 1)
-            {
+            if (messageCG.alpha != 1) {
                 messageCG.DOFade(1f, 0.2f);
             }
 
             messageTxtCG.DOFade(1, 0.2f);
-            messageTxtCG.DOFade(0f, 0.2f).SetDelay(2f).OnComplete(() =>
-            {
-                messageCG.DOFade(0f, 0.3f);
-            });
+            messageTxtCG.DOFade(0f, 0.2f).SetDelay(2f).OnComplete(() => { messageCG.DOFade(0f, 0.3f); });
         }
     }
 }

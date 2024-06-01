@@ -4,11 +4,13 @@ using UnityEngine.Serialization;
 
 public delegate void Impact(float damage);
 
-public class ExplodeOnImpact : MonoBehaviour
-{
-    [SerializeField] public BasicPaintableLayer primaryLayer;
-    [SerializeField] public BasicPaintableLayer secondaryLayer;
-    [FormerlySerializedAs("explosionPrefab")] public GameObject explosionFXPrefab;
+public class ExplodeOnImpact : MonoBehaviour {
+    [SerializeField]
+    public BasicPaintableLayer primaryLayer;
+    [SerializeField]
+    public BasicPaintableLayer secondaryLayer;
+    [FormerlySerializedAs("explosionPrefab")]
+    public GameObject explosionFXPrefab;
 
     public int radius = 60;
     public float damage;
@@ -29,72 +31,68 @@ public class ExplodeOnImpact : MonoBehaviour
     private bool _canTriggerBounceSound = true;
     private bool _isExplode = false;
 
-    private PaintingParameters _paintingParameters = new()
-    {
+    private PaintingParameters _paintingParameters = new() {
         Color = Color.clear,
-        Position = new Vector2Int(),
+        Position = new(),
         PaintingMode = PaintingMode.REPLACE_COLOR,
         DestructionMode = DestructionMode.DESTROY
     };
 
-    private void Start()
-    {
+    private void Start() {
         _paintingParameters.Shape = Shape.GenerateShapeCircle(radius);
 
-        if (destroyTimer > 0)
-        {
+        if (destroyTimer > 0) {
             _canExplode = false;
             Invoke("DestroyTimer", destroyTimer);
         }
-        if (timerAlertSound != "")
-        {
+
+        if (timerAlertSound != "") {
             InvokeRepeating("TriggerTimerAlertSond", 1f, 1f);
         }
-
     }
 
-    private void Update()
-    {
-        if (transform.position.y < -1)
-        {
+    private void Update() {
+        if (transform.position.y < -1) {
             Impact?.Invoke(0);
             Destroy(gameObject);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
-    {
+    private void OnCollisionEnter2D(Collision2D col) {
         TriggerBounceSound();
-        if (_canExplode == false) return;
-        if (!(col.collider.CompareTag("DestructibleTerrain") || col.collider.CompareTag("DestructibleObjects") || col.collider.CompareTag("Player"))) return;
+        if (_canExplode == false) {
+            return;
+        }
+
+        if (!(col.collider.CompareTag("DestructibleTerrain") || col.collider.CompareTag("DestructibleObjects") ||
+              col.collider.CompareTag("Player"))) {
+            return;
+        }
 
 
         _impacted = true;
 
         Vector2 position = col.GetContact(0).point;
 
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, (float)radius / primaryLayer.PPU, Physics2D.AllLayers);
+        Collider2D[] hitColliders =
+            Physics2D.OverlapCircleAll(position, (float)radius / primaryLayer.PPU, Physics2D.AllLayers);
         bool terrainHit = false;
-        foreach (Collider2D c in hitColliders)
-        {
-            if (c.CompareTag("Player"))
-            {
+        foreach (Collider2D c in hitColliders) {
+            if (c.CompareTag("Player")) {
                 // Players only have one collider, send them damage
                 c.SendMessage(nameof(PlayerController.TakeDamage), damage);
             }
-            else if (c.CompareTag("DestructibleTerrain"))
-            {
+            else if (c.CompareTag("DestructibleTerrain")) {
                 // Terrain has many colliders, save that we hit it and act later
                 terrainHit = true;
             }
-            if (c.CompareTag("DestructibleObjects"))
-            {
+
+            if (c.CompareTag("DestructibleObjects")) {
                 c.SendMessage(nameof(ExplosivObjects.TakeDamage), damage);
             }
         }
 
-        if (terrainHit)
-        {
+        if (terrainHit) {
             _paintingParameters.DestructionMode = DestructionMode.DESTROY;
             _paintingParameters.Position.x = (int)(position.x * primaryLayer.PPU) - radius;
             _paintingParameters.Position.y = (int)(position.y * primaryLayer.PPU) - radius;
@@ -109,87 +107,73 @@ public class ExplodeOnImpact : MonoBehaviour
         Destroy(gameObject);
     }
 
-
-    private void SpawnExplosion()
-    {
-        if (_isExplode == false)
-        {
-            if (explosionFXPrefab != null)
-            {
+    private void SpawnExplosion() {
+        if (_isExplode == false) {
+            if (explosionFXPrefab != null) {
                 Transform transform1 = transform;
                 Instantiate(explosionFXPrefab, transform1.position, transform1.rotation);
             }
+
             _isExplode = true;
         }
     }
 
-    private void TriggerBounceSound()
-    {
-        if (impactSounds.Length > 0)
-        {
-            if (_boundsSoundCount == 0)
-            {
+    private void TriggerBounceSound() {
+        if (impactSounds.Length > 0) {
+            if (_boundsSoundCount == 0) {
                 int ran = Random.Range(0, impactSounds.Length);
                 AudioManager.Instance.PlaySFX(impactSounds[ran]);
                 _boundsSoundCount = 1;
             }
-            else if (_boundsSoundCount <= 6 && _canTriggerBounceSound == true)
-            {
+            else if (_boundsSoundCount <= 6 && _canTriggerBounceSound == true) {
                 int ran = Random.Range(0, _bounceSounds.Length);
                 AudioManager.Instance.PlaySFX(_bounceSounds[ran]);
                 _canTriggerBounceSound = false;
                 _boundsSoundCount++;
             }
-            
         }
-        else if (_boundsSoundCount <= 6 && _canTriggerBounceSound == true)
-        {
+        else if (_boundsSoundCount <= 6 && _canTriggerBounceSound == true) {
             int ran = Random.Range(0, _bounceSounds.Length);
             AudioManager.Instance.PlaySFX(_bounceSounds[ran]);
             _canTriggerBounceSound = false;
             _boundsSoundCount++;
         }
 
-        Invoke(nameof(ResetBounceSound),0.1f);
+        Invoke(nameof(ResetBounceSound), 0.1f);
     }
-    private void ResetBounceSound()
-    {
+
+    private void ResetBounceSound() {
         _canTriggerBounceSound = true;
     }
 
-    private void TriggerTimerAlertSond()
-    {
+    private void TriggerTimerAlertSond() {
         _timerAlertSoundCount++;
-        if (_timerAlertSoundCount < destroyTimer)
+        if (_timerAlertSoundCount < destroyTimer) {
             AudioManager.Instance.PlaySFX(timerAlertSound);
+        }
     }
 
-
-    private void DestroyTimer()
-    {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, (float)radius / primaryLayer.PPU, Physics2D.AllLayers);
+    private void DestroyTimer() {
+        Collider2D[] hitColliders =
+            Physics2D.OverlapCircleAll(transform.position, (float)radius / primaryLayer.PPU, Physics2D.AllLayers);
         bool terrainHit = false;
-        foreach (Collider2D c in hitColliders)
-        {
-            if (c.CompareTag("Player"))
-            {
+        foreach (Collider2D c in hitColliders) {
+            if (c.CompareTag("Player")) {
                 // Players only have one collider, send them damage
                 c.SendMessage(nameof(PlayerController.TakeDamage), damage);
             }
-            else if (c.CompareTag("DestructibleTerrain"))
-            {
+            else if (c.CompareTag("DestructibleTerrain")) {
                 // Terrain has many colliders, save that we hit it and act later
                 terrainHit = true;
             }
-            if (c.CompareTag("DestructibleObjects"))
-            {
+
+            if (c.CompareTag("DestructibleObjects")) {
                 // Players only have one collider, send them damage
                 c.SendMessage(nameof(ExplosivObjects.TakeDamage), damage);
             }
         }
 
-        if (terrainHit)
-        {
+        if (terrainHit) {
             _paintingParameters.DestructionMode = DestructionMode.DESTROY;
             _paintingParameters.Position.x = (int)(transform.position.x * primaryLayer.PPU) - radius;
             _paintingParameters.Position.y = (int)(transform.position.y * primaryLayer.PPU) - radius;

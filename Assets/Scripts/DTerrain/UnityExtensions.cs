@@ -1,9 +1,7 @@
-﻿
-using UnityEngine;
-namespace DTerrain
-{
-    public static class UnityExtensions
-    {
+﻿using UnityEngine;
+
+namespace DTerrain {
+    public static class UnityExtensions {
         /// <summary>
         /// Gets a Rect that is an intersection of two Rects.
         /// </summary>
@@ -11,12 +9,10 @@ namespace DTerrain
         /// <param name="r2">Rect 2</param>
         /// <param name="area">Common area</param>
         /// <returns>True if r1 and r2 intersect</returns>
-        public static bool Intersects(this RectInt r1, RectInt r2, out RectInt area)
-        {
-            area = new RectInt();
+        public static bool Intersects(this RectInt r1, RectInt r2, out RectInt area) {
+            area = new();
 
-            if (r2.Overlaps(r1))
-            {
+            if (r2.Overlaps(r1)) {
                 int x1 = Mathf.Min(r1.xMax, r2.xMax);
                 int x2 = Mathf.Max(r1.xMin, r2.xMin);
                 int y1 = Mathf.Min(r1.yMax, r2.yMax);
@@ -31,7 +27,5 @@ namespace DTerrain
 
             return false;
         }
-
     }
-
 }

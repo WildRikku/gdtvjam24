@@ -3,92 +3,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[System.Serializable]
-public class Sound
-{
+[Serializable]
+public class Sound {
     public string name;
     public AudioClip clip;
 }
 
-public class AudioManager : MonoBehaviour
-{
+public class AudioManager : MonoBehaviour {
     public static AudioManager Instance;
 
     public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource;
     public float musicVolume, sfxVolume;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
+    private void Awake() {
+        if (Instance == null) {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
+        else {
             Destroy(gameObject);
         }
     }
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         //PlayMusic("MenuMusic");
     }
-
 
     // How to use:
     // AudioManager.Instance.PlaySFX("name");
     // AudioManager.Instance.PlayMusic("name");
     // AudioManager.Instance.musicSource.Stop(); - Stop Music
 
-    public void PlayMusic(string name)
-    {
+    public void PlayMusic(string name) {
         Sound s = Array.Find(musicSounds, x => x.name == name);
 
-        if (s == null)
-        {
+        if (s == null) {
             Debug.Log("Sound Not Found");
         }
-        else
-        {
+        else {
             musicSource.Stop();
             musicSource.clip = s.clip;
             musicSource.Play();
         }
     }
 
-    public void PlaySFX(string name)
-    {
+    public void PlaySFX(string name) {
         Sound s = Array.Find(sfxSounds, x => x.name == name);
 
-        if (s == null)
-        {
+        if (s == null) {
             Debug.Log("Sound Not Found");
         }
-        else
-        {
+        else {
             sfxSource.PlayOneShot(s.clip);
         }
     }
 
-    public void ToggleMusic()
-    {
+    public void ToggleMusic() {
         musicSource.mute = !musicSource.mute;
     }
-    public void ToggleSFX()
-    {
+
+    public void ToggleSFX() {
         sfxSource.mute = !sfxSource.mute;
     }
 
-    public void SetMusicVolume(float volume)
-    {
+    public void SetMusicVolume(float volume) {
         musicSource.volume = volume;
     }
 
-    public void SetSFXVolume(float volume)
-    {
+    public void SetSFXVolume(float volume) {
         sfxSource.volume = volume;
     }
 }

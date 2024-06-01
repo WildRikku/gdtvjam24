@@ -3,8 +3,7 @@ using UnityEngine;
 
 public delegate void ProjectileFired(GameObject projectile);
 
-public class Weapon : MonoBehaviour
-{
+public class Weapon : MonoBehaviour {
     public BattleField battleField;
     public KeyCode activationKey = KeyCode.A;
 
@@ -19,34 +18,28 @@ public class Weapon : MonoBehaviour
     public Sprite buttonSprite;
     public int ammo;
 
-    public virtual void Trigger()
-    {
+    public virtual void Trigger() {
         Debug.Log("Default Weapon base class Boom");
     }
 
-    protected void FinishAttack()
-    {
+    protected void FinishAttack() {
         AttackFinished?.Invoke(this, EventArgs.Empty);
     }
 }
 
-public class ProjectileWeapon : Weapon
-{
+public class ProjectileWeapon : Weapon {
     protected int ProjectileCount;
     public event ProjectileFired ProjectileFired;
 
-    protected void OnProjectileImpact(float damage)
-    {
+    protected void OnProjectileImpact(float damage) {
         ProjectileCount--;
         Debug.Log("projectile destroyed");
-        if (ProjectileCount == 0)
-        {
+        if (ProjectileCount == 0) {
             FinishAttack();
         }
     }
 
-    protected GameObject SpawnProjectile(GameObject prefab, Vector3 translation, Quaternion rotation)
-    {
+    protected GameObject SpawnProjectile(GameObject prefab, Vector3 translation, Quaternion rotation) {
         GameObject projectile = Instantiate(prefab, translation, rotation);
         ExplodeOnImpact eoi = projectile.GetComponent<ExplodeOnImpact>();
         eoi.primaryLayer = battleField.collidableLayer;

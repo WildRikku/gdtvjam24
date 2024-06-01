@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-namespace DTerrain
-{
-    public interface ITextureSource
-    {
+namespace DTerrain {
+    public interface ITextureSource {
         Texture2D Texture { get; set; }
         int PPU { get; set; }
 
