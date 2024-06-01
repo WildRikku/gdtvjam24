@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpiderGranadeController : RotatingWeapon
+public class SpiderGrenadeController : RotatingWeapon
 {
     public Transform shotTriggerPoint;
     public GameObject bombPrefab;
