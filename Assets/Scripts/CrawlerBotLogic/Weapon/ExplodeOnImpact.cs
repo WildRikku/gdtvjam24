@@ -69,9 +69,10 @@ public class ExplodeOnImpact : MonoBehaviour {
             return;
         }
 
-        _impacted = true;
         Vector2 position = col.GetContact(0).point;
         Explode(position);
+        
+        _impacted = true;
     }
 
     private void SpawnExplosion() {
@@ -128,6 +129,7 @@ public class ExplodeOnImpact : MonoBehaviour {
         Collider2D[] hitColliders =
             Physics2D.OverlapCircleAll(pos, (float)radius / primaryLayer.PPU, Physics2D.AllLayers);
         bool terrainHit = false;
+        
         foreach (Collider2D c in hitColliders) {
             if (c.CompareTag("Player")) {
                 // Players only have one collider, send them damage
@@ -153,7 +155,10 @@ public class ExplodeOnImpact : MonoBehaviour {
             secondaryLayer.Paint(_paintingParameters);
         }
 
-        Impact?.Invoke(damage); // TODO: damage is currently meaningless
+        if (!_impacted) {
+            Impact?.Invoke(damage); // TODO: damage is currently meaningless
+        }
+
         SpawnExplosion();
         Destroy(gameObject);
     }
