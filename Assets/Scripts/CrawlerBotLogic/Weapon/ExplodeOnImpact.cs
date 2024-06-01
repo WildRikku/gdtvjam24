@@ -29,7 +29,7 @@ public class ExplodeOnImpact : MonoBehaviour {
     private string[] _bounceSounds = new string[3] { "MouseHover1", "MouseHover2", "MouseHover3" };
     private int _boundsSoundCount = 0;
     private bool _canTriggerBounceSound = true;
-    private bool _isExplode = false;
+    private bool _hasExploded = false;
 
     private PaintingParameters _paintingParameters = new() {
         Color = Color.clear,
@@ -43,11 +43,11 @@ public class ExplodeOnImpact : MonoBehaviour {
 
         if (destroyTimer > 0) {
             _canExplode = false;
-            Invoke("DestroyTimer", destroyTimer);
+            Invoke(nameof(ExplodeAfterTimer), destroyTimer);
         }
 
         if (timerAlertSound != "") {
-            InvokeRepeating("TriggerTimerAlertSond", 1f, 1f);
+            InvokeRepeating(nameof(TriggerTimerAlertSond), 1f, 1f);
         }
     }
 
@@ -69,52 +69,19 @@ public class ExplodeOnImpact : MonoBehaviour {
             return;
         }
 
-
         _impacted = true;
-
         Vector2 position = col.GetContact(0).point;
-
-        Collider2D[] hitColliders =
-            Physics2D.OverlapCircleAll(position, (float)radius / primaryLayer.PPU, Physics2D.AllLayers);
-        bool terrainHit = false;
-        foreach (Collider2D c in hitColliders) {
-            if (c.CompareTag("Player")) {
-                // Players only have one collider, send them damage
-                c.SendMessage(nameof(PlayerController.TakeDamage), damage);
-            }
-            else if (c.CompareTag("DestructibleTerrain")) {
-                // Terrain has many colliders, save that we hit it and act later
-                terrainHit = true;
-            }
-
-            if (c.CompareTag("DestructibleObjects")) {
-                c.SendMessage(nameof(ExplosivObjects.TakeDamage), damage);
-            }
-        }
-
-        if (terrainHit) {
-            _paintingParameters.DestructionMode = DestructionMode.DESTROY;
-            _paintingParameters.Position.x = (int)(position.x * primaryLayer.PPU) - radius;
-            _paintingParameters.Position.y = (int)(position.y * primaryLayer.PPU) - radius;
-            primaryLayer.Paint(_paintingParameters);
-            _paintingParameters.DestructionMode = DestructionMode.NONE;
-            secondaryLayer.Paint(_paintingParameters);
-        }
-
-        Impact?.Invoke(damage); // TODO: damage is currently meaningless
-
-        SpawnExplosion();
-        Destroy(gameObject);
+        Explode(position);
     }
 
     private void SpawnExplosion() {
-        if (_isExplode == false) {
+        if (_hasExploded == false) {
             if (explosionFXPrefab != null) {
                 Transform transform1 = transform;
                 Instantiate(explosionFXPrefab, transform1.position, transform1.rotation);
             }
 
-            _isExplode = true;
+            _hasExploded = true;
         }
     }
 
@@ -153,9 +120,13 @@ public class ExplodeOnImpact : MonoBehaviour {
         }
     }
 
-    private void DestroyTimer() {
+    private void ExplodeAfterTimer() {
+        Explode(transform.position);
+    }
+
+    private void Explode(Vector3 pos) {
         Collider2D[] hitColliders =
-            Physics2D.OverlapCircleAll(transform.position, (float)radius / primaryLayer.PPU, Physics2D.AllLayers);
+            Physics2D.OverlapCircleAll(pos, (float)radius / primaryLayer.PPU, Physics2D.AllLayers);
         bool terrainHit = false;
         foreach (Collider2D c in hitColliders) {
             if (c.CompareTag("Player")) {
