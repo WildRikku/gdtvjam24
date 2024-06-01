@@ -53,7 +53,7 @@ public class Team : MonoBehaviour {
             pc.teamColor = teamColor;
             pc.mainWeapon = weaponPrefabs[Random.Range(0, weaponPrefabs.Count)];
             pc.index = i;
-            pc.HealthUpdated += TeamMemberOnHealthUpdated;
+            pc.HealthUpdated += OnTeamMemberHealthUpdated;
             if (_gameController.botNames.Count > 0) {
                 int value = Random.Range(0, _gameController.botNames.Count);
                 pc.botName = _gameController.botNames[value];
@@ -71,7 +71,7 @@ public class Team : MonoBehaviour {
         _activeMember = 0;
     }
 
-    private void TeamMemberOnHealthUpdated(PlayerController pc) {
+    private void OnTeamMemberHealthUpdated(PlayerController pc) {
         if (pc.Health <= 0) {
             // RIP
             _members.Remove(pc.index);
