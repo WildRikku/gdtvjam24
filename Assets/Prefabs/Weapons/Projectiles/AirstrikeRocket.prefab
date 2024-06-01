@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2838611224409438104}
   - component: {fileID: 6374603873300257624}
   m_Layer: 0
-  m_Name: AirStrikeRocked
+  m_Name: AirstrikeRocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
