@@ -81,15 +81,19 @@ public class PlayerController : MonoBehaviour
     private void WeaponOnAttackFinished(object sender, EventArgs e)
     {
         weapon.AttackFinished -= WeaponOnAttackFinished;
+        EndTurn();
+        TurnFinished?.Invoke(this);
+    }
+
+    public void EndTurn()
+    {
         weapon.isActive = false;
         spiderController.isActive = false;
         _myTurn = false;
-        TurnFinished?.Invoke(this);
     }
 
     public void TakeDamage(float amount)
     {
-       
         Health -= amount;
         healthTxt.text = Health.ToString();
         GameObject dp = Instantiate(damagePopupPrefab, transform.position, damagePopupPrefab.transform.rotation);

@@ -45,7 +45,13 @@ public class GameController : MonoBehaviour
             teams[i].TeamUpdated += OnTeamUpdated;
         }
         
-        menuController.TurnTimeIsUp += OnTurnEnded;
+        menuController.TurnTimeIsUp += OnTurnTimeIsUp;
+    }
+
+    private void OnTurnTimeIsUp(object sender, EventArgs e)
+    {
+        teams[activeTeam].EndTurn(true);
+        EndTurn(true);
     }
 
     private void OnTeamUpdated(short teamindex, int membercount)
@@ -98,6 +104,11 @@ public class GameController : MonoBehaviour
     }
 
     private void OnTurnEnded(object sender, EventArgs e)
+    {
+        EndTurn();
+    }
+
+    private void EndTurn(bool force = false)
     {
         _trackingProjectile = false;
         activeTeam = (activeTeam == 1) ? 0 : 1;

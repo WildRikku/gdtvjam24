@@ -86,9 +86,18 @@ public class Team : MonoBehaviour
     private void OnTurnFinished(PlayerController pc)
     {
         pc.TurnFinished -= OnTurnFinished;
+        EndTurn();
+        TurnEnded?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void EndTurn(bool force = false)
+    {
+        if (force)
+        {
+            _members.ElementAt(_activeMember).Value.EndTurn();
+        }
         _activeMember++;
         if (_activeMember == _members.Count)
             _activeMember = 0;
-        TurnEnded?.Invoke(this, EventArgs.Empty);
     }
 }

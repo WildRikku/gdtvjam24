@@ -12,10 +12,10 @@ public class ExplosivObjects : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("Christian hilf mir bitte :(");
+/*        Debug.Log("Christian hilf mir bitte :(");
         Debug.Log("Kannst du bitte machen, dass das fass explodiert und Schaden macht?");
-        Debug.Log("ich bin zu dumm für das ExplodeOnImpact script");
-        Debug.Log("ich versteh nicht, woher ExplodeOnImpact primaryLayer bekommt. Ich wollte über das Fass ein ExplodeObject erzeugen. Bekomm dann aber ne NullReferenz auf primaryLayer");
-         
+        Debug.Log("ich bin zu dumm fï¿½r das ExplodeOnImpact script");
+        Debug.Log("ich versteh nicht, woher ExplodeOnImpact primaryLayer bekommt. Ich wollte ï¿½ber das Fass ein ExplodeObject erzeugen. Bekomm dann aber ne NullReferenz auf primaryLayer");
+  */       
     }
 }
