@@ -201,7 +201,7 @@ MonoBehaviour:
   radius: 80
   damage: 32
   projectileCollider: {fileID: 5061946580784646974}
-  destroyTimer: 1
+  destroyTimer: 6
   impactSounds:
   - MouseClick
   timerAlertSound: WeaponTimerAlert

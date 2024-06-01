@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
 
     public int activeTeam;
     private bool _trackingProjectile;
+    private bool _ignoreTimer; // use to not end turn because of grenade timers
 
     public List<string> botNames; // use in PlayerController
 
@@ -44,6 +45,10 @@ public class GameController : MonoBehaviour {
     }
 
     private void OnTurnTimeIsUp(object sender, EventArgs e) {
+        if (_ignoreTimer) {
+            return;
+        }
+
         teams[activeTeam].EndTurn(true);
         EndTurn();
     }
@@ -69,6 +74,7 @@ public class GameController : MonoBehaviour {
     }
 
     private void Turn() {
+        _ignoreTimer = false;
         TurnStarted?.Invoke(this);
 
         // Activate next player
@@ -84,6 +90,7 @@ public class GameController : MonoBehaviour {
     }
 
     private void OnProjectileFired(GameObject projectile) {
+        _ignoreTimer = true;
         menuController.HideWeaponHUD();
 
         if (_trackingProjectile) {
