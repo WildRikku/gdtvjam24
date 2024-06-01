@@ -24,6 +24,7 @@ public class GameMenuController : MonoBehaviour
     public CanvasGroup gameEndHudCG;
 
     private List<GameObject> _weaponChooseLayoutPanels;
+    private List<Image> _weaponChooseLayoutPanelsImages;
     public GameObject weaponChooseLayoutPanelPrefab;
     public GameObject weaponChooseButtonPrefab;
 
@@ -69,10 +70,12 @@ public class GameMenuController : MonoBehaviour
 
         // generate weapon choose buttons
         _weaponChooseLayoutPanels = new();
+        _weaponChooseLayoutPanelsImages = new();
         foreach (Team t in gameController.teams)
         {
             GameObject lp = Instantiate(weaponChooseLayoutPanelPrefab, weaponChooseCG.transform);
             _weaponChooseLayoutPanels.Add(lp);
+            _weaponChooseLayoutPanelsImages.Add(lp.GetComponent<Image>());
             for (int i = 0; i < t.weapons.Count; i++)
             {
                 Weapon w = t.weapons[i];
@@ -92,7 +95,7 @@ public class GameMenuController : MonoBehaviour
     private void OnTurnStarted(GameController gameController)
     {
         ResetTurnTimerText(teamColorIndex[gameController.activeTeam]);
-        ShowWeaponHUD(teamColorIndex[gameController.activeTeam]);
+        ShowWeaponHUD(gameController.activeTeam, teamColorIndex[gameController.activeTeam]);
         foreach (GameObject lp in _weaponChooseLayoutPanels)
         {
             lp.SetActive(false);
@@ -160,9 +163,9 @@ public class GameMenuController : MonoBehaviour
         memberBar[memberBarIndex].color = teamColor[colorindex];
     }
 
-    public void ShowWeaponHUD(int panelColorIndex = 4)
+    public void ShowWeaponHUD(int activeTeam, int panelColorIndex = 4)
     {
-        //        weaponChooseBarImage.color = teamColor[panelColorIndex];
+        _weaponChooseLayoutPanelsImages[activeTeam].color = teamColor[panelColorIndex];
 
         weaponChooseCG.DOFade(1, 0.4f);
         weaponChooseCG.blocksRaycasts = true;
@@ -198,7 +201,7 @@ public class GameMenuController : MonoBehaviour
     // TODO: Delete and use this from another place
     void triggerWeaponBar()
     {
-        ShowWeaponHUD(1);
+        //ShowWeaponHUD(1);
     }
 
     // ------------------------------------
