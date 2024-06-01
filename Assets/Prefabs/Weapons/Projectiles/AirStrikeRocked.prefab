@@ -126,7 +126,7 @@ MonoBehaviour:
   radius: 70
   damage: 18
   projectileCollider: {fileID: 8034510886594934565}
-  destroyTimer: 3
+  destroyTimer: 0
   impactSounds:
   - AirStrikeImpact1
   - AirStrikeImpact2

@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour {
 
     private void OnTurnTimeIsUp(object sender, EventArgs e) {
         teams[activeTeam].EndTurn(true);
-        EndTurn(true);
+        EndTurn();
     }
 
     private void OnTeamUpdated(short teamindex, int membercount) {
@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour {
     private void MatchBegin() {
         activeTeam = 0;
         foreach (Team t in teams) {
-            t.TurnEnded += OnTurnEnded;
+            t.TurnEnded += OnTeamTurnEnded;
         }
 
         MatchStarted?.Invoke(this);
@@ -73,7 +73,6 @@ public class GameController : MonoBehaviour {
 
         AudioManager.Instance.PlaySFX("CameraSwipe");
         cinemachineVirtualCamera.Follow = teams[activeTeam].GetActivePlayer().transform;
-        // Give control to the next character of the active player
 
         // Wait for player action
         teams[activeTeam].PlayerAction();
@@ -91,11 +90,11 @@ public class GameController : MonoBehaviour {
         cinemachineVirtualCamera.Follow = projectile.transform;
     }
 
-    private void OnTurnEnded(object sender, EventArgs e) {
+    private void OnTeamTurnEnded(object sender, EventArgs e) {
         EndTurn();
     }
 
-    private void EndTurn(bool force = false) {
+    private void EndTurn() {
         _trackingProjectile = false;
         activeTeam = (activeTeam == 1) ? 0 : 1;
         Debug.Log("wait for next turn, next up is team " + activeTeam);

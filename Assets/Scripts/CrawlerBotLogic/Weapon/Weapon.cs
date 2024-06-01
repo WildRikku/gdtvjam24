@@ -38,6 +38,7 @@ public class ProjectileWeapon : Weapon
     protected void OnProjectileImpact(float damage)
     {
         ProjectileCount--;
+        Debug.Log("projectile destroyed");
         if (ProjectileCount == 0)
         {
             FinishAttack();

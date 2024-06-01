@@ -70,22 +70,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Attack()
+    public void StartTurn()
     {
         _myTurn = true;
         weapon.isActive = true;
         spiderController.isActive = true;
-        weapon.AttackFinished += WeaponOnAttackFinished;
+        weapon.AttackFinished += OnWeaponAttackFinished;
     }
 
-    private void WeaponOnAttackFinished(object sender, EventArgs e)
+    private void OnWeaponAttackFinished(object sender, EventArgs e)
     {
-        weapon.AttackFinished -= WeaponOnAttackFinished;
+        weapon.AttackFinished -= OnWeaponAttackFinished;
         EndTurn();
+        Debug.Log("finishing player turn because weapon");
         TurnFinished?.Invoke(this);
     }
 
-    public void EndTurn()
+    public void EndTurn(bool force = false)
     {
         weapon.isActive = false;
         spiderController.isActive = false;
@@ -104,11 +105,15 @@ public class PlayerController : MonoBehaviour
     {
         if (weapon.isActive)
         {
-            weapon.AttackFinished -= WeaponOnAttackFinished;
+            // no longer listen to the event when the attack is finished but do not stop the attack - fired projectiles should still live
+            weapon.AttackFinished -= OnWeaponAttackFinished;
+            Debug.Log("unsubscribed from weapon");
         }
 
         if (_myTurn)
         {
+            // TODO: should this still be called by the projectiles?
+            Debug.Log("finishing player turn because dead");
             TurnFinished?.Invoke(this);
         }
 

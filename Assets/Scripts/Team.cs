@@ -6,11 +6,24 @@ using Random = UnityEngine.Random;
 
 public delegate void TeamUpdated(short teamIndex, int memberCount);
 
+public class ActiveTeamMemberDeadException : Exception {
+    public ActiveTeamMemberDeadException() {
+    }
+
+    public ActiveTeamMemberDeadException(string message)
+        : base(message) {
+    }
+
+    public ActiveTeamMemberDeadException(string message, Exception inner)
+        : base(message, inner) {
+    }
+}
+
 public class Team : MonoBehaviour {
     public const short MaxTeamMembers = 4;
 
     public GameObject playerPrefab;
-    private Dictionary<short, PlayerController> _members;
+    private Dictionary<int, PlayerController> _members;
     private int _activeMember;
     
     public List<GameObject> weaponPrefabs;
@@ -47,6 +60,7 @@ public class Team : MonoBehaviour {
                 _gameController.botNames.RemoveAt(value);
             }
 
+            pc.TurnFinished += OnPlayerTurnFinished;
             _members.Add(i, pc);
         }
 
@@ -66,28 +80,41 @@ public class Team : MonoBehaviour {
     }
 
     public void PlayerAction() {
-        _members.ElementAt(_activeMember).Value.Attack();
-        _members.ElementAt(_activeMember).Value.TurnFinished += OnTurnFinished;
+        GetActivePlayer().StartTurn();
     }
 
-    public PlayerController GetActivePlayer() {
-        if (_activeMember >= _members.Count) _activeMember = 0; // a team member died between turns
-        return _members.ElementAt(_activeMember).Value;
+    /// <summary>
+    /// Get the active player unit, if it is still alive.
+    /// </summary>
+    /// <param name="checkAlive">Decide if an exception should be raised if the active player is dead.</param>
+    /// <returns></returns>
+    /// <exception cref="ActiveTeamMemberDeadException"></exception>
+    public PlayerController GetActivePlayer(bool checkAlive = true) {
+        if (checkAlive && !_members.ContainsKey(_activeMember)) {
+            throw new ActiveTeamMemberDeadException();
+        }
+        return !_members.ContainsKey(_activeMember) ? null : _members[_activeMember];
     }
 
-    private void OnTurnFinished(PlayerController pc) {
-        pc.TurnFinished -= OnTurnFinished;
+    private void OnPlayerTurnFinished(PlayerController pc) {
         EndTurn();
         TurnEnded?.Invoke(this, EventArgs.Empty);
     }
 
     public void EndTurn(bool force = false) {
         if (force) {
-            _members.ElementAt(_activeMember).Value.EndTurn();
+            GetActivePlayer(false)?.EndTurn(true);
         }
+        
+        NextPlayer();
+    }
 
-        _activeMember++;
-        if (_activeMember == _members.Count)
-            _activeMember = 0;
+    public void NextPlayer() {
+        do {
+            _activeMember++;
+            if (_activeMember == MaxTeamMembers) {
+                _activeMember = 0;
+            }
+        } while (!_members.ContainsKey(_activeMember));
     }
 }
