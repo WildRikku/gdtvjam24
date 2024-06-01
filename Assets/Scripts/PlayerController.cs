@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour {
     private void OnWeaponAttackFinished(object sender, EventArgs e) {
         weapon.AttackFinished -= OnWeaponAttackFinished;
         EndTurn();
-        Debug.Log("finishing player turn because weapon");
+        //Debug.Log("finishing player turn because weapon");
         TurnFinished?.Invoke(this);
     }
 
@@ -93,17 +93,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Die() {
-        if (weapon.isActive) {
-            // no longer listen to the event when the attack is finished but do not stop the attack - fired projectiles should still live
-            weapon.AttackFinished -= OnWeaponAttackFinished;
-            Debug.Log("unsubscribed from weapon");
-        }
-
-        if (_myTurn) {
-            // TODO: should this still be called by the projectiles?
-            Debug.Log("finishing player turn because dead");
-            TurnFinished?.Invoke(this);
-        }
+//        if (_myTurn) {
+//            // TODO: should this still be called by the projectiles?
+//            Debug.Log("finishing player turn because dead");
+//        }
 
         // Trigger the Message system
         string dM = botName + " " + dieMessages[UnityEngine.Random.Range(0, dieMessages.Length)];

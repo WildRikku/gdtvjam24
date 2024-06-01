@@ -71,11 +71,10 @@ public class GameController : MonoBehaviour {
     private void Turn() {
         TurnStarted?.Invoke(this);
 
+        // Activate next player
+        teams[activeTeam].PlayerAction();
         AudioManager.Instance.PlaySFX("CameraSwipe");
         cinemachineVirtualCamera.Follow = teams[activeTeam].GetActivePlayer().transform;
-
-        // Wait for player action
-        teams[activeTeam].PlayerAction();
 
         // follow first projectile if there is one
         ProjectileWeapon pw = teams[activeTeam].GetActivePlayer().weapon as ProjectileWeapon;

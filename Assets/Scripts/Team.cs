@@ -80,6 +80,7 @@ public class Team : MonoBehaviour {
     }
 
     public void PlayerAction() {
+        NextPlayer();
         GetActivePlayer().StartTurn();
     }
 
@@ -106,8 +107,6 @@ public class Team : MonoBehaviour {
         if (force) {
             GetActivePlayer(false)?.EndTurn(true);
         }
-
-        NextPlayer();
     }
 
     public void NextPlayer() {
