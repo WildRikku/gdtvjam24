@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour {
         healthTxt.text = Health.ToString();
     }
 
-    private void FixedUpdate() {
+    private void Update() {
         if (transform.position.y < -0.7f) {
             Health = 0;
         }
