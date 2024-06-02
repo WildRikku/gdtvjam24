@@ -9,14 +9,25 @@ public class RotatingWeapon : ProjectileWeapon {
 
     protected bool isRotating;
     private bool _rotatingToMax = true;
-    protected float rotationTempSpeed;
+    private float _rotationTempSpeed;
     protected bool isFadeOutRotation;
     private Rigidbody2D botRb;
 
     protected new void Start() {
         botRb = gameObject.GetComponentInParent<Rigidbody2D>();
-        rotationTempSpeed = rotationSpeed;
+        _rotationTempSpeed = rotationSpeed;
         base.Start();
+    }
+
+    protected void Update() {
+        if (!isRotating) {
+            return;
+        }
+
+        Rotate();
+        if (isFadeOutRotation) {
+            FadeOutRotation();
+        }
     }
 
     public override void Deactivate() {
@@ -28,14 +39,14 @@ public class RotatingWeapon : ProjectileWeapon {
         float currentZRotation = weaponRotationPoint.localEulerAngles.z;
 
         if (_rotatingToMax) {
-            currentZRotation = Mathf.MoveTowards(currentZRotation, maxZRotation, rotationTempSpeed * Time.deltaTime);
+            currentZRotation = Mathf.MoveTowards(currentZRotation, maxZRotation, _rotationTempSpeed * Time.deltaTime);
 
             if (currentZRotation >= maxZRotation) {
                 _rotatingToMax = false;
             }
         }
         else {
-            currentZRotation = Mathf.MoveTowards(currentZRotation, minZRotation, rotationTempSpeed * Time.deltaTime);
+            currentZRotation = Mathf.MoveTowards(currentZRotation, minZRotation, _rotationTempSpeed * Time.deltaTime);
 
             if (currentZRotation <= minZRotation) {
                 _rotatingToMax = true;
@@ -49,10 +60,10 @@ public class RotatingWeapon : ProjectileWeapon {
     }
 
     protected void FadeOutRotation() {
-        rotationTempSpeed--;
+        _rotationTempSpeed--;
 
-        if (rotationTempSpeed <= 1) {
-            rotationTempSpeed = rotationSpeed;
+        if (_rotationTempSpeed <= 1) {
+            _rotationTempSpeed = rotationSpeed;
             isRotating = false;
             isFadeOutRotation = false;
         }

@@ -26,11 +26,13 @@ public class SpiderBazookaController : RotatingWeapon {
         base.Start();
     }
 
-    protected void Update() {
+    protected new void Update() {
         if (!isActive) {
             return;
         }
-
+        
+        base.Update();
+        
         if (_waitingForShot) {
             SelectShootingForce();
         }
@@ -47,10 +49,6 @@ public class SpiderBazookaController : RotatingWeapon {
                 isRotating = true;
                 crosshairCG.alpha = 1;
             }
-        }
-
-        if (isRotating) {
-            Rotate();
         }
     }
 

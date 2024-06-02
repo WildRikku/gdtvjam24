@@ -17,10 +17,12 @@ public class SpiderMinigunController : RotatingWeapon {
         base.Start();
     }
 
-    private void Update() {
+    private new void Update() {
         if (!isActive) {
             return;
         }
+        
+        base.Update();
 
         if (Input.GetKeyDown(activationKey) && _shootingReset == false) {
             if (isRotating) {
@@ -32,15 +34,6 @@ public class SpiderMinigunController : RotatingWeapon {
                 isRotating = true;
                 crosshairCG.alpha = 1;
             }
-        }
-
-        if (!isRotating) {
-            return;
-        }
-
-        Rotate();
-        if (isFadeOutRotation) {
-            FadeOutRotation();
         }
     }
 
