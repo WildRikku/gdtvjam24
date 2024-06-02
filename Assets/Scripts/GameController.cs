@@ -19,9 +19,10 @@ public class GameController : MonoBehaviour {
     private bool _ignoreTimer; // use to not end turn because of grenade timers
 
     public List<string> botNames; // use in PlayerController
+    public List<string> matchStartMessages;
 
     private void Awake() {
-        Invoke(nameof(MatchBegin), 2f);
+        Invoke(nameof(MatchBegin), 4f);
         bool[] usedTeamColors = new bool[4];
 
         for (short i = 0; i < teams.Count; i++) {
@@ -70,6 +71,7 @@ public class GameController : MonoBehaviour {
         }
 
         MatchStarted?.Invoke(this);
+        menuController.TriggerMessage("Referee: " + matchStartMessages[Random.Range(0,matchStartMessages.Count)], 4);
         Turn();
     }
 

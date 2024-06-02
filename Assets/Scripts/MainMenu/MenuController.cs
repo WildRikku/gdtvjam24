@@ -86,6 +86,7 @@ public class MenuController : MonoBehaviour {
 
     public void OpenLevel() {
         AudioManager.Instance.PlaySFX("MouseGoBack3");
+        AudioManager.Instance.SetPvpmode();
 
         mainMenuCG.DOFade(0, 0.5f);
         mainMenuCG.blocksRaycasts = false;
@@ -93,6 +94,22 @@ public class MenuController : MonoBehaviour {
         creditsCG.blocksRaycasts = false;
         openLevelCG.DOFade(1, 0.5f);
         openLevelCG.blocksRaycasts = true;
+    }
+
+    public void StartStoryMode()  {
+        mainMenuCG.DOFade(0, 0.1f);
+        mainMenuCG.blocksRaycasts = false;
+        creditsCG.DOFade(0, 0.1f);
+        creditsCG.blocksRaycasts = false;
+        openLevelCG.DOFade(0, 0.1f);
+        openLevelCG.blocksRaycasts = false;
+        levelTransitonCG.blocksRaycasts = true;
+
+        AudioManager.Instance.PlaySFX("MouseGoBack1");
+        AudioManager.Instance.SetStorymode();
+        levelTransitonCG.DOFade(1, 0.25f).OnComplete(() => {
+            SceneManager.LoadScene(strLevel1);
+        });
     }
 
     public void GameQuit() {

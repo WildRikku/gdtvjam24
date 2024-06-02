@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour {
     public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource;
     public float musicVolume, sfxVolume;
+    public bool stroyMode = false;
 
     private void Awake() {
         if (Instance == null) {
@@ -73,5 +74,13 @@ public class AudioManager : MonoBehaviour {
 
     public void SetSFXVolume(float volume) {
         sfxSource.volume = volume;
+    }
+
+    public void SetStorymode() {
+        stroyMode = true;
+    }
+
+    public void SetPvpmode() {
+        stroyMode = false;
     }
 }

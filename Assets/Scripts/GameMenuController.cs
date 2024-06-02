@@ -256,7 +256,7 @@ public class GameMenuController : MonoBehaviour {
     private void ShowMessage() {
         if (messageList.Count > 0) {
             canTriggerNewMessage = false;
-            Invoke(nameof(ResetTrigger), 2f);
+            Invoke(nameof(ResetTrigger), 3f);
 
             messageTxtCG.DOKill();
             messageTxtCG.alpha = 0;
@@ -273,7 +273,7 @@ public class GameMenuController : MonoBehaviour {
             }
 
             messageTxtCG.DOFade(1, 0.2f);
-            messageTxtCG.DOFade(0f, 0.2f).SetDelay(2f).OnComplete(() => { messageCG.DOFade(0f, 0.3f); });
+            messageTxtCG.DOFade(0f, 0.2f).SetDelay(3f).OnComplete(() => { messageCG.DOFade(0f, 0.3f); });
         }
     }
 }

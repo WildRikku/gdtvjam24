@@ -372,6 +372,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: b205c30648a835349815a6cf47af871e, type: 3}
   - name: BotStep3
     clip: {fileID: 8300000, guid: a54461146c3d9f345b8e175bbcb5817e, type: 3}
+  - name: BotBoost
+    clip: {fileID: 8300000, guid: e2035885f6499564499c428659e95c91, type: 3}
+  - name: MessageAlert1
+    clip: {fileID: 8300000, guid: c4eb2eff7971ad34d9b97bb5ce3b72b2, type: 3}
+  - name: MessageAlert2
+    clip: {fileID: 8300000, guid: 19dedb176917ead4489f87eedecfe59c, type: 3}
   musicSource: {fileID: 8877118180281007894}
   sfxSource: {fileID: 167429082245504369}
   musicVolume: 0.2

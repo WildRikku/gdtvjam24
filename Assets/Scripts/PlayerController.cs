@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using TMPro;
+using System.Collections.Generic;
 
 public delegate void SimplePlayerEvent(PlayerController playerController);
 
@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject dieExplosion;
     private GameMenuController _gameMenuController;
     public string[] dieMessages;
+    public string[] playerTurnMesseges;
 
     private float _health = 50;
 
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 
     [HideInInspector]
     public string botName;
+    
     [HideInInspector]
     public int teamColor;
     public TMP_Text nameTxt;
@@ -70,6 +72,11 @@ public class PlayerController : MonoBehaviour {
         weapon.isActive = true;
         spiderController.isActive = true;
         weapon.AttackFinished += OnWeaponAttackFinished;
+
+
+        string message = playerTurnMesseges[UnityEngine.Random.Range(0, playerTurnMesseges.Length)];
+        message = "Referee: " + message.Replace("name", botName);
+        _gameMenuController.TriggerMessage(message,4) ;
     }
 
     private void OnWeaponAttackFinished(object sender, EventArgs e) {

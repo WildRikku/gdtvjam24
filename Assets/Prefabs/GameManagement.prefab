@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea89c409110e41943945e5fe0a0e5faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundSprite: {fileID: 21300000, guid: 89105587e95880c489879bd1b2be970a, type: 3}
+  backgroundSprite: {fileID: 21300000, guid: da7f580e6939f574b860ebb04e33efd5, type: 3}
   width: 0
   height: 0
   collidableLayer: {fileID: 0}
@@ -67,20 +67,51 @@ MonoBehaviour:
   - {fileID: 0}
   cinemachineVirtualCamera: {fileID: 0}
   menuController: {fileID: 0}
+  activeTeam: 0
   botNames:
-  - Herbert
-  - Manfred
-  - Siegfried
-  - Schorsch
-  - Sieglinde
-  - Hildegard
-  - "G\xFCnther"
-  - Friederike
-  - Heinz-Dieter
-  - Irmgard
-  - Gisela
-  - Fritz
-  - Egon
-  - Traudel
-  - Waldtraud
-  - Engelbert
+  - Cyril
+  - Nira
+  - Riot
+  - Zara
+  - Drown
+  - Lyra
+  - Jax
+  - Vex
+  - Kira
+  - Blaze
+  - Nyx
+  - Quill
+  - Sable
+  - Rune
+  - Zephyr
+  - Vale
+  - Ember
+  - Astra
+  - Riven
+  - Kael
+  - Serin
+  - Nyra
+  - Brex
+  - Thorne
+  - Draven
+  matchStartMessages:
+  - The battle begins! Fight for your freedom, teams! It's do or die!
+  - Warriors, prepare! The fight for freedom starts now!
+  - This is it, team! Battle for survival and liberty!
+  - Let the epic clash begin! Fight for freedom or fall trying!
+  - Teams, it's time! Battle for your lives and your freedom!
+  - To victory or death! The fight for freedom begins now!
+  - Champions, the time has come! Fight for survival and freedom!
+  - The war for liberty begins now! Give it your all, team!
+  - Gear up, team! It's a fight for life and freedom!
+  - This is your moment, warriors! Battle for your freedom starts now!
+  - The ultimate test begins! Fight for survival and freedom!
+  - Freedom or death! The battle starts now, team!
+  - Team, brace yourselves! The fight for freedom and life begins!
+  - It's all or nothing! Battle for your freedom starts here!
+  - The fight for liberty begins! Give it everything you've got, teams!
+  - The moment of truth is here! Fight for your freedom!
+  - To the brave and the bold! Battle for freedom and survival!
+  - Prepare for battle! Fight for your lives and your freedom!
+  - The struggle for liberty starts now! Fight with all your might!
+  - Warriors, to arms! The fight for freedom and life begins now!
