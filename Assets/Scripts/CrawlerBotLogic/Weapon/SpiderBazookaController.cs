@@ -77,7 +77,7 @@ public class SpiderBazookaController : RotatingWeapon {
         }
     }
 
-    private void TriggerShot() {
+    protected virtual void TriggerShot() {
         AudioManager.Instance.PlaySFX(shootEffectName);
         ProjectileCount = 1;
         muzzleParticle.Emit(40);

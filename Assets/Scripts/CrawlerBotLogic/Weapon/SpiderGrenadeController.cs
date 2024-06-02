@@ -15,7 +15,7 @@ public class SpiderGrenadeController : SpiderBazookaController {
         base.Update();
     }
 
-    private void TriggerShot() {
+    protected override void TriggerShot() {
         AudioManager.Instance.PlaySFX(shootEffectName);
         ShootImpulse(5);
 
