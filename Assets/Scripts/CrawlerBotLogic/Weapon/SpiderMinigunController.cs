@@ -32,7 +32,7 @@ public class SpiderMinigunController : RotatingWeapon {
                 InvokeRepeating(nameof(TriggerShot), 0, 0.05f);
             }
             else {
-                AudioManager.Instance.PlaySFX("MinigunRealod");
+                AudioManager.Instance.PlaySFX("MinigunReload");
                 isRotating = true;
                 crosshairCG.alpha = 1;
             }
