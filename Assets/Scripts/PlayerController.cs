@@ -72,8 +72,7 @@ public class PlayerController : MonoBehaviour {
         weapon.isActive = true;
         spiderController.isActive = true;
         weapon.AttackFinished += OnWeaponAttackFinished;
-
-
+        
         string message = playerTurnMesseges[UnityEngine.Random.Range(0, playerTurnMesseges.Length)];
         message = "Referee: " + message.Replace("name", botName);
         _gameMenuController.TriggerMessage(message,4) ;
@@ -102,10 +101,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Die() {
-//        if (_myTurn) {
-//            Debug.Log("finishing player turn because dead");
-//        }
-
         // Trigger the Message system
         string dM = botName + " " + dieMessages[UnityEngine.Random.Range(0, dieMessages.Length)];
         _gameMenuController.TriggerMessage(dM, teamColor);

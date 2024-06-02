@@ -26,6 +26,8 @@ public class SpiderMinigunController : RotatingWeapon {
 
         if (Input.GetKeyDown(activationKey) && _shootingReset == false) {
             if (isRotating) {
+                isActive = false;
+                isRotating = false;
                 ProjectileCount = 3;
                 InvokeRepeating(nameof(TriggerShot), 0, 0.05f);
             }

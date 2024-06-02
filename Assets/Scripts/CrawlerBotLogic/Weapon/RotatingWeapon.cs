@@ -20,7 +20,7 @@ public class RotatingWeapon : ProjectileWeapon {
     }
 
     protected void Update() {
-        if (!isRotating) {
+        if (!isRotating || !isActive) {
             return;
         }
 
@@ -35,7 +35,7 @@ public class RotatingWeapon : ProjectileWeapon {
         base.Deactivate();
     }
 
-    protected void Rotate() {
+    private void Rotate() {
         float currentZRotation = weaponRotationPoint.localEulerAngles.z;
 
         if (_rotatingToMax) {
@@ -59,7 +59,7 @@ public class RotatingWeapon : ProjectileWeapon {
         weaponRotationPoint.localEulerAngles = localEulerAngles;
     }
 
-    protected void FadeOutRotation() {
+    private void FadeOutRotation() {
         _rotationTempSpeed--;
 
         if (_rotationTempSpeed <= 1) {
