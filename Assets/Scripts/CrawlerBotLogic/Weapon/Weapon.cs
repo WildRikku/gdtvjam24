@@ -18,6 +18,10 @@ public class Weapon : MonoBehaviour {
     public Sprite buttonSprite;
     public int ammo;
 
+    protected void Start() {
+        battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
+    }
+
     public virtual void Trigger() {
         Debug.Log("Default Weapon base class Boom");
     }

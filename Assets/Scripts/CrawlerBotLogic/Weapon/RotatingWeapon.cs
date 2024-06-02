@@ -11,6 +11,12 @@ public class RotatingWeapon : ProjectileWeapon {
     private bool _rotatingToMax = true;
     protected float rotationTempSpeed;
     protected bool isFadeOutRotation;
+    private Rigidbody2D botRb;
+
+    protected new void Start() {
+        botRb = gameObject.GetComponentInParent<Rigidbody2D>();
+        base.Start();
+    }
 
     protected void Rotate() {
         float currentZRotation = weaponRotationPoint.localEulerAngles.z;
@@ -44,5 +50,16 @@ public class RotatingWeapon : ProjectileWeapon {
             isRotating = false;
             isFadeOutRotation = false;
         }
+    }
+    
+    protected virtual void Recoil(float force) {
+        if (botRb == null) {
+            return;
+        }
+
+        Vector2 direction = weaponRotationPoint.right * -1;
+        Vector2 impulse = direction * force;
+
+        botRb.AddForce(impulse, ForceMode2D.Impulse);
     }
 }

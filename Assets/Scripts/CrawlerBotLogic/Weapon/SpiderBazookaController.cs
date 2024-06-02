@@ -18,21 +18,18 @@ public class SpiderBazookaController : RotatingWeapon {
     protected bool isShooting;
     private bool waitingForShot;
     protected bool shootingReset = false; //TODO
-
-    protected Rigidbody2D botRb;
+    
     [FormerlySerializedAs("effectName")]
     public string shootEffectName;
 
     protected void Awake() {
-        battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
         rotationTempSpeed = rotationSpeed;
     }
 
-    protected void Start() {
-        botRb = gameObject.GetComponentInParent<Rigidbody2D>();
-        battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
+    protected new void Start() {
         speedBarCG.alpha = 0;
         crosshairCG.alpha = 0;
+        base.Start();
     }
 
     protected void Update() {
@@ -106,16 +103,5 @@ public class SpiderBazookaController : RotatingWeapon {
 
     protected void InvokeShootingReset() {
         shootingReset = false;
-    }
-
-    protected virtual void Recoil(float force) {
-        if (botRb == null) {
-            return;
-        }
-
-        Vector2 direction = weaponRotationPoint.right * -1;
-        Vector2 impulse = direction * force;
-
-        botRb.AddForce(impulse, ForceMode2D.Impulse);
     }
 }

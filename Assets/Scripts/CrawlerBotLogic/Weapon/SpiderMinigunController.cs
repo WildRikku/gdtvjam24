@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting.Dependencies.NCalc;
 
 public class SpiderMinigunController : RotatingWeapon {
     public Transform shotTriggerPoint;
@@ -12,14 +13,10 @@ public class SpiderMinigunController : RotatingWeapon {
     private int _firedProjectiles;
     private bool _shootingReset;
 
-    private Rigidbody2D botRb;
-
-    private void Awake() {
-        botRb = gameObject.GetComponentInParent<Rigidbody2D>();
-
+    private new void Start() {
         crosshairCG.alpha = 0;
-        battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
         rotationTempSpeed = rotationSpeed;
+        base.Start();
     }
 
     private void Update() {
@@ -50,18 +47,12 @@ public class SpiderMinigunController : RotatingWeapon {
     }
 
     private void TriggerShot() {
-        ShootImpulse(2f);
+        Recoil(2f);
         muzzleParticle.Emit(15);
         GameObject bullet = SpawnProjectile(bulletPrefab, shotTriggerPoint.position, shotTriggerPoint.rotation);
         _firedProjectiles++;
 
-        if (_firedProjectiles == 1 || _firedProjectiles == 3) {
-            AudioManager.Instance.PlaySFX("MinigunShoot1");
-        }
-
-        if (_firedProjectiles == 2) {
-            AudioManager.Instance.PlaySFX("MinigunShoot2");
-        }
+        AudioManager.Instance.PlaySFX(_firedProjectiles == 2 ? "MinigunShoot2" : "MinigunShoot1");
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (rb != null) {
@@ -81,14 +72,5 @@ public class SpiderMinigunController : RotatingWeapon {
 
     private void InvokeShootingReset() {
         _shootingReset = false;
-    }
-
-    private void ShootImpulse(float force) {
-        if (botRb != null) {
-            Vector2 direction = weaponRotationPoint.right * -1;
-            Vector2 impulse = direction * force;
-
-            botRb.AddForce(impulse, ForceMode2D.Impulse);
-        }
     }
 }
