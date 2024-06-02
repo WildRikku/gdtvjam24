@@ -5515,6 +5515,7 @@ MonoBehaviour:
   speedBarCG: {fileID: 2483682328441399197}
   crosshairCG: {fileID: 6342499411830476798}
   speedBar: {fileID: 6458374301954443578}
+  shootEffectName: GranadeShoot
 --- !u!114 &4767774775377012542
 MonoBehaviour:
   m_ObjectHideFlags: 0

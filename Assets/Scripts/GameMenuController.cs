@@ -43,6 +43,12 @@ public class GameMenuController : MonoBehaviour {
     private float remainingTime = 0;
     private float timeSinceLastUpdate = -10;
     private string[] messageAlerts = new string[2] { "MessageAlert1", "MessageAlert2" };
+    private float massageTime = 3;
+
+    public Image refereeImage;
+    public Sprite[] referreeSrites;
+    public Image diedBotImage;
+    public Sprite[] diedBotSprits;
 
     public event EventHandler TurnTimeIsUp;
 
@@ -239,6 +245,12 @@ public class GameMenuController : MonoBehaviour {
 
         messageList.Add(ma);
 
+        if (messageList.Count > 3) {
+            messageList.RemoveAt(0);
+            massageTime = 2;
+        }
+        else { massageTime = 3; }
+
         if (canTriggerNewMessage) {
             ShowMessage();
         }
@@ -256,7 +268,9 @@ public class GameMenuController : MonoBehaviour {
     private void ShowMessage() {
         if (messageList.Count > 0) {
             canTriggerNewMessage = false;
-            Invoke(nameof(ResetTrigger), 3f);
+            Invoke(nameof(ResetTrigger), massageTime);
+            refereeImage.enabled = false;
+
 
             messageTxtCG.DOKill();
             messageTxtCG.alpha = 0;
@@ -264,8 +278,17 @@ public class GameMenuController : MonoBehaviour {
             messageTxt.text = messageList[0].messageStr;
             AudioManager.Instance.PlaySFX(messageAlerts[UnityEngine.Random.Range(0, messageAlerts.Length)]);
             messageTxt.color = teamColor[messageList[0].colorInt];
+            if (messageList[0].colorInt < 4) {
+                refereeImage.enabled = false; 
+                diedBotImage.enabled = true; 
+                diedBotImage.sprite = diedBotSprits[messageList[0].colorInt]; 
+            }
+            else {
+                refereeImage.enabled = true; diedBotImage.enabled = false;
+                refereeImage.sprite = referreeSrites[UnityEngine.Random.Range(0, referreeSrites.Length)];
+            }
             messageList.RemoveAt(0);
-
+            
 
             messageCG.DOKill();
             if (messageCG.alpha != 1) {
@@ -273,7 +296,7 @@ public class GameMenuController : MonoBehaviour {
             }
 
             messageTxtCG.DOFade(1, 0.2f);
-            messageTxtCG.DOFade(0f, 0.2f).SetDelay(3f).OnComplete(() => { messageCG.DOFade(0f, 0.3f); });
+            messageTxtCG.DOFade(0f, 0.2f).SetDelay(massageTime).OnComplete(() => { messageCG.DOFade(0f, 0.3f); });
         }
     }
 }
