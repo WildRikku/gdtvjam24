@@ -16,7 +16,7 @@ public class SpiderBazookaController : RotatingWeapon {
     public Image speedBar;
 
     protected bool isShooting;
-    private bool isShootingState;
+    private bool waitingForShot;
     protected bool shootingReset = false; //TODO
 
     protected Rigidbody2D botRb;
@@ -40,15 +40,15 @@ public class SpiderBazookaController : RotatingWeapon {
             return;
         }
 
-        if (isShootingState && isRotating) {
+        if (waitingForShot && isRotating) {
             ShootingState();
         }
 
-        if (Input.GetKeyDown(activationKey) && isShootingState == false && isShooting == false &&
+        if (Input.GetKeyDown(activationKey) && waitingForShot == false && isShooting == false &&
             shootingReset == false) {
             if (isRotating) {
                 AudioManager.Instance.PlaySFX("BazookaLoad");
-                isShootingState = true;
+                waitingForShot = true;
                 speedBarCG.DOFade(1, 0.2f);
             }
             else {
@@ -58,34 +58,35 @@ public class SpiderBazookaController : RotatingWeapon {
             }
         }
 
-        if (isRotating && isShootingState == false) {
+        if (isRotating && waitingForShot == false) {
             Rotate();
         }
     }
 
     private void ShootingState() {
-        float pendulumFrequency = 0.5f;
-
-        shootingForceFactor = Mathf.Lerp(0, 1, (Mathf.Sin(Time.time * pendulumFrequency * Mathf.PI * 2) + 1) / 2);
+        // let player define force       
+        shootingForceFactor = Mathf.Lerp(0, 1, (Mathf.Sin(Time.time * 0.5f * Mathf.PI * 2) + 1) / 2);
         speedBar.fillAmount = shootingForceFactor;
 
         if (Input.GetKeyDown(activationKey)) {
             Invoke(nameof(TriggerShot), 0.1f);
             isShooting = true;
-            isShootingState = false;
+            waitingForShot = false;
             isActive = false;
         }
     }
 
     protected virtual void TriggerShot() {
         AudioManager.Instance.PlaySFX(shootEffectName);
+        Recoil(10f * Mathf.Max(0.5f, shootingForceFactor));
+        
         ProjectileCount = 1;
         muzzleParticle.Emit(40);
         GameObject bomb = SpawnProjectile(bombPrefab, shotTriggerPoint.position, shotTriggerPoint.rotation);
 
         Rigidbody2D rb = bomb.GetComponent<Rigidbody2D>();
         float shootingforce = 5f + shootingSpeed * shootingForceFactor * 1.5f;
-        ShootImpulse(10f * Mathf.Max(0.5f, shootingForceFactor));
+        
 
         if (rb != null) {
             rb.AddForce(shotTriggerPoint.up * shootingforce, ForceMode2D.Impulse);
@@ -104,7 +105,7 @@ public class SpiderBazookaController : RotatingWeapon {
         shootingReset = false;
     }
 
-    protected void ShootImpulse(float force) {
+    protected void Recoil(float force) {
         if (botRb != null) {
             Vector2 direction = weaponRotationPoint.right * -1;
             Vector2 impulse = direction * force;
