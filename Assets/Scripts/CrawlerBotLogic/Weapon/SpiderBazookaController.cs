@@ -36,8 +36,7 @@ public class SpiderBazookaController : RotatingWeapon {
         if (_waitingForShot) {
             SelectShootingForce();
         }
-
-        if (Input.GetKeyDown(activationKey) && !_waitingForShot) {
+        else if (Input.GetKeyDown(activationKey) && !_waitingForShot) {
             if (isRotating) {
                 AudioManager.Instance.PlaySFX("BazookaLoad");
                 _waitingForShot = true;
