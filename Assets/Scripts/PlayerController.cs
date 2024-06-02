@@ -87,7 +87,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void EndTurn(bool force = false) {
-        weapon.isActive = false;
+        if (force) {
+            weapon.Deactivate();
+        }
         spiderController.isActive = false;
         _myTurn = false;
     }
