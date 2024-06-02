@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
 
+public delegate void WeaponChangedByUser(int teamWeaponIndex);
+
 public class GameMenuController : MonoBehaviour {
     public struct MessageContainer {
         public string messageStr;
@@ -54,6 +56,7 @@ public class GameMenuController : MonoBehaviour {
     public string[] victoryScreenStory;
 
     public event EventHandler TurnTimeIsUp;
+    public event WeaponChangedByUser WeaponChangedByUser;
 
     private void Start() {
         Time.timeScale = 1;
@@ -85,15 +88,20 @@ public class GameMenuController : MonoBehaviour {
                 Weapon w = t.weapons[i];
                 GameObject btn = Instantiate(weaponChooseButtonPrefab, lp.transform);
                 WeaponChooseBtn btnclass = btn.GetComponent<WeaponChooseBtn>();
-                btnclass.btnName = w.name;
+                btnclass.btnName = w.displayName;
                 btnclass.btnDescription = w.description;
                 btnclass.btnSprite = w.buttonSprite;
                 btnclass.btnIndex = i;
+                btnclass.WeaponButtonClicked += OnWeaponButtonClicked;
             }
         }
 
         gameController.MatchStarted += OnMatchStarted;
         gameController.TurnStarted += OnTurnStarted;
+    }
+
+    private void OnWeaponButtonClicked(int index) {
+        WeaponChangedByUser?.Invoke(index);
     }
 
     private void OnTurnStarted(GameController gameController) {
@@ -242,9 +250,10 @@ public class GameMenuController : MonoBehaviour {
     // Message System
     public void TriggerMessage(string maString, int maColor = 4) // Color 4 = default)
     {
-        MessageContainer ma = new();
-        ma.messageStr = maString;
-        ma.colorInt = maColor;
+        MessageContainer ma = new() {
+            messageStr = maString,
+            colorInt = maColor
+        };
 
         messageList.Add(ma);
 

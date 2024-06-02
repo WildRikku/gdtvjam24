@@ -26,11 +26,12 @@ public class SpiderMinigunController : RotatingWeapon {
 
         if (Input.GetKeyDown(activationKey) && _shootingReset == false) {
             if (isRotating) {
+                isActive = false; // deactivates listening for keys but does not deactivate rotation
                 ProjectileCount = 3;
                 InvokeRepeating(nameof(TriggerShot), 0, 0.05f);
             }
             else {
-                AudioManager.Instance.PlaySFX("MinigunRealod");
+                AudioManager.Instance.PlaySFX("MinigunReload");
                 isRotating = true;
                 crosshairCG.alpha = 1;
             }

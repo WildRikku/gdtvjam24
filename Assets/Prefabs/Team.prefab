@@ -49,7 +49,12 @@ MonoBehaviour:
     type: 3}
   weaponPrefabs:
   - {fileID: 3116842073050561361, guid: f835883cac7218c4a93ea7c3c4adbdd6, type: 3}
+  - {fileID: 8156034423572122681, guid: a29cadde733902a45a9ae2346d1bfced, type: 3}
+  - {fileID: 8156034423572122681, guid: 6e9ce9c006678f840bf397af13bbc984, type: 3}
+  - {fileID: 7904412063863603580, guid: a78b8da7c87436c4c80f0a2e535960c0, type: 3}
+  weapons: []
   teamColor: 0
+  index: 0
   spawnZone: {fileID: 5044116353455752807}
 --- !u!61 &5044116353455752807
 BoxCollider2D:

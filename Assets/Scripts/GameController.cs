@@ -43,6 +43,11 @@ public class GameController : MonoBehaviour {
         }
 
         menuController.TurnTimeIsUp += OnTurnTimeIsUp;
+        menuController.WeaponChangedByUser += OnWeaponChangedByUser;
+    }
+
+    private void OnWeaponChangedByUser(int teamWeaponIndex) {
+        teams[activeTeam].GetActivePlayer().ChangeWeapon(teams[activeTeam].weaponPrefabs[teamWeaponIndex]);
     }
 
     private void OnTurnTimeIsUp(object sender, EventArgs e) {

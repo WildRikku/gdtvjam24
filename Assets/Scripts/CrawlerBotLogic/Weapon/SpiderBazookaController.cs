@@ -30,7 +30,7 @@ public class SpiderBazookaController : RotatingWeapon {
         if (!isActive) {
             return;
         }
-        
+
         base.Update();
         
         if (_waitingForShot) {
@@ -58,9 +58,9 @@ public class SpiderBazookaController : RotatingWeapon {
         speedBar.fillAmount = shootingForceFactor;
 
         if (Input.GetKeyDown(activationKey)) {
+            isActive = false; // deactivate
             Invoke(nameof(TriggerShot), 0.1f);
             _waitingForShot = false; // reset
-            isActive = false; // deactivate
         }
     }
 

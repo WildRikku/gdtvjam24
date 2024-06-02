@@ -31,11 +31,11 @@ public class RotatingWeapon : ProjectileWeapon {
     }
 
     public override void Deactivate() {
-        isRotating = false;
+        ResetRotation();
         base.Deactivate();
     }
 
-    protected void Rotate() {
+    private void Rotate() {
         float currentZRotation = weaponRotationPoint.localEulerAngles.z;
 
         if (_rotatingToMax) {
@@ -59,14 +59,18 @@ public class RotatingWeapon : ProjectileWeapon {
         weaponRotationPoint.localEulerAngles = localEulerAngles;
     }
 
-    protected void FadeOutRotation() {
+    private void FadeOutRotation() {
         _rotationTempSpeed--;
 
         if (_rotationTempSpeed <= 1) {
-            _rotationTempSpeed = rotationSpeed;
-            isRotating = false;
-            isFadeOutRotation = false;
+            ResetRotation();
         }
+    }
+
+    private void ResetRotation() {
+        _rotationTempSpeed = rotationSpeed;
+        isRotating = false;
+        isFadeOutRotation = false;
     }
     
     protected virtual void Recoil(float force) {

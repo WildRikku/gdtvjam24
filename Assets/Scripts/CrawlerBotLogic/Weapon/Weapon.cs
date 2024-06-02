@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public delegate void ProjectileFired(GameObject projectile);
 
@@ -12,8 +13,9 @@ public class Weapon : MonoBehaviour {
 
     public event EventHandler AttackFinished;
 
+    [FormerlySerializedAs("name")]
     [Header("Configuration")]
-    public string name;
+    public string displayName;
     public string description;
     public Sprite buttonSprite;
     public int ammo;
@@ -39,9 +41,8 @@ public class ProjectileWeapon : Weapon {
     protected int ProjectileCount;
     public event ProjectileFired ProjectileFired;
 
-    protected void OnProjectileImpact(float damage) {
+    private void OnProjectileImpact(float damage) {
         ProjectileCount--;
-        Debug.Log("projectile destroyed");
         if (ProjectileCount == 0) {
             FinishAttack();
         }

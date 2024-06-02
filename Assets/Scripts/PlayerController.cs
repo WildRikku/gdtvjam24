@@ -2,11 +2,14 @@ using System;
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 public delegate void SimplePlayerEvent(PlayerController playerController);
 
 public class PlayerController : MonoBehaviour {
-    public GameObject mainWeapon;
+    [FormerlySerializedAs("mainWeapon")]
+    public GameObject weaponPrefab;
+    private GameObject _weaponObject;
     public Weapon weapon;
     public Transform weaponSpawnPoint;
     public GameObject dieExplosion;
@@ -55,8 +58,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
         _gameMenuController = GameObject.Find("Canvas").GetComponent<GameMenuController>();
-        GameObject weaponInstance = Instantiate(mainWeapon, weaponSpawnPoint);
-        weapon = weaponInstance.GetComponent<Weapon>();
+        CreateWeapon();
         nameTxt.text = botName;
         healthTxt.text = Health.ToString();
     }
@@ -64,19 +66,34 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
         if (transform.position.y < -0.7f) {
             Health = 0;
+            TurnFinished?.Invoke(this);
         }
+    }
+
+    private void CreateWeapon() {
+        _weaponObject = Instantiate(weaponPrefab, weaponSpawnPoint);
+        weapon = _weaponObject.GetComponent<Weapon>();
     }
 
     public void StartTurn() {
         _myTurn = true;
-        weapon.isActive = true;
         spiderController.isActive = true;
-        weapon.AttackFinished += OnWeaponAttackFinished;
-
-
+        ActivateWeapon();
         string message = playerTurnMesseges[UnityEngine.Random.Range(0, playerTurnMesseges.Length)];
         message = "Referee: " + message.Replace("name", botName);
         _gameMenuController.TriggerMessage(message,4) ;
+    }
+
+    private void ActivateWeapon() {
+        weapon.isActive = true;
+        weapon.AttackFinished += OnWeaponAttackFinished;
+    }
+
+    public void ChangeWeapon(GameObject newWeaponPrefab) {
+        weaponPrefab = newWeaponPrefab;
+        Destroy(_weaponObject);
+        CreateWeapon();
+        ActivateWeapon();
     }
 
     private void OnWeaponAttackFinished(object sender, EventArgs e) {
@@ -102,10 +119,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Die() {
-//        if (_myTurn) {
-//            Debug.Log("finishing player turn because dead");
-//        }
-
         // Trigger the Message system
         string dM = botName + " " + dieMessages[UnityEngine.Random.Range(0, dieMessages.Length)];
         _gameMenuController.TriggerMessage(dM, teamColor);
