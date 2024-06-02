@@ -50,6 +50,9 @@ public class GameMenuController : MonoBehaviour {
     public Image diedBotImage;
     public Sprite[] diedBotSprits;
 
+    public string[] storyLoadScreen;
+    public string[] victoryScreenStory;
+
     public event EventHandler TurnTimeIsUp;
 
     private void Start() {
