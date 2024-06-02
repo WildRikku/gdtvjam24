@@ -76,7 +76,7 @@ public class SpiderBazookaController : RotatingWeapon {
         }
     }
 
-    protected virtual void TriggerShot() {
+    protected void TriggerShot() {
         AudioManager.Instance.PlaySFX(shootEffectName);
         Recoil(10f * Mathf.Max(0.5f, shootingForceFactor));
         
@@ -85,8 +85,7 @@ public class SpiderBazookaController : RotatingWeapon {
         GameObject bomb = SpawnProjectile(bombPrefab, shotTriggerPoint.position, shotTriggerPoint.rotation);
 
         Rigidbody2D rb = bomb.GetComponent<Rigidbody2D>();
-        float shootingforce = 5f + shootingSpeed * shootingForceFactor * 1.5f;
-        
+        float shootingforce = CalculateShootingForce();
 
         if (rb != null) {
             rb.AddForce(shotTriggerPoint.up * shootingforce, ForceMode2D.Impulse);
@@ -101,16 +100,22 @@ public class SpiderBazookaController : RotatingWeapon {
         Invoke(nameof(InvokeShootingReset), 3f);
     }
 
+    protected virtual float CalculateShootingForce() {
+        return 5f + shootingSpeed * shootingForceFactor * 1.5f;
+    }
+
     protected void InvokeShootingReset() {
         shootingReset = false;
     }
 
-    protected void Recoil(float force) {
-        if (botRb != null) {
-            Vector2 direction = weaponRotationPoint.right * -1;
-            Vector2 impulse = direction * force;
-
-            botRb.AddForce(impulse, ForceMode2D.Impulse);
+    protected virtual void Recoil(float force) {
+        if (botRb == null) {
+            return;
         }
+
+        Vector2 direction = weaponRotationPoint.right * -1;
+        Vector2 impulse = direction * force;
+
+        botRb.AddForce(impulse, ForceMode2D.Impulse);
     }
 }
