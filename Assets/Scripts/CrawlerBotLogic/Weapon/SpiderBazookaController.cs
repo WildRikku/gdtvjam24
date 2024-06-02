@@ -15,9 +15,7 @@ public class SpiderBazookaController : RotatingWeapon {
     public CanvasGroup crosshairCG;
     public Image speedBar;
 
-    protected bool isShooting;
-    private bool waitingForShot;
-    protected bool shootingReset = false; //TODO
+    private bool _waitingForShot;
     
     [FormerlySerializedAs("effectName")]
     public string shootEffectName;
@@ -37,15 +35,15 @@ public class SpiderBazookaController : RotatingWeapon {
             return;
         }
 
-        if (waitingForShot && isRotating) {
-            ShootingState();
+        if (_waitingForShot) {
+            SelectShootingForce();
         }
 
-        if (Input.GetKeyDown(activationKey) && waitingForShot == false && isShooting == false &&
-            shootingReset == false) {
+        if (Input.GetKeyDown(activationKey) && !_waitingForShot) {
             if (isRotating) {
                 AudioManager.Instance.PlaySFX("BazookaLoad");
-                waitingForShot = true;
+                _waitingForShot = true;
+                isRotating = false;
                 speedBarCG.DOFade(1, 0.2f);
             }
             else {
@@ -55,21 +53,20 @@ public class SpiderBazookaController : RotatingWeapon {
             }
         }
 
-        if (isRotating && waitingForShot == false) {
+        if (isRotating) {
             Rotate();
         }
     }
 
-    private void ShootingState() {
+    private void SelectShootingForce() {
         // let player define force       
         shootingForceFactor = Mathf.Lerp(0, 1, (Mathf.Sin(Time.time * 0.5f * Mathf.PI * 2) + 1) / 2);
         speedBar.fillAmount = shootingForceFactor;
 
         if (Input.GetKeyDown(activationKey)) {
             Invoke(nameof(TriggerShot), 0.1f);
-            isShooting = true;
-            waitingForShot = false;
-            isActive = false;
+            _waitingForShot = false; // reset
+            isActive = false; // deactivate
         }
     }
 
@@ -91,9 +88,6 @@ public class SpiderBazookaController : RotatingWeapon {
         speedBarCG.DOFade(0, 0.2f);
         crosshairCG.DOFade(0, 0.2f);
 
-        isRotating = false;
-        isShooting = false;
-        shootingReset = true;
         Invoke(nameof(InvokeShootingReset), 3f);
     }
 
@@ -102,6 +96,5 @@ public class SpiderBazookaController : RotatingWeapon {
     }
 
     protected void InvokeShootingReset() {
-        shootingReset = false;
     }
 }
