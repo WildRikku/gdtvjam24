@@ -43,6 +43,7 @@ public class GameMenuController : MonoBehaviour {
     private float remainingTime = 0;
     private float timeSinceLastUpdate = -10;
     private string[] messageAlerts = new string[2] { "MessageAlert1", "MessageAlert2" };
+    private float massageTime = 3;
 
     public Image refereeImage;
     public Sprite[] referreeSrites;
@@ -244,6 +245,11 @@ public class GameMenuController : MonoBehaviour {
 
         messageList.Add(ma);
 
+        if (messageList.Count > 3) {
+            messageList.RemoveAt(0);
+            massageTime = 2;
+        }
+        else { massageTime = 3; }
 
         if (canTriggerNewMessage) {
             ShowMessage();
@@ -262,7 +268,7 @@ public class GameMenuController : MonoBehaviour {
     private void ShowMessage() {
         if (messageList.Count > 0) {
             canTriggerNewMessage = false;
-            Invoke(nameof(ResetTrigger), 3f);
+            Invoke(nameof(ResetTrigger), massageTime);
             refereeImage.enabled = false;
 
 
@@ -282,7 +288,7 @@ public class GameMenuController : MonoBehaviour {
                 refereeImage.sprite = referreeSrites[UnityEngine.Random.Range(0, referreeSrites.Length)];
             }
             messageList.RemoveAt(0);
-
+            
 
             messageCG.DOKill();
             if (messageCG.alpha != 1) {
@@ -290,7 +296,7 @@ public class GameMenuController : MonoBehaviour {
             }
 
             messageTxtCG.DOFade(1, 0.2f);
-            messageTxtCG.DOFade(0f, 0.2f).SetDelay(3f).OnComplete(() => { messageCG.DOFade(0f, 0.3f); });
+            messageTxtCG.DOFade(0f, 0.2f).SetDelay(massageTime).OnComplete(() => { messageCG.DOFade(0f, 0.3f); });
         }
     }
 }
