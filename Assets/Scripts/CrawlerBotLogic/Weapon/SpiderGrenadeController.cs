@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SpiderGrenadeController : SpiderBazookaController {
     private new void Start() {
         base.Start();

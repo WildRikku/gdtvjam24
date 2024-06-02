@@ -20,7 +20,7 @@ public class RotatingWeapon : ProjectileWeapon {
     }
 
     protected void Update() {
-        if (!isRotating || !isActive) {
+        if (!isRotating) {
             return;
         }
 
@@ -31,7 +31,7 @@ public class RotatingWeapon : ProjectileWeapon {
     }
 
     public override void Deactivate() {
-        isRotating = false;
+        ResetRotation();
         base.Deactivate();
     }
 
@@ -63,10 +63,14 @@ public class RotatingWeapon : ProjectileWeapon {
         _rotationTempSpeed--;
 
         if (_rotationTempSpeed <= 1) {
-            _rotationTempSpeed = rotationSpeed;
-            isRotating = false;
-            isFadeOutRotation = false;
+            ResetRotation();
         }
+    }
+
+    private void ResetRotation() {
+        _rotationTempSpeed = rotationSpeed;
+        isRotating = false;
+        isFadeOutRotation = false;
     }
     
     protected virtual void Recoil(float force) {
