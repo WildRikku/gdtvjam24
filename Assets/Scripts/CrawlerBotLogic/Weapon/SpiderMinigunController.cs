@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting.Dependencies.NCalc;
 
 public class SpiderMinigunController : RotatingWeapon {
     public Transform shotTriggerPoint;
