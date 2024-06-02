@@ -12761,6 +12761,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7843806692661230299, guid: 8857f49315aaf7346bceb10beff2e596,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 7.300049
+      objectReference: {fileID: 0}
     - target: {fileID: 8080186578197980441, guid: 8857f49315aaf7346bceb10beff2e596,
         type: 3}
       propertyPath: gameController
@@ -12963,12 +12968,12 @@ PrefabInstance:
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.032099
+      value: 8.891715
       objectReference: {fileID: 0}
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.105226
+      value: 5.104186
       objectReference: {fileID: 0}
     - target: {fileID: 4417311475867233259, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
