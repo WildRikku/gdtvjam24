@@ -23,31 +23,19 @@ public class SpiderBazookaController : RotatingWeapon {
     [FormerlySerializedAs("effectName")]
     public string shootEffectName;
 
-    private void Awake() {
-        AwakeActions();
-    }
-
-    protected void AwakeActions() {
+    protected void Awake() {
         battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
         rotationTempSpeed = rotationSpeed;
     }
 
-    private void Start() {
-        StartActions();
-    }
-
-    protected void StartActions() {
+    protected void Start() {
         botRb = gameObject.GetComponentInParent<Rigidbody2D>();
         battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
         speedBarCG.alpha = 0;
         crosshairCG.alpha = 0;
     }
 
-    private void Update() {
-        UpdateActions();
-    }
-
-    protected void UpdateActions() {
+    protected void Update() {
         if (!isActive) {
             return;
         }

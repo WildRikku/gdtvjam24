@@ -3,16 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SpiderGrenadeController : SpiderBazookaController {
-    private void Awake() {
-        AwakeActions();
+    private new void Awake() {
+        base.Awake();
     }
 
-    private void Start() {
-        StartActions();
+    private new void Start() {
+        base.Start();
     }
 
-    private void Update() {
-        UpdateActions();
+    private new void Update() {
+        base.Update();
     }
 
     private void TriggerShot() {
