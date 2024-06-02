@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour {
         healthTxt.text = Health.ToString();
     }
 
-    private void FixedUpdate() {
+    private void Update() {
         if (transform.position.y < -0.7f) {
             Health = 0;
         }
@@ -87,7 +87,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void EndTurn(bool force = false) {
-        weapon.isActive = false;
+        if (force) {
+            weapon.Deactivate();
+        }
         spiderController.isActive = false;
         _myTurn = false;
     }
@@ -101,7 +103,6 @@ public class PlayerController : MonoBehaviour {
 
     private void Die() {
 //        if (_myTurn) {
-//            // TODO: should this still be called by the projectiles?
 //            Debug.Log("finishing player turn because dead");
 //        }
 

@@ -15,40 +15,33 @@ public class SpiderBazookaController : RotatingWeapon {
     public CanvasGroup crosshairCG;
     public Image speedBar;
 
-    protected bool isShooting;
-    private bool waitingForShot;
-    protected bool shootingReset = false; //TODO
-
-    protected Rigidbody2D botRb;
+    private bool _waitingForShot;
+    
     [FormerlySerializedAs("effectName")]
     public string shootEffectName;
 
-    protected void Awake() {
-        battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
-        rotationTempSpeed = rotationSpeed;
-    }
-
-    protected void Start() {
-        botRb = gameObject.GetComponentInParent<Rigidbody2D>();
-        battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
+    protected new void Start() {
         speedBarCG.alpha = 0;
         crosshairCG.alpha = 0;
+        base.Start();
     }
 
-    protected void Update() {
+    protected new void Update() {
         if (!isActive) {
             return;
         }
-
-        if (waitingForShot && isRotating) {
-            ShootingState();
+        
+        base.Update();
+        
+        if (_waitingForShot) {
+            SelectShootingForce();
         }
 
-        if (Input.GetKeyDown(activationKey) && waitingForShot == false && isShooting == false &&
-            shootingReset == false) {
+        if (Input.GetKeyDown(activationKey) && !_waitingForShot) {
             if (isRotating) {
                 AudioManager.Instance.PlaySFX("BazookaLoad");
-                waitingForShot = true;
+                _waitingForShot = true;
+                isRotating = false;
                 speedBarCG.DOFade(1, 0.2f);
             }
             else {
@@ -57,22 +50,17 @@ public class SpiderBazookaController : RotatingWeapon {
                 crosshairCG.alpha = 1;
             }
         }
-
-        if (isRotating && waitingForShot == false) {
-            Rotate();
-        }
     }
 
-    private void ShootingState() {
+    private void SelectShootingForce() {
         // let player define force       
         shootingForceFactor = Mathf.Lerp(0, 1, (Mathf.Sin(Time.time * 0.5f * Mathf.PI * 2) + 1) / 2);
         speedBar.fillAmount = shootingForceFactor;
 
         if (Input.GetKeyDown(activationKey)) {
             Invoke(nameof(TriggerShot), 0.1f);
-            isShooting = true;
-            waitingForShot = false;
-            isActive = false;
+            _waitingForShot = false; // reset
+            isActive = false; // deactivate
         }
     }
 
@@ -94,9 +82,6 @@ public class SpiderBazookaController : RotatingWeapon {
         speedBarCG.DOFade(0, 0.2f);
         crosshairCG.DOFade(0, 0.2f);
 
-        isRotating = false;
-        isShooting = false;
-        shootingReset = true;
         Invoke(nameof(InvokeShootingReset), 3f);
     }
 
@@ -105,17 +90,5 @@ public class SpiderBazookaController : RotatingWeapon {
     }
 
     protected void InvokeShootingReset() {
-        shootingReset = false;
-    }
-
-    protected virtual void Recoil(float force) {
-        if (botRb == null) {
-            return;
-        }
-
-        Vector2 direction = weaponRotationPoint.right * -1;
-        Vector2 impulse = direction * force;
-
-        botRb.AddForce(impulse, ForceMode2D.Impulse);
     }
 }
