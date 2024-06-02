@@ -26,6 +26,10 @@ public class Weapon : MonoBehaviour {
         Debug.Log("Default Weapon base class Boom");
     }
 
+    public virtual void Deactivate() {
+        isActive = false;
+    }
+
     protected void FinishAttack() {
         AttackFinished?.Invoke(this, EventArgs.Empty);
     }

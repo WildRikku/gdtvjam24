@@ -20,10 +20,6 @@ public class SpiderBazookaController : RotatingWeapon {
     [FormerlySerializedAs("effectName")]
     public string shootEffectName;
 
-    protected void Awake() {
-        rotationTempSpeed = rotationSpeed;
-    }
-
     protected new void Start() {
         speedBarCG.alpha = 0;
         crosshairCG.alpha = 0;

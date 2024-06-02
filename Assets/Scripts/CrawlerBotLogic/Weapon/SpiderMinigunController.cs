@@ -14,7 +14,6 @@ public class SpiderMinigunController : RotatingWeapon {
 
     private new void Start() {
         crosshairCG.alpha = 0;
-        rotationTempSpeed = rotationSpeed;
         base.Start();
     }
 

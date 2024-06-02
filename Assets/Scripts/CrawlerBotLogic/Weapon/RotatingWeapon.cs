@@ -15,7 +15,13 @@ public class RotatingWeapon : ProjectileWeapon {
 
     protected new void Start() {
         botRb = gameObject.GetComponentInParent<Rigidbody2D>();
+        rotationTempSpeed = rotationSpeed;
         base.Start();
+    }
+
+    public override void Deactivate() {
+        isRotating = false;
+        base.Deactivate();
     }
 
     protected void Rotate() {
