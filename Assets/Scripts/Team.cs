@@ -27,6 +27,7 @@ public class Team : MonoBehaviour {
     private int _activeMember;
 
     public List<GameObject> weaponPrefabs;
+    [HideInInspector]
     public List<Weapon> weapons;
 
     [HideInInspector]
@@ -51,7 +52,7 @@ public class Team : MonoBehaviour {
             SpiderChangeTeamColor spiderChangeTeamColor = newPlayer.GetComponentInChildren<SpiderChangeTeamColor>();
             spiderChangeTeamColor.teamColor = teamColor;
             pc.teamColor = teamColor;
-            pc.mainWeapon = weaponPrefabs[Random.Range(0, weaponPrefabs.Count)];
+            pc.weaponPrefab = weaponPrefabs[Random.Range(0, weaponPrefabs.Count)];
             pc.index = i;
             pc.HealthUpdated += OnTeamMemberHealthUpdated;
             if (_gameController.botNames.Count > 0) {

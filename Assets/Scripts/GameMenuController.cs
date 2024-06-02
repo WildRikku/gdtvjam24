@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
 
+public delegate void WeaponChangedByUser(int teamWeaponIndex);
+
 public class GameMenuController : MonoBehaviour {
     public struct MessageContainer {
         public string messageStr;
@@ -51,6 +53,7 @@ public class GameMenuController : MonoBehaviour {
     public Sprite[] diedBotSprits;
 
     public event EventHandler TurnTimeIsUp;
+    public event WeaponChangedByUser WeaponChangedByUser;
 
     private void Start() {
         Time.timeScale = 1;
@@ -86,11 +89,16 @@ public class GameMenuController : MonoBehaviour {
                 btnclass.btnDescription = w.description;
                 btnclass.btnSprite = w.buttonSprite;
                 btnclass.btnIndex = i;
+                btnclass.WeaponButtonClicked += OnWeaponButtonClicked;
             }
         }
 
         gameController.MatchStarted += OnMatchStarted;
         gameController.TurnStarted += OnTurnStarted;
+    }
+
+    private void OnWeaponButtonClicked(int index) {
+        WeaponChangedByUser?.Invoke(index);
     }
 
     private void OnTurnStarted(GameController gameController) {

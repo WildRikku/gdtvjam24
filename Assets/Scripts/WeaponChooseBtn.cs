@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public delegate void WeaponButtonClicked(int index);
+
 public class WeaponChooseBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     [Header("Do this for every Btn")]
     public int btnIndex = 0;
@@ -16,6 +18,8 @@ public class WeaponChooseBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public CanvasGroup textCG;
     public TMP_Text btnHeaderText;
     public TMP_Text btnDescriptionText;
+
+    public event WeaponButtonClicked WeaponButtonClicked;
 
     private void Start() {
         textCG.alpha = 0;
@@ -35,6 +39,6 @@ public class WeaponChooseBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void ChooseBtn() {
         AudioManager.Instance.PlaySFX("InstallWeapon");
 
-        Debug.Log($"Christian hier musst du was mit dem index machen - {btnIndex}");
+        WeaponButtonClicked?.Invoke(btnIndex);
     }
 }
