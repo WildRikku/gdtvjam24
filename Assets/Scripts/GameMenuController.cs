@@ -85,7 +85,7 @@ public class GameMenuController : MonoBehaviour {
                 Weapon w = t.weapons[i];
                 GameObject btn = Instantiate(weaponChooseButtonPrefab, lp.transform);
                 WeaponChooseBtn btnclass = btn.GetComponent<WeaponChooseBtn>();
-                btnclass.btnName = w.name;
+                btnclass.btnName = w.displayName;
                 btnclass.btnDescription = w.description;
                 btnclass.btnSprite = w.buttonSprite;
                 btnclass.btnIndex = i;
