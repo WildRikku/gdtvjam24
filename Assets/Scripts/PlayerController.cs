@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
         if (transform.position.y < -0.7f) {
             Health = 0;
+            TurnFinished?.Invoke(this);
         }
     }
 
