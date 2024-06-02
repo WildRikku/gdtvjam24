@@ -101,7 +101,6 @@ public class PlayerController : MonoBehaviour {
 
     private void Die() {
 //        if (_myTurn) {
-//            // TODO: should this still be called by the projectiles?
 //            Debug.Log("finishing player turn because dead");
 //        }
 
