@@ -239,9 +239,10 @@ public class GameMenuController : MonoBehaviour {
     // Message System
     public void TriggerMessage(string maString, int maColor = 4) // Color 4 = default)
     {
-        MessageContainer ma = new();
-        ma.messageStr = maString;
-        ma.colorInt = maColor;
+        MessageContainer ma = new() {
+            messageStr = maString,
+            colorInt = maColor
+        };
 
         messageList.Add(ma);
 
