@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject damagePopupPrefab;
 
     private void Start() {
-        _gameMenuController = GameObject.Find("Canvas").GetComponent<GameMenuController>();
+        _gameMenuController = GameObject.Find("UI").GetComponent<GameMenuController>();
         nameTxt.text = botName;
         healthTxt.text = Health.ToString();
     }
