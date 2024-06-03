@@ -23,11 +23,10 @@ public class PlayerController : MonoBehaviour {
     public float Health {
         get => _health;
         private set {
-            _health -= value;
+            _health = value;
             HealthUpdated?.Invoke(this);
             if (_health <= 0) {
-                SpawnDieExplosion();
-                //AudioManager.Instance.PlaySFX("BotDieSound");
+                _health = 0;
                 Die();
             }
             else {
@@ -40,6 +39,8 @@ public class PlayerController : MonoBehaviour {
 
     public short index;
     private bool _myTurn;
+    private bool _drowned;
+    private bool _hasFired;
 
     public event SimplePlayerEvent TurnFinished;
     public event SimplePlayerEvent HealthUpdated;
@@ -63,8 +64,12 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         if (transform.position.y < -0.7f) {
+            _drowned = true;
+            EndTurn();
             Health = 0;
-            //TurnFinished?.Invoke(this);
+            if (!_hasFired) {
+                TurnFinished?.Invoke(this);
+            }
         }
     }
 
@@ -86,6 +91,14 @@ public class PlayerController : MonoBehaviour {
     private void ActivateWeapon() {
         weapon.isActive = true;
         weapon.AttackFinished += OnWeaponAttackFinished;
+        ProjectileWeapon pw = weapon as ProjectileWeapon;
+        if (pw != null) {
+            pw.ProjectileFired += OnProjectileFired;
+        }
+    }
+
+    private void OnProjectileFired(GameObject projectile) {
+        _hasFired = true;
     }
 
     public void ChangeWeapon(GameObject newWeaponPrefab, int weaponIndex) {
@@ -97,6 +110,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnWeaponAttackFinished(object sender, EventArgs e) {
         weapon.AttackFinished -= OnWeaponAttackFinished;
+        _hasFired = false;
         EndTurn();
         //Debug.Log("finishing player turn because weapon");
         TurnFinished?.Invoke(this);
@@ -111,6 +125,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void TakeDamage(float amount) {
+        if (_health == 0) return;
         amount = Mathf.RoundToInt(amount);
         Health -= amount;
         healthTxt.text = Health.ToString();
@@ -119,6 +134,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Die() {
+        if (!_drowned) {
+            SpawnDieExplosion();
+            //AudioManager.Instance.PlaySFX("BotDieSound");
+        }
+
         // Trigger the Message system
         string dM = botName + " " + dieMessages[UnityEngine.Random.Range(0, dieMessages.Length)];
         _gameMenuController.TriggerMessage(dM, teamColor);
