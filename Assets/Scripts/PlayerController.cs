@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
     public float Health {
         get => _health;
         private set {
-            _health = Mathf.RoundToInt(value);
+            _health -= value;
             HealthUpdated?.Invoke(this);
             if (_health <= 0) {
                 SpawnDieExplosion();
@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void TakeDamage(float amount) {
+        amount = Mathf.RoundToInt(amount);
         Health -= amount;
         healthTxt.text = Health.ToString();
         GameObject dp = Instantiate(damagePopupPrefab, transform.position, damagePopupPrefab.transform.rotation);
