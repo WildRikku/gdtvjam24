@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
         _gameMenuController = GameObject.Find("Canvas").GetComponent<GameMenuController>();
-        CreateWeapon();
         nameTxt.text = botName;
         healthTxt.text = Health.ToString();
     }
@@ -70,9 +69,10 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void CreateWeapon() {
+    private void CreateWeapon(int weaponIndex) {
         _weaponObject = Instantiate(weaponPrefab, weaponSpawnPoint);
         weapon = _weaponObject.GetComponent<Weapon>();
+        weapon.index = weaponIndex;
     }
 
     public void StartTurn() {
@@ -89,10 +89,10 @@ public class PlayerController : MonoBehaviour {
         weapon.AttackFinished += OnWeaponAttackFinished;
     }
 
-    public void ChangeWeapon(GameObject newWeaponPrefab) {
+    public void ChangeWeapon(GameObject newWeaponPrefab, int weaponIndex) {
         weaponPrefab = newWeaponPrefab;
         Destroy(_weaponObject);
-        CreateWeapon();
+        CreateWeapon(weaponIndex);
         ActivateWeapon();
     }
 

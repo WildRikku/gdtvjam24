@@ -143,7 +143,7 @@ public class GameMenuController : MonoBehaviour {
         foreach (GameObject lp in _weaponChooseLayoutPanels) {
             lp.SetActive(false);
         }
-
+        
         _weaponChooseLayoutPanels[gameController.activeTeam].SetActive(true);
     }
 

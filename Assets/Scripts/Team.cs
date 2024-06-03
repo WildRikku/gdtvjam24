@@ -44,6 +44,13 @@ public class Team : MonoBehaviour {
         _gameController = GameObject.Find("GameManagement").GetComponent<GameController>();
 
         Bounds bounds = spawnZone.bounds;
+        
+        for (int k = 0; k < weaponPrefabs.Count; k++) {
+            Weapon w = weaponPrefabs[k].GetComponent<Weapon>();
+            w.index = k;
+            weapons.Add(w);
+        }
+        
         for (short i = 0; i < MaxTeamMembers; i++) {
             GameObject newPlayer = Instantiate(playerPrefab, bounds.min + bounds.size / MaxTeamMembers * i,
                 Quaternion.identity, transform);
@@ -51,7 +58,8 @@ public class Team : MonoBehaviour {
             SpiderChangeTeamColor spiderChangeTeamColor = newPlayer.GetComponentInChildren<SpiderChangeTeamColor>();
             spiderChangeTeamColor.teamColor = teamColor;
             pc.teamColor = teamColor;
-            pc.weaponPrefab = weaponPrefabs[Random.Range(0, weaponPrefabs.Count)];
+            int randomWeaponIndex = Random.Range(0, weaponPrefabs.Count);
+            pc.ChangeWeapon(weaponPrefabs[randomWeaponIndex], randomWeaponIndex);
             pc.index = i;
             pc.HealthUpdated += OnTeamMemberHealthUpdated;
             if (_gameController.botNames.Count > 0) {
@@ -62,10 +70,6 @@ public class Team : MonoBehaviour {
 
             pc.TurnFinished += OnPlayerTurnFinished;
             _members.Add(i, pc);
-        }
-
-        foreach (GameObject go in weaponPrefabs) {
-            weapons.Add(go.GetComponent<Weapon>());
         }
 
         _activeMember = 0;

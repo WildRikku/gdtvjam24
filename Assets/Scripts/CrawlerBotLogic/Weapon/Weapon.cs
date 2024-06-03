@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour {
     [TextArea(3,5)] public string description;
     public Sprite buttonSprite;
     public int ammo;
+    public int index;
 
     protected void Start() {
         battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
