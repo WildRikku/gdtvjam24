@@ -17,6 +17,7 @@ public class MenuController : MonoBehaviour {
     public string strLevel1;
     public string strLevel2;
     public string strLevel3;
+    public string storyIntro;
 
     private void Awake() {
         mainMenuCG.alpha = 1;
@@ -108,7 +109,7 @@ public class MenuController : MonoBehaviour {
         AudioManager.Instance.PlaySFX("MouseGoBack1");
         AudioManager.Instance.SetStorymode();
         levelTransitonCG.DOFade(1, 0.25f).OnComplete(() => {
-            SceneManager.LoadScene(strLevel1);
+            SceneManager.LoadScene(storyIntro);
         });
     }
 

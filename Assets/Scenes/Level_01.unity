@@ -691,11 +691,11 @@ GameObject:
   - component: {fileID: 553278319}
   m_Layer: 3
   m_Name: BorderColliderGround
-  m_TagString: Untagged
+  m_TagString: WaterBorder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &553278318
 Transform:
   m_ObjectHideFlags: 0
@@ -740,10 +740,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 5.2540636, y: -10.28273}
+  m_Offset: {x: 0.027442932, y: -9.966751}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -754,7 +754,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 31.463686, y: 1.1502647}
+  m_Size: {x: 89.637024, y: 1.7822218}
   m_EdgeRadius: 0
 --- !u!1001 &599275715
 PrefabInstance:
@@ -1498,7 +1498,6 @@ GameObject:
   - component: {fileID: 1391521041}
   - component: {fileID: 1391521044}
   - component: {fileID: 1391521043}
-  - component: {fileID: 1391521042}
   m_Layer: 0
   m_Name: water border
   m_TagString: Untagged
@@ -1514,35 +1513,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391521040}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 9.2, y: -0.02, z: -0.61}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 9.2, y: -0.28, z: 0.57}
   m_LocalScale: {x: 6, y: 0, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1842360923}
-  m_LocalEulerAnglesHint: {x: -50, y: 0, z: 0}
---- !u!64 &1391521042
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1391521040}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!23 &1391521043
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1681,7 +1658,6 @@ GameObject:
   - component: {fileID: 1540059848}
   - component: {fileID: 1540059851}
   - component: {fileID: 1540059850}
-  - component: {fileID: 1540059849}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -1704,28 +1680,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1842360923}
   m_LocalEulerAnglesHint: {x: -50, y: 0, z: 0}
---- !u!64 &1540059849
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540059847}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1540059850
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7210,16 +7164,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7843806692661230299, guid: 8857f49315aaf7346bceb10beff2e596,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 7.300049
-      objectReference: {fileID: 0}
     - target: {fileID: 8080186578197980441, guid: 8857f49315aaf7346bceb10beff2e596,
         type: 3}
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1774172127}
+    - target: {fileID: 8080186578197980441, guid: 8857f49315aaf7346bceb10beff2e596,
+        type: 3}
+      propertyPath: loadScreenStoryText
+      value: 
+      objectReference: {fileID: 1261035075553931846}
     - target: {fileID: 8211826557752792740, guid: 8857f49315aaf7346bceb10beff2e596,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -7255,11 +7209,33 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8492141556853735047, guid: 8857f49315aaf7346bceb10beff2e596,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9085383550230425297, guid: 8857f49315aaf7346bceb10beff2e596,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8857f49315aaf7346bceb10beff2e596, type: 3}
+--- !u!114 &1261035075553931846 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2591665126728908185, guid: 8857f49315aaf7346bceb10beff2e596,
+    type: 3}
+  m_PrefabInstance: {fileID: 1261035075553931845}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7525836277810522903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7349,12 +7325,12 @@ PrefabInstance:
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.634514
+      value: 5.634511
       objectReference: {fileID: 0}
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.0760336
+      value: 5.0760393
       objectReference: {fileID: 0}
     - target: {fileID: 4417311475867233259, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}

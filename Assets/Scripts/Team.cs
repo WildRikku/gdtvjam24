@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,7 +19,7 @@ public class ActiveTeamMemberDeadException : Exception {
 }
 
 public class Team : MonoBehaviour {
-    public const short MaxTeamMembers = 4;
+    public const short MaxTeamMembers = 1;
 
     public GameObject playerPrefab;
     private Dictionary<int, PlayerController> _members;

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DestructibleTerrain
   - DestructibleObjects
+  - WaterBorder
   layers:
   - Default
   - TransparentFX

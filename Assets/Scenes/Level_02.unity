@@ -12761,16 +12761,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7843806692661230299, guid: 8857f49315aaf7346bceb10beff2e596,
+    - target: {fileID: 8080186578197980441, guid: 8857f49315aaf7346bceb10beff2e596,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 7.300049
+      propertyPath: levelIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8080186578197980441, guid: 8857f49315aaf7346bceb10beff2e596,
         type: 3}
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1774172127}
+    - target: {fileID: 8080186578197980441, guid: 8857f49315aaf7346bceb10beff2e596,
+        type: 3}
+      propertyPath: loadScreenStoryText
+      value: 
+      objectReference: {fileID: 1261035075553931846}
     - target: {fileID: 8211826557752792740, guid: 8857f49315aaf7346bceb10beff2e596,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -12806,11 +12811,28 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8492141556853735047, guid: 8857f49315aaf7346bceb10beff2e596,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8857f49315aaf7346bceb10beff2e596, type: 3}
+--- !u!114 &1261035075553931846 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2591665126728908185, guid: 8857f49315aaf7346bceb10beff2e596,
+    type: 3}
+  m_PrefabInstance: {fileID: 1261035075553931845}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5922870089157176195
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12968,12 +12990,12 @@ PrefabInstance:
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.03335
+      value: 8.8879595
       objectReference: {fileID: 0}
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.105235
+      value: 5.100549
       objectReference: {fileID: 0}
     - target: {fileID: 4417311475867233259, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
@@ -13099,8 +13121,8 @@ SceneRoots:
   - {fileID: 1842360923}
   - {fileID: 1857181806}
   - {fileID: 867882890}
-  - {fileID: 1261035075553931845}
   - {fileID: 1682444575}
   - {fileID: 999891862}
   - {fileID: 202399442}
   - {fileID: 550311108}
+  - {fileID: 1261035075553931845}

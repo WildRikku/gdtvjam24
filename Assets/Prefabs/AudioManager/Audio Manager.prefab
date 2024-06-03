@@ -378,7 +378,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c4eb2eff7971ad34d9b97bb5ce3b72b2, type: 3}
   - name: MessageAlert2
     clip: {fileID: 8300000, guid: 19dedb176917ead4489f87eedecfe59c, type: 3}
+  - name: Splash
+    clip: {fileID: 8300000, guid: c58f6aff7322ea04b8548a4557649e75, type: 3}
   musicSource: {fileID: 8877118180281007894}
   sfxSource: {fileID: 167429082245504369}
   musicVolume: 0.2
   sfxVolume: 0.7
+  stroyMode: 0

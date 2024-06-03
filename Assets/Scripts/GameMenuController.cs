@@ -52,23 +52,50 @@ public class GameMenuController : MonoBehaviour {
     public Image diedBotImage;
     public Sprite[] diedBotSprits;
 
-    public string[] storyLoadScreen;
-    public string[] victoryScreenStory;
+    [TextArea(3, 10)] public string[] loadScreenStorys;
+    [TextArea(3, 10)] public string[] victoryScreenStorys;
+    public int levelIndex = 0;
+    public TMP_Text vSStoryText;
+    public CanvasGroup stroymodeCG;
+    public TMP_Text loadScreenStoryText;
+    public TMP_Text loadScreenWaitText;
+    public TMP_Text backToMenuBtnText;
 
     public event EventHandler TurnTimeIsUp;
     public event WeaponChangedByUser WeaponChangedByUser;
 
     private void Start() {
-        Time.timeScale = 1;
+        
 
         playerHUDCG.alpha = 0;
         playerHUDCG.DOFade(1f, 2f);
         weaponChooseCG.alpha = 0;
         messageTxtCG.alpha = 0;
         messageCG.alpha = 0;
-        transitionHUDCG.alpha = 1;
-        transitionHUDCG.blocksRaycasts = false;
-        transitionHUDCG.DOFade(0, 0.2f).SetUpdate(true);
+
+        if (AudioManager.Instance.stroyMode == false) {
+            Time.timeScale = 1;
+            loadScreenWaitText.enabled = true;
+            stroymodeCG.alpha = 0;
+            transitionHUDCG.alpha = 1;
+            transitionHUDCG.blocksRaycasts = false;
+            transitionHUDCG.DOFade(0, 0.2f).SetUpdate(true);
+            vSStoryText.text = "";
+            backToMenuBtnText.text = "Back to Menu";
+            loadScreenStoryText.text = "";
+        }
+        else {
+            Time.timeScale = 0;
+            loadScreenWaitText.enabled = false;
+            stroymodeCG.DOFade(1, 0.2f).SetUpdate(true); ;
+            transitionHUDCG.alpha = 1;
+            transitionHUDCG.blocksRaycasts = true;
+            vSStoryText.text = victoryScreenStorys[levelIndex];
+            backToMenuBtnText.text = "Next Arena";
+            if (levelIndex == 2) backToMenuBtnText.text = "Thanks for playing";
+            loadScreenStoryText.text = loadScreenStorys[levelIndex];
+        }
+
         breakHUDCG.alpha = 0;
         breakHUDCG.blocksRaycasts = false;
         gameEndHudCG.alpha = 0;
@@ -194,10 +221,14 @@ public class GameMenuController : MonoBehaviour {
         }
     }
 
-    // TODO: Delete and use this from another place
-    private void triggerWeaponBar() {
-        //ShowWeaponHUD(1);
+    public void StartRound() {
+        AudioManager.Instance.PlaySFX("MouseClick");
+        Time.timeScale = 1;
+        transitionHUDCG.blocksRaycasts = false;
+        transitionHUDCG.DOFade(0, 0.2f).SetUpdate(true);
     }
+
+
 
     // ------------------------------------
     // BreakHUD
@@ -220,10 +251,21 @@ public class GameMenuController : MonoBehaviour {
 
     public void BackToMenu() {
         AudioManager.Instance.PlaySFX("MouseGoBack1");
+        stroymodeCG.alpha = 0;
         transitionHUDCG.blocksRaycasts = true;
         transitionHUDCG.DOFade(1, 0.2f).SetUpdate(true).OnComplete(() => {
             Time.timeScale = 1;
-            SceneManager.LoadScene("MenuScene");
+
+            if (AudioManager.Instance.stroyMode == false) {
+                SceneManager.LoadScene("MenuScene");
+            }
+            else {
+                switch (levelIndex) {
+                    case 0: SceneManager.LoadScene("Level_02"); break;
+                    case 1: SceneManager.LoadScene("Level_03"); break;
+                    case 2: SceneManager.LoadScene("StoryEndScene"); break;
+                }
+            }
         });
     }
 

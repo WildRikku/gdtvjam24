@@ -57,6 +57,11 @@ public class ExplodeOnImpact : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+    private void OnTriggerEnter2D(Collider2D col) {
+        if (col.CompareTag("WaterBorder")) {
+            AudioManager.Instance.PlaySFX("Splash");
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D col) {
         TriggerBounceSound();
