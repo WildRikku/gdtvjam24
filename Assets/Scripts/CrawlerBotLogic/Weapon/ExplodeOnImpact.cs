@@ -163,7 +163,7 @@ public class ExplodeOnImpact : MonoBehaviour {
         }
 
         if (!_impacted) {
-            Impact?.Invoke(damage); // TODO: damage is currently meaningless
+            Impact?.Invoke(damage); // TODO: damage is currently meaningless at this point
         }
 
         SpawnExplosion();
