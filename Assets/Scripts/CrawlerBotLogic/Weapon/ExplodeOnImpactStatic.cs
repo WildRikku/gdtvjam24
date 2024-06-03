@@ -1,4 +1,3 @@
-using CrawlerBotLogic.Weapon;
 using UnityEngine;
 
 public class ExplodeOnImpactStatic : ExplodeOnImpact {
@@ -7,8 +6,7 @@ public class ExplodeOnImpactStatic : ExplodeOnImpact {
 
     private float _lastPosition;
     private float _fallenDistance;
-    [field: SerializeField]
-    public float health { get; set; }
+    
     
     protected new void Start()
     {
@@ -34,18 +32,6 @@ public class ExplodeOnImpactStatic : ExplodeOnImpact {
     protected override void OnCollisionEnter2D(Collision2D col) {
         if (_fallenDistance > fallDistance) {
             base.OnCollisionEnter2D(col);
-        }
-    }
-    
-    public void Die() {
-        Explode(transform.position);
-    }
-
-    public void TakeDamage(float amount) {
-        health -= amount;
-        if (health <= 0) {
-            health = 0;
-            Die();
         }
     }
 }
