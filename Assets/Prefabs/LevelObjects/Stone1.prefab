@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5630805634666966743}
   - component: {fileID: 7491717183555379529}
+  - component: {fileID: 23226489637663637}
   m_Layer: 0
   m_Name: Image
   m_TagString: Player
@@ -27,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8302675012377594104}
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4fb6c56a37badcd4fbb6afd1e5668164, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 474057ea5e85c7740ad0d28aa14502a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,6 +85,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &23226489637663637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20916040363270555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44eb398fb634114798d43106e0cf559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primaryLayer: {fileID: 0}
+  secondaryLayer: {fileID: 0}
+  explosionFXPrefab: {fileID: 0}
+  radius: 60
+  damage: 0
+  destroyTimer: 0
+  impactSounds: []
+  timerAlertSound: 
 --- !u!1 &2694085880865148809
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,11 +114,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8302675012377594104}
-  - component: {fileID: 1269258756628739360}
   - component: {fileID: 9213675634596317863}
-  - component: {fileID: -4575002450542948708}
+  - component: {fileID: -4029796862141896004}
+  - component: {fileID: 1197038203215546541}
   m_Layer: 0
-  m_Name: ExplosiveBarrel
+  m_Name: Stone1
   m_TagString: DestructibleObjects
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,15 +133,57 @@ Transform:
   m_GameObject: {fileID: 2694085880865148809}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.412, y: 2.301, z: 0}
+  m_LocalPosition: {x: 7.412, y: 2.233, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5630805634666966743}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1269258756628739360
-BoxCollider2D:
+--- !u!50 &9213675634596317863
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694085880865148809}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 2
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &-4029796862141896004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694085880865148809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01943b0345e6448fa5ce2cdb4da360ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <health>k__BackingField: 200
+  destructionFXPrefab: {fileID: 497190267284873559, guid: 03ad791e258a2754cad4098f6d414180,
+    type: 3}
+--- !u!70 &1197038203215546541
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -151,66 +214,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00036215782, y: 0.0058634877}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.4575276, y: 0.5706669}
-  m_EdgeRadius: 0
---- !u!50 &9213675634596317863
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2694085880865148809}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1.5
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &-4575002450542948708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2694085880865148809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd56b3543a4cc6b4088504b641447393, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  primaryLayer: {fileID: 0}
-  secondaryLayer: {fileID: 0}
-  explosionFXPrefab: {fileID: 6366052215560769963, guid: c68763c5b04d56e4a9051373e6d40591,
-    type: 3}
-  radius: 125
-  damage: 30
-  destroyTimer: 0
-  impactSounds: []
-  timerAlertSound: 
-  fallDistance: 1.5
-  <health>k__BackingField: 10
+  m_Offset: {x: -0.030145679, y: -0.0065465393}
+  m_Size: {x: 0.41422307, y: 0.23223296}
+  m_Direction: 1
