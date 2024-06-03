@@ -15,21 +15,20 @@ public class ExplodeOnImpact : MonoBehaviour {
     public int radius = 60;
     public float damage;
 
-    public Collider2D projectileCollider;
     public event Impact Impact;
 
     private bool _impacted;
 
     private bool _canExplode = true;
-    public float destroyTimer = 0f;
+    public float destroyTimer;
 
     public string[] impactSounds;
     public string timerAlertSound;
-    private int _timerAlertSoundCount = 0;
-    private string[] _bounceSounds = new string[3] { "MouseHover1", "MouseHover2", "MouseHover3" };
-    private int _boundsSoundCount = 0;
+    private int _timerAlertSoundCount;
+    private readonly string[] _bounceSounds = { "MouseHover1", "MouseHover2", "MouseHover3" };
+    private int _boundsSoundCount;
     private bool _canTriggerBounceSound = true;
-    private bool _hasExploded = false;
+    private bool _hasExploded;
 
     private PaintingParameters _paintingParameters = new() {
         Color = Color.clear,
