@@ -1,12 +1,11 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class SpiderAirstrikeController : ProjectileWeapon {
     public GameObject rocketPrefab;
 
-    private void Start() {
-        battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
+    private new void Start() {
+        base.Start();
     }
 
     private void Update() {

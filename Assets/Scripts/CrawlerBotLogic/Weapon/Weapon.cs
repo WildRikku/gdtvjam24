@@ -41,6 +41,10 @@ public class ProjectileWeapon : Weapon {
     protected int ProjectileCount;
     public event ProjectileFired ProjectileFired;
 
+    protected new void Start() {
+        base.Start();
+    }
+    
     private void OnProjectileImpact(float damage) {
         ProjectileCount--;
         if (ProjectileCount == 0) {
