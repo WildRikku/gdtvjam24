@@ -1,3 +1,4 @@
+using CrawlerBotLogic.Weapon;
 using DTerrain;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,7 +10,6 @@ public class ExplodeOnImpact : MonoBehaviour {
     public BasicPaintableLayer primaryLayer;
     [SerializeField]
     public BasicPaintableLayer secondaryLayer;
-    [FormerlySerializedAs("explosionPrefab")]
     public GameObject explosionFXPrefab;
 
     public int radius = 60;
@@ -129,12 +129,14 @@ public class ExplodeOnImpact : MonoBehaviour {
         Explode(transform.position);
     }
 
-    private void Explode(Vector3 pos) {
+    protected void Explode(Vector3 pos) {
         Collider2D[] hitColliders =
             Physics2D.OverlapCircleAll(pos, (float)radius / primaryLayer.PPU, Physics2D.AllLayers);
         bool terrainHit = false;
         
         foreach (Collider2D c in hitColliders) {
+            if (c.gameObject.GetInstanceID() == gameObject.GetInstanceID()) continue;
+            
             if (c.CompareTag("Player")) {
                 // Players only have one collider, send them damage
                 c.SendMessage(nameof(PlayerController.TakeDamage), damage);
@@ -146,7 +148,7 @@ public class ExplodeOnImpact : MonoBehaviour {
 
             if (c.CompareTag("DestructibleObjects")) {
                 // Objects only have one collider, send them damage
-                c.SendMessage(nameof(ExplosiveObject.TakeDamage), damage);
+                c.SendMessage("TakeDamage", damage);
             }
         }
 

@@ -207,9 +207,10 @@ MonoBehaviour:
   secondaryLayer: {fileID: 0}
   explosionFXPrefab: {fileID: 6366052215560769963, guid: c68763c5b04d56e4a9051373e6d40591,
     type: 3}
-  radius: 60
-  damage: 0
+  radius: 125
+  damage: 30
   destroyTimer: 0
   impactSounds: []
   timerAlertSound: 
   fallDistance: 1.5
+  <health>k__BackingField: 10

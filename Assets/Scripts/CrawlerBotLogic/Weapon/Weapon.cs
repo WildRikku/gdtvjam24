@@ -8,7 +8,6 @@ public class Weapon : MonoBehaviour {
     public BattleField battleField;
     public KeyCode activationKey = KeyCode.A;
 
-    [HideInInspector]
     public bool isActive;
 
     public event EventHandler AttackFinished;
