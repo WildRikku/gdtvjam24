@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour {
     [FormerlySerializedAs("name")]
     [Header("Configuration")]
     public string displayName;
-    public string description;
+    [TextArea(3,5)] public string description;
     public Sprite buttonSprite;
     public int ammo;
 

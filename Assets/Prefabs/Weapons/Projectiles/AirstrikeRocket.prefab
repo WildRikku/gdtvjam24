@@ -123,8 +123,8 @@ MonoBehaviour:
   secondaryLayer: {fileID: 0}
   explosionFXPrefab: {fileID: 8370981332788340581, guid: 100ca56ea4c48f440b60200fc0e4fe16,
     type: 3}
-  radius: 70
-  damage: 100
+  radius: 60
+  damage: 20
   projectileCollider: {fileID: 8034510886594934565}
   destroyTimer: 0
   impactSounds:

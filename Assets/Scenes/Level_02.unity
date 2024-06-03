@@ -6009,6 +6009,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8640216060027896663, guid: 62b1f9556a02e8645abda989fa32b810,
         type: 3}
+      propertyPath: filterMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8640216060027896663, guid: 62b1f9556a02e8645abda989fa32b810,
+        type: 3}
       propertyPath: <PPU>k__BackingField
       value: 100
       objectReference: {fileID: 0}
@@ -6613,6 +6618,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: VisibleLayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7903818146178738457, guid: f0b93ec83940aea45aade030c4f4633d,
+        type: 3}
+      propertyPath: filterMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7903818146178738457, guid: f0b93ec83940aea45aade030c4f4633d,
         type: 3}
@@ -12990,12 +13000,12 @@ PrefabInstance:
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.8879595
+      value: 9.0304
       objectReference: {fileID: 0}
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.100549
+      value: 5.1052136
       objectReference: {fileID: 0}
     - target: {fileID: 4417311475867233259, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}

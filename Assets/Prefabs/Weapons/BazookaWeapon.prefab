@@ -5499,8 +5499,13 @@ MonoBehaviour:
   battleField: {fileID: 0}
   activationKey: 32
   isActive: 0
-  name: Bazooka
-  description: loaded boom
+  displayName: Bazooka
+  description: 'Fires a bomb with a big impact
+
+    <color="red">28 damage/ hit</color>
+
+    <color="blue">
+    AOE 70 </color>'
   buttonSprite: {fileID: 21300000, guid: aeea5e75f1688a44eb61d239e090a301, type: 3}
   ammo: 0
   weaponRotationPoint: {fileID: 6867387976718280892}
