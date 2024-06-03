@@ -30,6 +30,8 @@ public class ExplodeOnImpact : MonoBehaviour {
     private bool _canTriggerBounceSound = true;
     private bool _hasExploded;
 
+    private Collider2D _collider;
+
     private PaintingParameters _paintingParameters = new() {
         Color = Color.clear,
         Position = new(),
@@ -48,6 +50,8 @@ public class ExplodeOnImpact : MonoBehaviour {
         if (timerAlertSound != "") {
             InvokeRepeating(nameof(TriggerTimerAlertSond), 1f, 1f);
         }
+
+        _collider = GetComponent<Collider2D>();
     }
 
     private void Update() {
@@ -130,8 +134,9 @@ public class ExplodeOnImpact : MonoBehaviour {
     }
 
     protected void Explode(Vector3 pos) {
+        float convertedRadius = (float)radius / primaryLayer.PPU;
         Collider2D[] hitColliders =
-            Physics2D.OverlapCircleAll(pos, (float)radius / primaryLayer.PPU, Physics2D.AllLayers);
+            Physics2D.OverlapCircleAll(pos, convertedRadius, Physics2D.AllLayers);
         bool terrainHit = false;
         
         foreach (Collider2D c in hitColliders) {
@@ -139,7 +144,9 @@ public class ExplodeOnImpact : MonoBehaviour {
             
             if (c.CompareTag("Player")) {
                 // Players only have one collider, send them damage
-                c.SendMessage(nameof(PlayerController.TakeDamage), damage);
+                float distance = c.Distance(_collider).distance;
+                float damageProportion = Mathf.Clamp(1f - distance / convertedRadius, 0.5f, 1f);
+                c.SendMessage(nameof(PlayerController.TakeDamage), damage * damageProportion);
             }
             else if (c.CompareTag("DestructibleTerrain")) {
                 // Terrain has many colliders, save that we hit it and act later
