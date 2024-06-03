@@ -73,7 +73,7 @@ public class GameMenuController : MonoBehaviour {
         messageTxtCG.alpha = 0;
         messageCG.alpha = 0;
 
-        if (AudioManager.Instance.stroyMode == false) {
+        if (AudioManager.Instance.storyMode == false) {
             Time.timeScale = 1;
             loadScreenWaitText.enabled = true;
             storymodeCG.alpha = 0;
@@ -271,7 +271,7 @@ public class GameMenuController : MonoBehaviour {
         transitionHUDCG.DOFade(1, 0.2f).SetUpdate(true).OnComplete(() => {
             Time.timeScale = 1;
 
-            if (AudioManager.Instance.stroyMode == false) {
+            if (AudioManager.Instance.storyMode == false) {
                 SceneManager.LoadScene("MenuScene");
             }
             else {

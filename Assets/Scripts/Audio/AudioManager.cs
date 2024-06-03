@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class Sound {
@@ -16,7 +17,8 @@ public class AudioManager : MonoBehaviour {
     public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource;
     public float musicVolume, sfxVolume;
-    public bool stroyMode = false;
+    [FormerlySerializedAs("stroyMode")]
+    public bool storyMode = false;
 
     private void Awake() {
         if (Instance == null) {
@@ -89,10 +91,10 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void SetStorymode() {
-        stroyMode = true;
+        storyMode = true;
     }
 
     public void SetPvpmode() {
-        stroyMode = false;
+        storyMode = false;
     }
 }

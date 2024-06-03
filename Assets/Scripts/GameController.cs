@@ -25,11 +25,17 @@ public class GameController : MonoBehaviour {
         Invoke(nameof(MatchBegin), 4f);
         bool[] usedTeamColors = new bool[4];
 
+        bool storyMode = AudioManager.Instance.storyMode;
         for (short i = 0; i < teams.Count; i++) {
             int teamColor;
-            do {
-                teamColor = Random.Range(0, 4);
-            } while (usedTeamColors[teamColor]);
+            if (storyMode) {
+                teamColor = i;
+            }
+            else {
+                do {
+                    teamColor = Random.Range(0, 4);
+                } while (usedTeamColors[teamColor]);
+            }
 
             teams[i].teamColor = teamColor;
             if (menuController != null) {

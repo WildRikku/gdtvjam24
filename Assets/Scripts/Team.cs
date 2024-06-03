@@ -50,6 +50,8 @@ public class Team : MonoBehaviour {
             w.index = k;
             weapons.Add(w);
         }
+
+        bool storyMode = AudioManager.Instance.storyMode && index == 0;
         
         for (short i = 0; i < MaxTeamMembers; i++) {
             GameObject newPlayer = Instantiate(playerPrefab, bounds.min + bounds.size / MaxTeamMembers * i,
@@ -64,7 +66,7 @@ public class Team : MonoBehaviour {
             pc.index = i;
             pc.HealthUpdated += OnTeamMemberHealthUpdated;
             if (_gameController.botNames.Count > 0) {
-                int value = Random.Range(0, _gameController.botNames.Count);
+                int value = storyMode ? i : Random.Range(0, _gameController.botNames.Count);
                 pc.botName = _gameController.botNames[value];
                 _gameController.botNames.RemoveAt(value);
             }
