@@ -5506,7 +5506,7 @@ MonoBehaviour:
     damage/ hit</color>
 
     <color="blue"> AOE 80 </color>'
-  buttonSprite: {fileID: 21300000, guid: 862fcd1f589eb654aabff29aa797eb99, type: 3}
+  buttonSprite: {fileID: 21300000, guid: 4d91a1942608c334ca70a6054a7a1ebe, type: 3}
   ammo: 0
   weaponRotationPoint: {fileID: 6867387976718280892}
   minZRotation: 120

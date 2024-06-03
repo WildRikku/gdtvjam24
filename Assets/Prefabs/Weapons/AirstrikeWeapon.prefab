@@ -140,7 +140,7 @@ MonoBehaviour:
 
     <color="blue">
     AOE 60/ rocket </color>'
-  buttonSprite: {fileID: 21300000, guid: af7f9093dfb4fb34a9659b3692e57977, type: 3}
+  buttonSprite: {fileID: 21300000, guid: 51b074cd3bdfd7249928806aa606d5e2, type: 3}
   ammo: 100
   rocketPrefab: {fileID: 675455061750858186, guid: 98fd2dbcbaa7bec4ab983794a3c128ce,
     type: 3}

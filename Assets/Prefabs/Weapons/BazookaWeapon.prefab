@@ -5506,7 +5506,7 @@ MonoBehaviour:
 
     <color="blue">
     AOE 70 </color>'
-  buttonSprite: {fileID: 21300000, guid: aeea5e75f1688a44eb61d239e090a301, type: 3}
+  buttonSprite: {fileID: 21300000, guid: b3a73fbee009c2a47ad450ce303b269e, type: 3}
   ammo: 0
   weaponRotationPoint: {fileID: 6867387976718280892}
   minZRotation: 90
