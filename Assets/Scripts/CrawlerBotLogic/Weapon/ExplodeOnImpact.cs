@@ -15,21 +15,20 @@ public class ExplodeOnImpact : MonoBehaviour {
     public int radius = 60;
     public float damage;
 
-    public Collider2D projectileCollider;
     public event Impact Impact;
 
     private bool _impacted;
 
     private bool _canExplode = true;
-    public float destroyTimer = 0f;
+    public float destroyTimer;
 
     public string[] impactSounds;
     public string timerAlertSound;
-    private int _timerAlertSoundCount = 0;
-    private string[] _bounceSounds = new string[3] { "MouseHover1", "MouseHover2", "MouseHover3" };
-    private int _boundsSoundCount = 0;
+    private int _timerAlertSoundCount;
+    private readonly string[] _bounceSounds = { "MouseHover1", "MouseHover2", "MouseHover3" };
+    private int _boundsSoundCount;
     private bool _canTriggerBounceSound = true;
-    private bool _hasExploded = false;
+    private bool _hasExploded;
 
     private PaintingParameters _paintingParameters = new() {
         Color = Color.clear,
@@ -38,7 +37,7 @@ public class ExplodeOnImpact : MonoBehaviour {
         DestructionMode = DestructionMode.DESTROY
     };
 
-    private void Start() {
+    protected void Start() {
         _paintingParameters.Shape = Shape.GenerateShapeCircle(radius);
 
         if (destroyTimer > 0) {
@@ -63,7 +62,7 @@ public class ExplodeOnImpact : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D col) {
+    protected virtual void OnCollisionEnter2D(Collision2D col) {
         TriggerBounceSound();
         if (_canExplode == false) {
             return;
@@ -146,8 +145,8 @@ public class ExplodeOnImpact : MonoBehaviour {
             }
 
             if (c.CompareTag("DestructibleObjects")) {
-                // Players only have one collider, send them damage
-                c.SendMessage(nameof(ExplosivObjects.TakeDamage), damage);
+                // Objects only have one collider, send them damage
+                c.SendMessage(nameof(ExplosiveObject.TakeDamage), damage);
             }
         }
 

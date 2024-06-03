@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour {
     }
 
     private void OnWeaponChangedByUser(int teamWeaponIndex) {
-        teams[activeTeam].GetActivePlayer().ChangeWeapon(teams[activeTeam].weaponPrefabs[teamWeaponIndex]);
+        teams[activeTeam].GetActivePlayer().ChangeWeapon(teams[activeTeam].weaponPrefabs[teamWeaponIndex], teamWeaponIndex);
         FollowProjectile();
     }
 
