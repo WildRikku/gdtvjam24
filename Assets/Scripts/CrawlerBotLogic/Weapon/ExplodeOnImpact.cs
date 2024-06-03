@@ -154,15 +154,16 @@ public class ExplodeOnImpact : MonoBehaviour {
 
         if (terrainHit) {
             _paintingParameters.DestructionMode = DestructionMode.DESTROY;
-            _paintingParameters.Position.x = (int)(transform.position.x * primaryLayer.PPU) - radius;
-            _paintingParameters.Position.y = (int)(transform.position.y * primaryLayer.PPU) - radius;
+            Vector3 position = transform.position;
+            _paintingParameters.Position.x = (int)(position.x * primaryLayer.PPU) - radius;
+            _paintingParameters.Position.y = (int)(position.y * primaryLayer.PPU) - radius;
             primaryLayer.Paint(_paintingParameters);
             _paintingParameters.DestructionMode = DestructionMode.NONE;
             secondaryLayer.Paint(_paintingParameters);
         }
 
         if (!_impacted) {
-            Impact?.Invoke(damage); // TODO: damage is currently meaningless
+            Impact?.Invoke(damage); // TODO: damage is currently meaningless at this point
         }
 
         SpawnExplosion();
