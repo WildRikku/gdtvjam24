@@ -27,7 +27,7 @@ public class SpiderAirstrikeController : ProjectileWeapon {
     public override void Trigger() {
         ProjectileCount =
             _projectileCount; // set beforehand so we don't stop the attack if all spawned projectiles crash before all have been spaweed
-        _randomX = Random.Range(0, battleField.width);
+        _randomX = Random.Range(0.15f * battleField.width, 0.85f * battleField.width);
         for (short i = 1; i < 5; i++) {
             Invoke(nameof(Shoot), 0.2f * i);
         }
