@@ -980,11 +980,11 @@ GameObject:
   - component: {fileID: 841169012}
   m_Layer: 3
   m_Name: BorderColliderGround
-  m_TagString: Untagged
+  m_TagString: WaterBorder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &841169011
 Transform:
   m_ObjectHideFlags: 0
@@ -1029,10 +1029,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 5.2540636, y: -10.28273}
+  m_Offset: {x: 6.289646, y: -10.558219}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1043,7 +1043,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 31.463686, y: 1.1502647}
+  m_Size: {x: 83.105705, y: 0.59928703}
   m_EdgeRadius: 0
 --- !u!1 &867882889
 GameObject:
@@ -7122,41 +7122,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.size
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[33].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: e2035885f6499564499c428659e95c91, type: 3}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[33].name
-      value: BotBoost
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[34].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: c4eb2eff7971ad34d9b97bb5ce3b72b2, type: 3}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[34].name
-      value: MessageAlert1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[35].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 19dedb176917ead4489f87eedecfe59c, type: 3}
-    - target: {fileID: 8324177487568057142, guid: f7a8fe08522991242a2706577dbfdd5a,
-        type: 3}
-      propertyPath: sfxSounds.Array.data[35].name
-      value: MessageAlert2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7183,12 +7148,12 @@ PrefabInstance:
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.430865
+      value: 6.4308558
       objectReference: {fileID: 0}
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.0405555
+      value: 5.043764
       objectReference: {fileID: 0}
     - target: {fileID: 3902046542772843581, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
