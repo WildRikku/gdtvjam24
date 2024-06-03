@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
     public float Health {
         get => _health;
         private set {
-            _health = value;
+            _health = Mathf.RoundToInt(value);
             HealthUpdated?.Invoke(this);
             if (_health <= 0) {
                 SpawnDieExplosion();
