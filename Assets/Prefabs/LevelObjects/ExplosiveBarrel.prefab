@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5630805634666966743}
   - component: {fileID: 7491717183555379529}
-  - component: {fileID: 23226489637663637}
   m_Layer: 0
   m_Name: Image
   m_TagString: Player
@@ -85,27 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &23226489637663637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20916040363270555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c44eb398fb634114798d43106e0cf559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  primaryLayer: {fileID: 0}
-  secondaryLayer: {fileID: 0}
-  explosionFXPrefab: {fileID: 0}
-  radius: 60
-  damage: 0
-  projectileCollider: {fileID: 0}
-  destroyTimer: 0
-  impactSounds: []
-  timerAlertSound: 
 --- !u!1 &2694085880865148809
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +95,7 @@ GameObject:
   - component: {fileID: 8302675012377594104}
   - component: {fileID: 1269258756628739360}
   - component: {fileID: 9213675634596317863}
-  - component: {fileID: 1166329480150320299}
+  - component: {fileID: -4575002450542948708}
   m_Layer: 0
   m_Name: ExplosiveBarrel
   m_TagString: DestructibleObjects
@@ -173,7 +151,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00036215782, y: 0.00030589104}
+  m_Offset: {x: 0.0003621578, y: 0.000305891}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -184,7 +162,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.45752764, y: 0.59951925}
+  m_Size: {x: 0.4575276, y: 0.5995193}
   m_EdgeRadius: 0
 --- !u!50 &9213675634596317863
 Rigidbody2D:
@@ -213,7 +191,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1166329480150320299
+--- !u!114 &-4575002450542948708
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,10 +200,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2694085880865148809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea534d0ccd7723c4c84b156abbb3d495, type: 3}
+  m_Script: {fileID: 11500000, guid: fd56b3543a4cc6b4088504b641447393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 3689770828418205119, guid: ae064e70d6b288a428266128850ca901,
+  primaryLayer: {fileID: 0}
+  secondaryLayer: {fileID: 0}
+  explosionFXPrefab: {fileID: 6366052215560769963, guid: c68763c5b04d56e4a9051373e6d40591,
     type: 3}
-  collider_: {fileID: 1269258756628739360}
-  rb: {fileID: 9213675634596317863}
+  radius: 60
+  damage: 0
+  destroyTimer: 0
+  impactSounds: []
+  timerAlertSound: 
+  fallDistance: 1.5

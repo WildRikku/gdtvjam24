@@ -37,7 +37,7 @@ public class ExplodeOnImpact : MonoBehaviour {
         DestructionMode = DestructionMode.DESTROY
     };
 
-    private void Start() {
+    protected void Start() {
         _paintingParameters.Shape = Shape.GenerateShapeCircle(radius);
 
         if (destroyTimer > 0) {
@@ -62,7 +62,7 @@ public class ExplodeOnImpact : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D col) {
+    protected virtual void OnCollisionEnter2D(Collision2D col) {
         TriggerBounceSound();
         if (_canExplode == false) {
             return;
