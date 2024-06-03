@@ -108,9 +108,7 @@ public class MenuController : MonoBehaviour {
 
         AudioManager.Instance.PlaySFX("MouseGoBack1");
         AudioManager.Instance.SetStorymode();
-        levelTransitonCG.DOFade(1, 0.25f).OnComplete(() => {
-            SceneManager.LoadScene(storyIntro);
-        });
+        SceneManager.LoadScene(storyIntro);
     }
 
     public void GameQuit() {
