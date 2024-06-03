@@ -338,10 +338,12 @@ MonoBehaviour:
   btnName: button
   btnDescription: button
   btnSprite: {fileID: 0}
-  btnImage: {fileID: 7240646539862843842}
+  btnWeaponImage: {fileID: 7240646539862843842}
+  btnImage: {fileID: 2792321938256579424}
   textCG: {fileID: 4694428855783774685}
   btnHeaderText: {fileID: 114120076109534157}
   btnDescriptionText: {fileID: 1800941732335244550}
+  activColor: {r: 1, g: 0.759434, b: 0.759434, a: 1}
 --- !u!1 &2141508760938314051
 GameObject:
   m_ObjectHideFlags: 0

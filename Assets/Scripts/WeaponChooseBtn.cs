@@ -14,16 +14,17 @@ public class WeaponChooseBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public Sprite btnSprite;
 
     [Header("Prefab")]
+    public Image btnWeaponImage;
     public Image btnImage;
     public CanvasGroup textCG;
     public TMP_Text btnHeaderText;
     public TMP_Text btnDescriptionText;
-
+    public Color activColor;
     public event WeaponButtonClicked WeaponButtonClicked;
 
     private void Start() {
         textCG.alpha = 0;
-        btnImage.sprite = btnSprite;
+        btnWeaponImage.sprite = btnSprite;
         btnHeaderText.text = btnName;
         btnDescriptionText.text = btnDescription;
     }
@@ -40,5 +41,14 @@ public class WeaponChooseBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
         AudioManager.Instance.PlaySFX("InstallWeapon");
 
         WeaponButtonClicked?.Invoke(btnIndex);
+        SetActivBtn();
+    }
+
+    public void SetActivBtn() {
+        btnImage.color = activColor;
+    }
+
+    public void ResetBtnColor() {
+        btnImage.color = Color.white;
     }
 }
