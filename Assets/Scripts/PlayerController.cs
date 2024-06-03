@@ -1,9 +1,7 @@
 using System;
 using UnityEngine;
 using TMPro;
-using System.Collections.Generic;
 using UnityEngine.Serialization;
-using static UnityEditor.FilePathAttribute;
 
 public delegate void SimplePlayerEvent(PlayerController playerController);
 
@@ -70,7 +68,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void CreateWeapon(int weaponIndex) {
+    public void CreateWeapon(int weaponIndex) {
         _weaponObject = Instantiate(weaponPrefab, weaponSpawnPoint);
         weapon = _weaponObject.GetComponent<Weapon>();
         weapon.index = weaponIndex;

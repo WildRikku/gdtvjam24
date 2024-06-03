@@ -59,7 +59,8 @@ public class Team : MonoBehaviour {
             spiderChangeTeamColor.teamColor = teamColor;
             pc.teamColor = teamColor;
             int randomWeaponIndex = Random.Range(0, weaponPrefabs.Count);
-            pc.ChangeWeapon(weaponPrefabs[randomWeaponIndex], randomWeaponIndex);
+            pc.weaponPrefab = weaponPrefabs[randomWeaponIndex];
+            pc.CreateWeapon(randomWeaponIndex);
             pc.index = i;
             pc.HealthUpdated += OnTeamMemberHealthUpdated;
             if (_gameController.botNames.Count > 0) {
