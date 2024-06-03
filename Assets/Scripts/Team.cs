@@ -19,7 +19,7 @@ public class ActiveTeamMemberDeadException : Exception {
 }
 
 public class Team : MonoBehaviour {
-    public const short MaxTeamMembers = 1;
+    public const short MaxTeamMembers = 4;
 
     public GameObject playerPrefab;
     private Dictionary<int, PlayerController> _members;

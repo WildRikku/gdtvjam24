@@ -308,7 +308,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 0}
   weapon: {fileID: 0}
   weaponSpawnPoint: {fileID: 5374031209549792931}
-  dieExplosion: {fileID: 8322696212696052600, guid: 5f551e38bf6ac6c4ba22bb5ef80d58f4,
+  dieExplosionPrefab: {fileID: 3689770828418205119, guid: d4351d02dc4ebb44297c23b6d6d9453f,
     type: 3}
   dieMessages:
   - is now a ghost. Boo!

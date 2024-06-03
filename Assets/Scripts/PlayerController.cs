@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.Serialization;
+using static UnityEditor.FilePathAttribute;
 
 public delegate void SimplePlayerEvent(PlayerController playerController);
 
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject _weaponObject;
     public Weapon weapon;
     public Transform weaponSpawnPoint;
-    public GameObject dieExplosion;
+    public GameObject dieExplosionPrefab;
     private GameMenuController _gameMenuController;
     public string[] dieMessages;
     public string[] playerTurnMesseges;
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour {
             _health = value;
             HealthUpdated?.Invoke(this);
             if (_health <= 0) {
-                Instantiate(dieExplosion, transform.position, transform.rotation);
+                SpawnDieExplosion();
                 //AudioManager.Instance.PlaySFX("BotDieSound");
                 Die();
             }
@@ -124,5 +125,14 @@ public class PlayerController : MonoBehaviour {
         _gameMenuController.TriggerMessage(dM, teamColor);
 
         Destroy(gameObject);
+    }
+
+    private void SpawnDieExplosion() {
+        BattleField battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
+
+        GameObject projectile = Instantiate(dieExplosionPrefab, transform.position, transform.rotation);
+        ExplodeOnImpact eoi = projectile.GetComponent<ExplodeOnImpact>();
+        eoi.primaryLayer = battleField.collidableLayer;
+        eoi.secondaryLayer = battleField.visibleLayer;
     }
 }

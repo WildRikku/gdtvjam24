@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8111372657524466792}
   - component: {fileID: 8619291356185805421}
   - component: {fileID: 5806622001161034673}
+  - component: {fileID: 7685720341564432692}
   m_Layer: 0
   m_Name: WeaponChooseLayoutPanel
   m_TagString: Untagged
@@ -133,3 +134,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
   m_VerticalFit: 1
+--- !u!114 &7685720341564432692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6096920731118230496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9c53cab033c3f4fb5e2fc9c10e81a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

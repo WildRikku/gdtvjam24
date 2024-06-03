@@ -413,64 +413,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
-        type: 3}
-      propertyPath: weaponPrefabs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
-        type: 3}
-      propertyPath: weaponPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 8156034423572122681, guid: 6e9ce9c006678f840bf397af13bbc984,
-        type: 3}
-    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
-        type: 3}
-      propertyPath: weaponPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 3116842073050561361, guid: f835883cac7218c4a93ea7c3c4adbdd6,
-        type: 3}
-    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
-        type: 3}
-      propertyPath: weaponPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 7904412063863603580, guid: a78b8da7c87436c4c80f0a2e535960c0,
-        type: 3}
-    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
-        type: 3}
-      propertyPath: weaponPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 8156034423572122681, guid: a29cadde733902a45a9ae2346d1bfced,
-        type: 3}
     - target: {fileID: 4902690037320882239, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
         type: 3}
       propertyPath: m_Name
       value: Team1
       objectReference: {fileID: 0}
-    - target: {fileID: 4902690037320882239, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5044116353455752807, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
         type: 3}
       propertyPath: m_Size.x
-      value: 5.9710383
+      value: 8.111403
       objectReference: {fileID: 0}
     - target: {fileID: 5044116353455752807, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
         type: 3}
       propertyPath: m_Size.y
-      value: 2.0918531
+      value: 2.3420181
       objectReference: {fileID: 0}
     - target: {fileID: 5044116353455752807, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
         type: 3}
       propertyPath: m_Offset.x
-      value: 7.680662
+      value: 9.802946
       objectReference: {fileID: 0}
     - target: {fileID: 5044116353455752807, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
         type: 3}
       propertyPath: m_Offset.y
-      value: 4.208736
+      value: 4.3033876
+      objectReference: {fileID: 0}
+    - target: {fileID: 5044116353455752807, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -712,35 +683,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
-        type: 3}
-      propertyPath: weaponPrefabs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
-        type: 3}
-      propertyPath: weaponPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 8156034423572122681, guid: 6e9ce9c006678f840bf397af13bbc984,
-        type: 3}
-    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
-        type: 3}
-      propertyPath: weaponPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 3116842073050561361, guid: f835883cac7218c4a93ea7c3c4adbdd6,
-        type: 3}
-    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
-        type: 3}
-      propertyPath: weaponPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 7904412063863603580, guid: a78b8da7c87436c4c80f0a2e535960c0,
-        type: 3}
-    - target: {fileID: 1834154716753612942, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
-        type: 3}
-      propertyPath: weaponPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 8156034423572122681, guid: a29cadde733902a45a9ae2346d1bfced,
-        type: 3}
     - target: {fileID: 4902690037320882239, guid: dff6b4a1e9f248b4bb88051533e9c1bf,
         type: 3}
       propertyPath: m_Name
