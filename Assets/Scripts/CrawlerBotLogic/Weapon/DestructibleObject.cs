@@ -8,7 +8,7 @@ namespace CrawlerBotLogic.Weapon {
         public GameObject destructionFXPrefab;
         
         public void Die() {
-            Instantiate(destructionFXPrefab);
+            Instantiate(destructionFXPrefab,transform.position,transform.rotation);
             Destroy(gameObject);
         }
 

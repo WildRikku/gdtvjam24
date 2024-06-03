@@ -197,7 +197,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -225,5 +225,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <health>k__BackingField: 5
-  destructionFXPrefab: {fileID: 497190267284873559, guid: 03ad791e258a2754cad4098f6d414180,
+  destructionFXPrefab: {fileID: 8813890883548811946, guid: 8c1ee5db99ac1e946ad31090c2328057,
     type: 3}
