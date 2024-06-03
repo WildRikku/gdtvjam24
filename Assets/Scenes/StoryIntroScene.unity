@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4587014
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2876,6 +2876,7 @@ MonoBehaviour:
   timeline_01: {fileID: 1427305229}
   timeline_02: {fileID: 1485589905}
   timeline_03: {fileID: 978206682}
+  transitionCG: {fileID: 4587016}
   timelineIndex: 0
 --- !u!1 &1944714027
 GameObject:

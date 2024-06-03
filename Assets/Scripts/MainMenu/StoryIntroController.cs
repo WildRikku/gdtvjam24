@@ -1,11 +1,13 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.Playables;
+using DG.Tweening;
 
 public class StoryIntroController : MonoBehaviour {
     public PlayableDirector timeline_01;
     public PlayableDirector timeline_02;
     public PlayableDirector timeline_03;
+    public CanvasGroup transitionCG;
 
     public int timelineIndex = 0;
     private bool isDirectorPlay = true;
@@ -41,11 +43,8 @@ public class StoryIntroController : MonoBehaviour {
 
     public void GotoRoom(string room) {
         AudioManager.Instance.PlaySFX("CameraSwipe");
-        //transitionImage.DOFade(1f, 0.5f).OnComplete(() => {
-
-        SceneManager.LoadScene(room);
-
-
-
+        transitionCG.DOFade(1f, 0.5f).OnComplete(() => {
+            SceneManager.LoadScene(room);
+        });
     }
 }

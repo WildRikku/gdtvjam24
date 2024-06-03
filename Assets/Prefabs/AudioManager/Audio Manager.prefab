@@ -305,6 +305,12 @@ MonoBehaviour:
   musicSounds:
   - name: MainMenuSound
     clip: {fileID: 8300000, guid: 64476a10eff915b45b978c2df3b4d691, type: 3}
+  - name: Level1
+    clip: {fileID: 8300000, guid: fe97490750595e24da2b2647cee8ee43, type: 3}
+  - name: Level2
+    clip: {fileID: 8300000, guid: 421efce02fdc39f48bcfa85275540d14, type: 3}
+  - name: Level3
+    clip: {fileID: 8300000, guid: 91c1668a488080b48814f3a26a79bb81, type: 3}
   sfxSounds:
   - name: MouseClick
     clip: {fileID: 8300000, guid: 28c3e596600781c43944fc8476b9f8e4, type: 3}

@@ -66,7 +66,6 @@ public class GameMenuController : MonoBehaviour {
 
     private void Start() {
         
-
         playerHUDCG.alpha = 0;
         playerHUDCG.DOFade(1f, 2f);
         weaponChooseCG.alpha = 0;
@@ -83,6 +82,12 @@ public class GameMenuController : MonoBehaviour {
             vSStoryText.text = "";
             backToMenuBtnText.text = "Back to Menu";
             loadScreenStoryText.text = "";
+
+            switch (levelIndex) {
+                case 0: AudioManager.Instance.PlayMusic("Level1"); break;
+                case 1: AudioManager.Instance.PlayMusic("Level2"); break;
+                case 2: AudioManager.Instance.PlayMusic("Level3"); break;
+            }
         }
         else {
             Time.timeScale = 0;
@@ -226,6 +231,12 @@ public class GameMenuController : MonoBehaviour {
         Time.timeScale = 1;
         transitionHUDCG.blocksRaycasts = false;
         transitionHUDCG.DOFade(0, 0.2f).SetUpdate(true);
+
+        switch (levelIndex) {
+            case 0: AudioManager.Instance.PlayMusic("Level1"); break;
+            case 1: AudioManager.Instance.PlayMusic("Level2"); break;
+            case 2: AudioManager.Instance.PlayMusic("Level3"); break;
+        }
     }
 
 

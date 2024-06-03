@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [Serializable]
 public class Sound {
@@ -43,9 +44,20 @@ public class AudioManager : MonoBehaviour {
             Debug.Log("Sound Not Found");
         }
         else {
-            musicSource.Stop();
-            musicSource.clip = s.clip;
-            musicSource.Play();
+            if (musicSource.isPlaying) {
+                musicSource.DOFade(musicVolume, 0.5f).SetUpdate(true).OnComplete(() => 
+                {
+                    musicSource.Stop();
+                    musicSource.clip = s.clip;
+                    musicSource.Play();
+                    musicSource.DOFade(musicVolume, 0.5f).SetUpdate(true);
+                });
+            }
+            else {
+                musicSource.clip = s.clip;
+                musicSource.Play();
+            }
+            
         }
     }
 
