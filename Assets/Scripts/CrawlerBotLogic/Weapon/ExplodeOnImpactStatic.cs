@@ -42,6 +42,8 @@ public class ExplodeOnImpactStatic : ExplodeOnImpact {
     }
 
     public void TakeDamage(float amount) {
+        if (health == 0) return; // this prevents calling Die() multiple times
+        
         health -= amount;
         if (health <= 0) {
             health = 0;
