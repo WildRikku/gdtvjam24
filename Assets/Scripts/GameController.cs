@@ -48,6 +48,7 @@ public class GameController : MonoBehaviour {
 
     private void OnWeaponChangedByUser(int teamWeaponIndex) {
         teams[activeTeam].GetActivePlayer().ChangeWeapon(teams[activeTeam].weaponPrefabs[teamWeaponIndex]);
+        FollowProjectile();
     }
 
     private void OnTurnTimeIsUp(object sender, EventArgs e) {
@@ -89,6 +90,10 @@ public class GameController : MonoBehaviour {
         AudioManager.Instance.PlaySFX("CameraSwipe");
         cinemachineVirtualCamera.Follow = teams[activeTeam].GetActivePlayer().transform;
 
+        FollowProjectile();
+    }
+
+    private void FollowProjectile() {
         // follow first projectile if there is one
         ProjectileWeapon pw = teams[activeTeam].GetActivePlayer().weapon as ProjectileWeapon;
         if (pw != null) {
