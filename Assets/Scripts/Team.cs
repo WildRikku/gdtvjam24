@@ -66,7 +66,7 @@ public class Team : MonoBehaviour {
             pc.index = i;
             pc.HealthUpdated += OnTeamMemberHealthUpdated;
             if (_gameController.botNames.Count > 0) {
-                int value = storyMode ? i : Random.Range(0, _gameController.botNames.Count);
+                int value = storyMode ? 0 : Random.Range(0, _gameController.botNames.Count);
                 pc.botName = _gameController.botNames[value];
                 _gameController.botNames.RemoveAt(value);
             }

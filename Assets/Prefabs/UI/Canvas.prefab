@@ -515,7 +515,6 @@ MonoBehaviour:
   - {r: 0.18676849, g: 0.7075472, b: 0.130162, a: 1}
   - {r: 0.735849, g: 0.09371662, b: 0.6955357, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
-  weaponChooseBarImage: {fileID: 0}
   gameEndText: {fileID: 8614836769007919993}
   roundTimerText: {fileID: 2057879345824289933}
   timerContainer: {fileID: 4328985716254037122}
@@ -585,7 +584,7 @@ MonoBehaviour:
 '
   levelIndex: 0
   vSStoryText: {fileID: 4903489865110976928}
-  stroymodeCG: {fileID: 2730957842342326292}
+  storymodeCG: {fileID: 2730957842342326292}
   loadScreenStoryText: {fileID: 0}
   loadScreenWaitText: {fileID: 350097966797934998}
   backToMenuBtnText: {fileID: 2293468068813946866}
@@ -822,7 +821,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BackToMenu
+  m_text: Back To Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ad1c95e7cc90e214f951a1e1e169914c, type: 2}
   m_sharedMaterial: {fileID: 3584385154073877098, guid: ad1c95e7cc90e214f951a1e1e169914c,
