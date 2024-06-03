@@ -2153,7 +2153,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8080186578197980441}
         m_TargetAssemblyTypeName: GameMenuController, Assembly-CSharp
-        m_MethodName: BackToMenu
+        m_MethodName: BackToMenuBreak
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

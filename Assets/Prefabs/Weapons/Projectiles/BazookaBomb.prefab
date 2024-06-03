@@ -195,11 +195,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primaryLayer: {fileID: 0}
   secondaryLayer: {fileID: 0}
-  explosionFXPrefab: {fileID: 8813890883548811946, guid: 8c1ee5db99ac1e946ad31090c2328057,
+  explosionFXPrefab: {fileID: 8813890883548811946, guid: c846ce158fa599c44843a17893da4303,
     type: 3}
   radius: 70
   damage: 28
-  projectileCollider: {fileID: 244345188004463526}
   destroyTimer: 0
   impactSounds: []
   timerAlertSound: 

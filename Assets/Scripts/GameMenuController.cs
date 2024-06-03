@@ -284,6 +284,16 @@ public class GameMenuController : MonoBehaviour {
         });
     }
 
+    public void BackToMenuBreak() {
+        AudioManager.Instance.PlaySFX("MouseGoBack1");
+        storymodeCG.alpha = 0;
+        transitionHUDCG.blocksRaycasts = true;
+        transitionHUDCG.DOFade(1, 0.2f).SetUpdate(true).OnComplete(() => {
+            Time.timeScale = 1;
+            SceneManager.LoadScene("MenuScene");
+        });
+    }
+
     // ------------------------------------
     // Game End HUD
     public void ShowGameEndHUD(short teamIndex) {
