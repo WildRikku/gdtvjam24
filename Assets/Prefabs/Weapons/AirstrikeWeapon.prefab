@@ -136,7 +136,7 @@ MonoBehaviour:
   displayName: Random Airstrike
   description: 'Drops 4 rockets from the sky in a random position
 
-    <color="red">20
+    <color="red">18
     damage / hit</color>
 
     <color="blue"> AOE 60/ rocket </color>'

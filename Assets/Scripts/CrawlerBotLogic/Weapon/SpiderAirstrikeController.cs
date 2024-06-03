@@ -35,7 +35,7 @@ public class SpiderAirstrikeController : ProjectileWeapon {
 
     private void Shoot() {
         AudioManager.Instance.PlaySFX("AirstrikeSpawn");
-        SpawnProjectile(rocketPrefab, new(_randomX + 0.25f * _firedProjectiles, battleField.height), Quaternion.identity);
+        SpawnProjectile(rocketPrefab, new(_randomX + 0.7f * _firedProjectiles, battleField.height), Quaternion.identity);
         _firedProjectiles++;
         if (_firedProjectiles == _projectileCount) {
             _firedProjectiles = 0;
