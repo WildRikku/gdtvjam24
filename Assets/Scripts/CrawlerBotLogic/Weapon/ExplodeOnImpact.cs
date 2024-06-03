@@ -84,14 +84,16 @@ public class ExplodeOnImpact : MonoBehaviour {
     }
 
     private void SpawnExplosion() {
-        if (_hasExploded == false) {
-            if (explosionFXPrefab != null) {
-                Transform transform1 = transform;
-                Instantiate(explosionFXPrefab, transform1.position, transform1.rotation);
-            }
-
-            _hasExploded = true;
+        if (_hasExploded) {
+            return;
         }
+
+        if (explosionFXPrefab != null) {
+            Transform transform1 = transform;
+            Instantiate(explosionFXPrefab, transform1.position, transform1.rotation);
+        }
+
+        _hasExploded = true;
     }
 
     private void TriggerBounceSound() {
@@ -134,6 +136,10 @@ public class ExplodeOnImpact : MonoBehaviour {
     }
 
     protected void Explode(Vector3 pos) {
+        if (_hasExploded) {
+            return;
+        }
+        
         float convertedRadius = (float)radius / primaryLayer.PPU;
         Collider2D[] hitColliders =
             Physics2D.OverlapCircleAll(pos, convertedRadius, Physics2D.AllLayers);
@@ -173,7 +179,7 @@ public class ExplodeOnImpact : MonoBehaviour {
             Impact?.Invoke(damage); // TODO: damage is currently meaningless at this point
         }
 
-        SpawnExplosion();
+        SpawnExplosion(); // will set hasExploded
         Destroy(gameObject);
     }
 }
