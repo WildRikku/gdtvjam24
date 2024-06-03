@@ -135,6 +135,8 @@ public class ExplodeOnImpact : MonoBehaviour {
         bool terrainHit = false;
         
         foreach (Collider2D c in hitColliders) {
+            if (c.gameObject.GetInstanceID() == gameObject.GetInstanceID()) continue;
+            
             if (c.CompareTag("Player")) {
                 // Players only have one collider, send them damage
                 c.SendMessage(nameof(PlayerController.TakeDamage), damage);
