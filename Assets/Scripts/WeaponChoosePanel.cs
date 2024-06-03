@@ -8,7 +8,7 @@ public class WeaponChoosePanel : MonoBehaviour
 
     public void RestBtnColor() {
         foreach (WeaponChooseBtn item in weaponBtns) {
-            //weaponBtns.re
+            item.ResetBtnColor();
         }
     }
 }

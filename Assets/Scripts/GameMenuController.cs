@@ -115,6 +115,7 @@ public class GameMenuController : MonoBehaviour {
         _weaponChooseLayoutPanelsImages = new();
         foreach (Team t in gameController.teams) {
             GameObject lp = Instantiate(weaponChooseLayoutPanelPrefab, weaponChooseCG.transform);
+            WeaponChoosePanel wlp = lp.GetComponent<WeaponChoosePanel>();
             _weaponChooseLayoutPanels.Add(lp);
             _weaponChooseLayoutPanelsImages.Add(lp.GetComponent<Image>());
             for (int i = 0; i < t.weapons.Count; i++) {
@@ -126,6 +127,8 @@ public class GameMenuController : MonoBehaviour {
                 btnclass.btnSprite = w.buttonSprite;
                 btnclass.btnIndex = i;
                 btnclass.WeaponButtonClicked += OnWeaponButtonClicked;
+                btnclass.gameController = gameController;
+                wlp.weaponBtns.Add(btnclass);
             }
         }
 

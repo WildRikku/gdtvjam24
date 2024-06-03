@@ -21,12 +21,20 @@ public class WeaponChooseBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public TMP_Text btnDescriptionText;
     public Color activColor;
     public event WeaponButtonClicked WeaponButtonClicked;
+    private WeaponChoosePanel panelParent;
+    public GameController gameController;
 
     private void Start() {
         textCG.alpha = 0;
         btnWeaponImage.sprite = btnSprite;
         btnHeaderText.text = btnName;
         btnDescriptionText.text = btnDescription;
+        panelParent = GetComponentInParent<WeaponChoosePanel>();
+    }
+
+    private void OnEnable() {
+        ResetBtnColor();
+        Invoke(nameof(TriggerActivBtn), 0.1f);
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
@@ -39,6 +47,9 @@ public class WeaponChooseBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void ChooseBtn() {
         AudioManager.Instance.PlaySFX("InstallWeapon");
+        if (panelParent != null) {
+            panelParent.RestBtnColor();
+        }
 
         WeaponButtonClicked?.Invoke(btnIndex);
         SetActivBtn();
@@ -46,6 +57,14 @@ public class WeaponChooseBtn : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void SetActivBtn() {
         btnImage.color = activColor;
+    }
+
+    public void TriggerActivBtn() {
+        if (gameController != null) {
+            int weaponIndex = gameController.teams[gameController.activeTeam].GetActivePlayer().weapon.index;
+            if (weaponIndex == btnIndex)
+                SetActivBtn();
+        }
     }
 
     public void ResetBtnColor() {
