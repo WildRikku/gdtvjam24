@@ -199,12 +199,12 @@ PrefabInstance:
     - target: {fileID: 9059081225101177549, guid: e0583b59d87d4004db9d3f9e444dd0c9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.779801
+      value: 10.7798
       objectReference: {fileID: 0}
     - target: {fileID: 9059081225101177549, guid: e0583b59d87d4004db9d3f9e444dd0c9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.688693
+      value: 10.68869
       objectReference: {fileID: 0}
     - target: {fileID: 9059081225101177549, guid: e0583b59d87d4004db9d3f9e444dd0c9,
         type: 3}
@@ -6804,7 +6804,7 @@ PrefabInstance:
     - target: {fileID: 952404888174358533, guid: 8857f49315aaf7346bceb10beff2e596,
         type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 1063669075745880676, guid: 8857f49315aaf7346bceb10beff2e596,
         type: 3}
@@ -7242,12 +7242,12 @@ PrefabInstance:
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.634512
+      value: 5.634514
       objectReference: {fileID: 0}
     - target: {fileID: 1866052362358352136, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.07602
+      value: 5.0760336
       objectReference: {fileID: 0}
     - target: {fileID: 4417311475867233259, guid: 221d4a46ad69ef941bbb323c04804a7e,
         type: 3}

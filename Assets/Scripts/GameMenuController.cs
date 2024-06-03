@@ -5,6 +5,7 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 public delegate void WeaponChangedByUser(int teamWeaponIndex);
 
@@ -31,7 +32,6 @@ public class GameMenuController : MonoBehaviour {
     public int[] teamColorIndex = new int[2];
     public Image[] memberBar;
     public Color[] teamColor;
-    public Image weaponChooseBarImage;
     public TMP_Text gameEndText;
     public TMP_Text roundTimerText;
     public Transform timerContainer;
@@ -40,12 +40,12 @@ public class GameMenuController : MonoBehaviour {
 
     public GameController gameController;
     public TMP_Text messageTxt;
-    public List<MessageContainer> messageList = new();
-    private bool canTriggerNewMessage = true;
-    private float remainingTime = 0;
-    private float timeSinceLastUpdate = -10;
-    private string[] messageAlerts = new string[2] { "MessageAlert1", "MessageAlert2" };
-    private float massageTime = 3;
+    private readonly List<MessageContainer> _messageList = new();
+    private bool _canTriggerNewMessage = true;
+    private float _remainingTime = 0;
+    private float _timeSinceLastUpdate = -10;
+    private readonly string[] _messageAlerts = new string[2] { "MessageAlert1", "MessageAlert2" };
+    private float _massageTime = 3;
 
     public Image refereeImage;
     public Sprite[] referreeSrites;
@@ -56,7 +56,8 @@ public class GameMenuController : MonoBehaviour {
     [TextArea(3, 10)] public string[] victoryScreenStorys;
     public int levelIndex = 0;
     public TMP_Text vSStoryText;
-    public CanvasGroup stroymodeCG;
+    [FormerlySerializedAs("stroymodeCG")]
+    public CanvasGroup storymodeCG;
     public TMP_Text loadScreenStoryText;
     public TMP_Text loadScreenWaitText;
     public TMP_Text backToMenuBtnText;
@@ -75,7 +76,7 @@ public class GameMenuController : MonoBehaviour {
         if (AudioManager.Instance.stroyMode == false) {
             Time.timeScale = 1;
             loadScreenWaitText.enabled = true;
-            stroymodeCG.alpha = 0;
+            storymodeCG.alpha = 0;
             transitionHUDCG.alpha = 1;
             transitionHUDCG.blocksRaycasts = false;
             transitionHUDCG.DOFade(0, 0.2f).SetUpdate(true);
@@ -92,7 +93,7 @@ public class GameMenuController : MonoBehaviour {
         else {
             Time.timeScale = 0;
             loadScreenWaitText.enabled = false;
-            stroymodeCG.DOFade(1, 0.2f).SetUpdate(true); ;
+            storymodeCG.DOFade(1, 0.2f).SetUpdate(true); ;
             transitionHUDCG.alpha = 1;
             transitionHUDCG.blocksRaycasts = true;
             vSStoryText.text = victoryScreenStorys[levelIndex];
@@ -173,11 +174,11 @@ public class GameMenuController : MonoBehaviour {
 
 
         //timer
-        remainingTime -= Time.deltaTime;
-        timeSinceLastUpdate += Time.deltaTime;
-        if (timeSinceLastUpdate >= 1f) {
+        _remainingTime -= Time.deltaTime;
+        _timeSinceLastUpdate += Time.deltaTime;
+        if (_timeSinceLastUpdate >= 1f) {
             TimerStep();
-            timeSinceLastUpdate = 0f;
+            _timeSinceLastUpdate = 0f;
         }
     }
 
@@ -209,19 +210,19 @@ public class GameMenuController : MonoBehaviour {
     }
 
     public void ResetTurnTimerText(int teamColorIndex, int timerValue = 30) {
-        remainingTime = timerValue;
-        timeSinceLastUpdate = 0f;
+        _remainingTime = timerValue;
+        _timeSinceLastUpdate = 0f;
         roundTimerText.color = teamColor[teamColorIndex];
         TimerStep();
     }
 
     private void TimerStep() {
-        int timerText = Mathf.Max(0, Mathf.RoundToInt(remainingTime));
+        int timerText = Mathf.Max(0, Mathf.RoundToInt(_remainingTime));
 
         roundTimerText.text = timerText.ToString();
         timerContainer.DOShakeScale(0.5f, 0.1f, 10, 90, true, ShakeRandomnessMode.Harmonic);
 
-        if (remainingTime <= 0f) {
+        if (_remainingTime <= 0f) {
             TurnTimeIsUp?.Invoke(this, EventArgs.Empty);
         }
     }
@@ -262,7 +263,7 @@ public class GameMenuController : MonoBehaviour {
 
     public void BackToMenu() {
         AudioManager.Instance.PlaySFX("MouseGoBack1");
-        stroymodeCG.alpha = 0;
+        storymodeCG.alpha = 0;
         transitionHUDCG.blocksRaycasts = true;
         transitionHUDCG.DOFade(1, 0.2f).SetUpdate(true).OnComplete(() => {
             Time.timeScale = 1;
@@ -308,51 +309,51 @@ public class GameMenuController : MonoBehaviour {
             colorInt = maColor
         };
 
-        messageList.Add(ma);
+        _messageList.Add(ma);
 
-        if (messageList.Count > 3) {
-            messageList.RemoveAt(0);
-            massageTime = 2;
+        if (_messageList.Count > 3) {
+            _messageList.RemoveAt(0);
+            _massageTime = 2;
         }
-        else { massageTime = 3; }
+        else { _massageTime = 3; }
 
-        if (canTriggerNewMessage) {
+        if (_canTriggerNewMessage) {
             ShowMessage();
         }
     }
 
     private void ResetTrigger() {
-        if (messageList.Count > 0) {
+        if (_messageList.Count > 0) {
             ShowMessage();
         }
         else {
-            canTriggerNewMessage = true;
+            _canTriggerNewMessage = true;
         }
     }
 
     private void ShowMessage() {
-        if (messageList.Count > 0) {
-            canTriggerNewMessage = false;
-            Invoke(nameof(ResetTrigger), massageTime);
+        if (_messageList.Count > 0) {
+            _canTriggerNewMessage = false;
+            Invoke(nameof(ResetTrigger), _massageTime);
             refereeImage.enabled = false;
 
 
             messageTxtCG.DOKill();
             messageTxtCG.alpha = 0;
 
-            messageTxt.text = messageList[0].messageStr;
-            AudioManager.Instance.PlaySFX(messageAlerts[UnityEngine.Random.Range(0, messageAlerts.Length)]);
-            messageTxt.color = teamColor[messageList[0].colorInt];
-            if (messageList[0].colorInt < 4) {
+            messageTxt.text = _messageList[0].messageStr;
+            AudioManager.Instance.PlaySFX(_messageAlerts[UnityEngine.Random.Range(0, _messageAlerts.Length)]);
+            messageTxt.color = teamColor[_messageList[0].colorInt];
+            if (_messageList[0].colorInt < 4) {
                 refereeImage.enabled = false; 
                 diedBotImage.enabled = true; 
-                diedBotImage.sprite = diedBotSprits[messageList[0].colorInt]; 
+                diedBotImage.sprite = diedBotSprits[_messageList[0].colorInt]; 
             }
             else {
                 refereeImage.enabled = true; diedBotImage.enabled = false;
                 refereeImage.sprite = referreeSrites[UnityEngine.Random.Range(0, referreeSrites.Length)];
             }
-            messageList.RemoveAt(0);
+            _messageList.RemoveAt(0);
             
 
             messageCG.DOKill();
@@ -361,7 +362,7 @@ public class GameMenuController : MonoBehaviour {
             }
 
             messageTxtCG.DOFade(1, 0.2f);
-            messageTxtCG.DOFade(0f, 0.2f).SetDelay(massageTime).OnComplete(() => { messageCG.DOFade(0f, 0.3f); });
+            messageTxtCG.DOFade(0f, 0.2f).SetDelay(_massageTime).OnComplete(() => { messageCG.DOFade(0f, 0.3f); });
         }
     }
 }
