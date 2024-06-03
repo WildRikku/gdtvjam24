@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosivObjects : MonoBehaviour {
+public class ExplosiveObject : MonoBehaviour {
     private float health = 5;
     public GameObject explosionPrefab;
     private bool _isExplode = false;

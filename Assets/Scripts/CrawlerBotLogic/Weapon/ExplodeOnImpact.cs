@@ -146,8 +146,8 @@ public class ExplodeOnImpact : MonoBehaviour {
             }
 
             if (c.CompareTag("DestructibleObjects")) {
-                // Players only have one collider, send them damage
-                c.SendMessage(nameof(ExplosivObjects.TakeDamage), damage);
+                // Objects only have one collider, send them damage
+                c.SendMessage(nameof(ExplosiveObject.TakeDamage), damage);
             }
         }
 
