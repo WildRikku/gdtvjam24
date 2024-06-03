@@ -5058,7 +5058,7 @@ MonoBehaviour:
   description: 'Fires 3 shots in a row
 
     <color="red">8 damage / hit</color>'
-  buttonSprite: {fileID: 21300000, guid: f3961526bc235b94db9bba05620b00c9, type: 3}
+  buttonSprite: {fileID: -2116494574, guid: 8f0331b8908f35341b6eb1a98d960d8b, type: 3}
   ammo: 100
   index: 0
   weaponRotationPoint: {fileID: 2615886611781964132}
