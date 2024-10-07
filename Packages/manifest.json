@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.singularitygroup.hotreload": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.12.10",
+    "com.singularitygroup.hotreload": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.12.12",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.animation.rigging": "1.2.1",
     "com.unity.cinemachine": "2.10.0",
