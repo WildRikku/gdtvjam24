@@ -43,7 +43,8 @@ public class GameMenuController : MonoBehaviour {
     private readonly List<MessageContainer> _messageList = new();
     private bool _canTriggerNewMessage = true;
     private float _remainingTime = 0;
-    private float _timeSinceLastUpdate = -10;
+    private float _timeSinceLastUpdate = 0;
+    private bool timerRuns = false;
     private readonly string[] _messageAlerts = new string[2] { "MessageAlert1", "MessageAlert2" };
     private float _massageTime = 3;
 
@@ -142,6 +143,7 @@ public class GameMenuController : MonoBehaviour {
 
     private void OnTurnStarted(GameController gameController) {
         ResetTurnTimerText(teamColorIndex[gameController.activeTeam]);
+        timerRuns = true;
         ShowWeaponHUD(gameController.activeTeam, teamColorIndex[gameController.activeTeam]);
         foreach (GameObject lp in _weaponChooseLayoutPanels) {
             lp.SetActive(false);
@@ -177,11 +179,18 @@ public class GameMenuController : MonoBehaviour {
 
 
         //timer
-        _remainingTime -= Time.deltaTime;
-        _timeSinceLastUpdate += Time.deltaTime;
-        if (_timeSinceLastUpdate >= 1f) {
-            TimerStep();
-            _timeSinceLastUpdate = 0f;
+        if (timerRuns) {
+            _remainingTime -= Time.deltaTime;
+            if (_remainingTime <= 0f) {
+                timerRuns = false;
+                TurnTimeIsUp?.Invoke(this, EventArgs.Empty);
+            }
+            // UI
+            _timeSinceLastUpdate += Time.deltaTime;
+            if (_timeSinceLastUpdate >= 1f) {
+                TimerDisplayStep();
+                _timeSinceLastUpdate -= 1f;
+            }
         }
     }
 
@@ -216,18 +225,14 @@ public class GameMenuController : MonoBehaviour {
         _remainingTime = timerValue;
         _timeSinceLastUpdate = 0f;
         roundTimerText.color = teamColor[teamColorIndex];
-        TimerStep();
+        TimerDisplayStep();
     }
 
-    private void TimerStep() {
+    private void TimerDisplayStep() {
         int timerText = Mathf.Max(0, Mathf.RoundToInt(_remainingTime));
 
         roundTimerText.text = timerText.ToString();
         timerContainer.DOShakeScale(0.5f, 0.1f, 10, 90, true, ShakeRandomnessMode.Harmonic);
-
-        if (_remainingTime <= 0f) {
-            TurnTimeIsUp?.Invoke(this, EventArgs.Empty);
-        }
     }
 
     public void StartRound() {

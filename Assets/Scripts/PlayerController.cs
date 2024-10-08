@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void StartTurn() {
-        _myTurn = true;
+        // _myTurn = true;
         spiderController.IsActive = true;
         ActivateWeapon();
         string message = playerTurnMesseges[UnityEngine.Random.Range(0, playerTurnMesseges.Length)];
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour {
             weapon.Deactivate();
         }
         spiderController.IsActive = false;
-        _myTurn = false;
+        //_myTurn = false;
     }
 
     public void TakeDamage(float amount) {
