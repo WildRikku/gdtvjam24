@@ -68,6 +68,7 @@ public class Team : MonoBehaviour {
             if (_gameController.botNames.Count > 0) {
                 int value = storyMode ? 0 : Random.Range(0, _gameController.botNames.Count);
                 pc.botName = _gameController.botNames[value];
+                newPlayer.name = index + " " + pc.botName;
                 _gameController.botNames.RemoveAt(value);
             }
 
