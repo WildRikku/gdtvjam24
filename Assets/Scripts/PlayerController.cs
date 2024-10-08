@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
             EndTurn();
             if (Health > 0) {
                 Health = 0;
-                if (!_hasFired) {
+                if (!_hasFired && spiderController.IsActive) {
                     TurnFinished?.Invoke(this);
                 }
             }
