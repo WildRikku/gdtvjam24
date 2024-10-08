@@ -5447,7 +5447,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Martin Steguweit - Level Design, Developer, Sound and Music Design, Artist
+  m_text: Martin Steguweit - Level Designer, Developer, Sound and Music Designer,
+    Artist
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ad1c95e7cc90e214f951a1e1e169914c, type: 2}
   m_sharedMaterial: {fileID: 3584385154073877098, guid: ad1c95e7cc90e214f951a1e1e169914c,

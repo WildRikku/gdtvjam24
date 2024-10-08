@@ -66,9 +66,11 @@ public class PlayerController : MonoBehaviour {
         if (transform.position.y < -0.7f) {
             _drowned = true;
             EndTurn();
-            Health = 0;
-            if (!_hasFired) {
-                TurnFinished?.Invoke(this);
+            if (Health > 0) {
+                Health = 0;
+                if (!_hasFired) {
+                    TurnFinished?.Invoke(this);
+                }
             }
         }
     }

@@ -633,7 +633,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0.000030517578}
+  m_AnchoredPosition: {x: -0.00006103516, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &891155386
@@ -696,11 +696,11 @@ MonoBehaviour:
   m_text: "After the competition, we returned to the city center of 9 Dystricts.
     We stopped at our favorite pub where our names were celebrated and our deeds
     praised, prizes were awarded and songs were composed in our honor. \nBut each
-    of us knew that the real prize was our cohesion and the friendship that had strengthened
-    us in battle. The five of us would be bound together by our deeds for a long
-    time to come. \nFrom now on we're brothers and sisters by choice. I would kill
-    for them mates everytime again. Nira, Cyril, Riot and Zara - we were the last
-    standing."
+    of us knew that the real prize was our new team spirit and the friendship that
+    had strengthened us in battle. The five of us would be bound together by our
+    deeds for a long time to come. \nFrom now on we're brothers and sisters by choice.
+    I would kill for them mates everytime again. Nira, Cyril, Riot and Zara - we
+    were the last standing."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ad1c95e7cc90e214f951a1e1e169914c, type: 2}
   m_sharedMaterial: {fileID: 3584385154073877098, guid: ad1c95e7cc90e214f951a1e1e169914c,
