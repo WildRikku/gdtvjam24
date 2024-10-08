@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SpiderEyeFollow : MonoBehaviour {
@@ -16,14 +17,20 @@ public class SpiderEyeFollow : MonoBehaviour {
     }
 
     private void Update() {
-        if (!spiderController.isActive) {
+        if (!spiderController.IsActive) {
             sphereRenderer.material = inactivSpiderMat;
             return;
         }
 
         Vector3 position = eyeCenter.position;
-        Vector3 mousePosition = mainCamera.ScreenToWorldPoint(new(Input.mousePosition.x, Input.mousePosition.y,
-            position.z - mainCamera.transform.position.z));
+        Vector3 mousePosition = new();
+        try {
+            //mousePosition = mainCamera.ScreenToWorldPoint(new(Input.mousePosition.x, Input.mousePosition.y,
+              //  position.z - mainCamera.transform.position.z));
+        }
+        catch (Exception e) {
+            // I don't care I love it
+        }
         Vector3 direction = mousePosition - position;
         direction.z = 0;
         if (direction != Vector3.zero) {
@@ -31,5 +38,6 @@ public class SpiderEyeFollow : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 0, angle);
             sphereRenderer.material = activSpiderMat;
         }
+
     }
 }
