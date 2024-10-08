@@ -1,16 +1,18 @@
+using System;
 using UnityEngine;
 
 public class SpiderController : MonoBehaviour {
     public float speed = 1f;
-    private Rigidbody2D _rb;
-    public bool isActive;
+    protected Rigidbody2D _rb;
+    public virtual bool IsActive { get; set; }
+
     public ParticleSystem[] boostParticleSystem;
     private bool _canTriggerBoostsound = true;
 
-    private void Awake() {
+    protected void Awake() {
         _rb = GetComponent<Rigidbody2D>();
 
-        //TODO
+        //TODO schön machen
         _rb.AddForce(Vector2.right * 50f);
         Invoke(nameof(TODOSmallForce), 1f);
     }
@@ -19,31 +21,39 @@ public class SpiderController : MonoBehaviour {
         _rb.AddForce(Vector2.up * 100f);
     }
 
-    private void FixedUpdate() {
-        if (!isActive) {
+    protected virtual void FixedUpdate() {
+        if (!IsActive) {
             return;
         }
 
-        if (Mathf.Abs(_rb.velocity.x) < speed) {
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
-                _rb.AddForce(Vector2.right * 50f);
-            }
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
+            MoveSideways();
+        }
 
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
-                _rb.AddForce(-Vector2.right * 50f);
-            }
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
+            MoveSideways(-1f);
         }
 
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
-            _rb.AddForce(Vector2.up * 25f);
-            boostParticleSystem[0].Emit(1);
-            boostParticleSystem[1].Emit(1);
+            MoveUp();
+        }
+    }
 
-            if (_canTriggerBoostsound == true) {
-                Invoke(nameof(ResetTriggerBoostSound), .4f);
-                _canTriggerBoostsound = false;
-                AudioManager.Instance.PlaySFX("BotBoost");
-            }
+    protected void MoveSideways(float sign = 1f) {
+        if (Mathf.Abs(_rb.velocity.x) < speed) {
+            _rb.AddForce(sign * Vector2.right * 50f);
+        }
+    }
+
+    protected void MoveUp() {
+        _rb.AddForce(Vector2.up * 25f);
+        boostParticleSystem[0].Emit(1);
+        boostParticleSystem[1].Emit(1);
+
+        if (_canTriggerBoostsound == true) {
+            Invoke(nameof(ResetTriggerBoostSound), .4f);
+            _canTriggerBoostsound = false;
+            AudioManager.Instance.PlaySFX("BotBoost");
         }
     }
 

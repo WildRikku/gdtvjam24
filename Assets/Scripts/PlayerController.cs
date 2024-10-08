@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour {
 
     public void StartTurn() {
         _myTurn = true;
-        spiderController.isActive = true;
+        spiderController.IsActive = true;
         ActivateWeapon();
         string message = playerTurnMesseges[UnityEngine.Random.Range(0, playerTurnMesseges.Length)];
         message = "Referee: " + message.Replace("name", botName);
@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour {
         if (force) {
             weapon.Deactivate();
         }
-        spiderController.isActive = false;
+        spiderController.IsActive = false;
         _myTurn = false;
     }
 

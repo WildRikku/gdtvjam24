@@ -18,8 +18,12 @@ public class GameController : MonoBehaviour {
     private bool _trackingProjectile;
     private bool _ignoreTimer; // use to not end turn because of grenade timers
 
+    public List<BoxCollider2D> movementZones;
+
     public List<string> botNames; // use in PlayerController
     public List<string> matchStartMessages;
+
+    public Transform debugMarker;
 
     private void Awake() {
         Invoke(nameof(MatchBegin), 4f);
