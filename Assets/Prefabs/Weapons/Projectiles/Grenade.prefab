@@ -200,11 +200,11 @@ MonoBehaviour:
     type: 3}
   radius: 80
   damage: 32
-  projectileCollider: {fileID: 5061946580784646974}
   destroyTimer: 4
   impactSounds:
   - MouseClick
   timerAlertSound: WeaponTimerAlert
+  projectileCollider: {fileID: 5061946580784646974}
 --- !u!1 &5319203220862553152
 GameObject:
   m_ObjectHideFlags: 0

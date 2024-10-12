@@ -130,6 +130,7 @@ MonoBehaviour:
   - AirStrikeImpact1
   - AirStrikeImpact2
   timerAlertSound: 
+  projectileCollider: {fileID: 8034510886594934565}
 --- !u!1 &6787041333528522611
 GameObject:
   m_ObjectHideFlags: 0

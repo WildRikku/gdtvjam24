@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class EnemyController : SpiderController {
     private GameController _gameController;
+    public PlayerController playerController;
+
     private int movementPhase = 0;
     private int actionState = 0;
 
     private bool velocityFlag = false;
     private Vector3 _targetVector;
     private bool _isActive;
+
+    private float xDir;
     public override bool IsActive {
         get => _isActive;
         set {
@@ -18,7 +22,7 @@ public class EnemyController : SpiderController {
                 actionState = 1;
                 Invoke(nameof(EndMovement), 15f);
                 // pick a target zone
-                Bounds targetZone = _gameController.movementZones[0].bounds;
+                Bounds targetZone = _gameController.movementZones[Random.Range(0, _gameController.movementZones.Count)].bounds;
                 _targetVector = RandomVector(targetZone.min, targetZone.max);
                 _gameController.debugMarker.position = _targetVector;
                 // oversteer height because falling
@@ -51,16 +55,23 @@ public class EnemyController : SpiderController {
                     actionState = 3;
                     break;
             case 3:
+                // activate dynamite
+                // TOOD: chose weapon
+                _gameController.ChangeWeapon(0);
+                // fire
+                playerController.weapon.Trigger();
+                actionState = 4;
                 break;
-
-
-                // retreat from wall
+            case 4:
+                // retreat from dynamite
+                MoveSideways(-xDir);
+                break;
         }
     }
 
     private void HandleMovement() {
         Vector3 distance = _targetVector - transform.position;
-        float xDir = Mathf.Sign(distance.x);
+        xDir = Mathf.Sign(distance.x);
 
         // Cycle through flying and walking
         if (Mathf.Abs(distance.x) > 0.5f) {

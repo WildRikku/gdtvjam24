@@ -10,6 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4247587392948642449, guid: 3c88af2e12c37b1468fdadecd9dbe601,
         type: 3}
+      propertyPath: isAiControled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4247587392948642449, guid: 3c88af2e12c37b1468fdadecd9dbe601,
+        type: 3}
       propertyPath: spiderController
       value: 
       objectReference: {fileID: -7277053038750586930}
@@ -95,6 +100,18 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 8330733767197175936}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3931994303164706287 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4247587392948642449, guid: 3c88af2e12c37b1468fdadecd9dbe601,
+    type: 3}
+  m_PrefabInstance: {fileID: 8330733767197175936}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8888718995556493575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979f66262eab3ca4080aee7291a8d4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8888718995556493575 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 632655614212495751, guid: 3c88af2e12c37b1468fdadecd9dbe601,
@@ -114,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  isActive: 0
   boostParticleSystem:
   - {fileID: 1344542545570823616}
   - {fileID: 893982449143703959}
+  playerController: {fileID: 3931994303164706287}

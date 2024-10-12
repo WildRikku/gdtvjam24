@@ -7,16 +7,26 @@ public class RotatingWeapon : ProjectileWeapon {
     public float maxZRotation = 200f;
     public float rotationSpeed = 10f;
 
-    protected bool isRotating;
+    private bool _isActive;
+    public override bool isActive {
+        get => _isActive;
+        set {
+            _isActive = value;
+            _shootingState = ShootingStates.Idle;
+        }
+    }
+
+    protected ShootingStates _shootingState = ShootingStates.Idle;
+    protected bool isRotating; // not a state but an effect
     private bool _rotatingToMax = true;
     private float _rotationTempSpeed;
     protected bool isFadeOutRotation;
     private Rigidbody2D botRb;
 
-    protected new void Start() {
+    protected new void Awake() {
         botRb = gameObject.GetComponentInParent<Rigidbody2D>();
         _rotationTempSpeed = rotationSpeed;
-        base.Start();
+        base.Awake();
     }
 
     protected void Update() {

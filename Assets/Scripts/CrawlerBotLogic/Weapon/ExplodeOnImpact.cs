@@ -6,9 +6,7 @@ using UnityEngine.Serialization;
 public delegate void Impact(float damage);
 
 public class ExplodeOnImpact : MonoBehaviour {
-    [SerializeField]
     public BasicPaintableLayer primaryLayer;
-    [SerializeField]
     public BasicPaintableLayer secondaryLayer;
     public GameObject explosionFXPrefab;
 
@@ -30,7 +28,7 @@ public class ExplodeOnImpact : MonoBehaviour {
     private bool _canTriggerBounceSound = true;
     private bool _hasExploded;
 
-    private Collider2D _collider;
+    public Collider2D projectileCollider;
 
     private PaintingParameters _paintingParameters = new() {
         Color = Color.clear,
@@ -39,7 +37,7 @@ public class ExplodeOnImpact : MonoBehaviour {
         DestructionMode = DestructionMode.DESTROY
     };
 
-    protected void Start() {
+    protected void Awake() {
         _paintingParameters.Shape = Shape.GenerateShapeCircle(radius);
 
         if (destroyTimer > 0) {
@@ -50,8 +48,6 @@ public class ExplodeOnImpact : MonoBehaviour {
         if (timerAlertSound != "") {
             InvokeRepeating(nameof(TriggerTimerAlertSond), 1f, 1f);
         }
-
-        _collider = GetComponent<Collider2D>();
     }
 
     private void Update() {
@@ -150,7 +146,7 @@ public class ExplodeOnImpact : MonoBehaviour {
             
             if (c.CompareTag("Player")) {
                 // Players only have one collider, send them damage
-                float distance = c.Distance(_collider).distance;
+                float distance = c.Distance(projectileCollider).distance;
                 float damageProportion = Mathf.Clamp(1f - distance / convertedRadius, 0.5f, 1f);
                 c.SendMessage(nameof(PlayerController.TakeDamage), damage * damageProportion);
             }

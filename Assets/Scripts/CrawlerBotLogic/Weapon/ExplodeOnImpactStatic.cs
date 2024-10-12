@@ -10,14 +10,14 @@ public class ExplodeOnImpactStatic : ExplodeOnImpact {
     [field: SerializeField]
     public float health { get; set; }
     
-    protected new void Start()
+    protected new void Awake()
     {
         BattleField battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
         primaryLayer = battleField.collidableLayer;
         secondaryLayer = battleField.visibleLayer;
         _lastPosition = transform.position.y;
         
-        base.Start();
+        base.Awake();
     }
 
     private void FixedUpdate() {

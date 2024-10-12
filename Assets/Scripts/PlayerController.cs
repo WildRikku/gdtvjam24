@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
+using Unity.VisualScripting;
 
 public delegate void SimplePlayerEvent(PlayerController playerController);
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour {
     public string[] playerTurnMesseges;
 
     private float _health = 50;
+    public bool isAiControled;
 
     private string[] impactSounds = new string[3] { "Impact1", "Impact2", "Impact3" };
 
@@ -92,6 +94,7 @@ public class PlayerController : MonoBehaviour {
 
     private void ActivateWeapon() {
         weapon.isActive = true;
+        weapon.isAiControled = isAiControled;
         weapon.AttackFinished += OnWeaponAttackFinished;
         ProjectileWeapon pw = weapon as ProjectileWeapon;
         if (pw != null) {

@@ -8,7 +8,10 @@ public class Weapon : MonoBehaviour {
     public BattleField battleField;
     public KeyCode activationKey = KeyCode.A;
 
-    public bool isActive;
+    public virtual bool isActive {
+        get; set;
+    }
+    public bool isAiControled;
 
     public event EventHandler AttackFinished;
 
@@ -20,7 +23,7 @@ public class Weapon : MonoBehaviour {
     public int ammo;
     public int index;
 
-    protected void Start() {
+    protected void Awake() {
         battleField = GameObject.Find("GameManagement").GetComponent<BattleField>();
     }
 
@@ -41,8 +44,8 @@ public class ProjectileWeapon : Weapon {
     protected int ProjectileCount;
     public event ProjectileFired ProjectileFired;
 
-    protected new void Start() {
-        base.Start();
+    protected new void Awake() {
+        base.Awake();
     }
     
     private void OnProjectileImpact(float damage) {

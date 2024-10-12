@@ -6,8 +6,8 @@ public class SpiderDynamiteController : ProjectileWeapon {
     [FormerlySerializedAs("rocketPrefab")]
     public GameObject dynamitePrefab;
 
-    private new void Start() {
-        base.Start();
+    private new void Awake() {
+        base.Awake();
     }
 
     private void Update() {
@@ -15,14 +15,14 @@ public class SpiderDynamiteController : ProjectileWeapon {
             return;
         }
 
-        if (Input.GetKeyDown(activationKey)) {
-            AudioManager.Instance.PlaySFX("GranadeShoot");
-            isActive = false;
+        if (!isAiControled && Input.GetKeyDown(activationKey)) {
             Trigger();
         }
     }
 
     public override void Trigger() {
+        AudioManager.Instance.PlaySFX("GranadeShoot");
+        isActive = false;
         ProjectileCount = 1; // set beforehand so we don't stop the attack if all spawned projectiles crash before all have been spaweed
         SpawnProjectile(dynamitePrefab, transform.position, Quaternion.identity);
     }

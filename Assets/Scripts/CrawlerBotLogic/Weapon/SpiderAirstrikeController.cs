@@ -8,8 +8,8 @@ public class SpiderAirstrikeController : ProjectileWeapon {
     private float _randomX;
     private const short _projectileCount = 4;
 
-    private new void Start() {
-        base.Start();
+    private new void Awake() {
+        base.Awake();
     }
 
     private void Update() {
@@ -17,7 +17,7 @@ public class SpiderAirstrikeController : ProjectileWeapon {
             return;
         }
 
-        if (Input.GetKeyDown(activationKey)) {
+        if (!isAiControled && Input.GetKeyDown(activationKey)) {
             AudioManager.Instance.PlaySFX("AirstrikeLoad");
             isActive = false;
             Trigger();

@@ -202,3 +202,4 @@ MonoBehaviour:
   destroyTimer: 0
   impactSounds: []
   timerAlertSound: 
+  projectileCollider: {fileID: 244345188004463526}

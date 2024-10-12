@@ -12,9 +12,9 @@ public class SpiderMinigunController : RotatingWeapon {
     private int _firedProjectiles;
     private bool _shootingReset;
 
-    private new void Start() {
+    private new void Awake() {
         crosshairCG.alpha = 0;
-        base.Start();
+        base.Awake();
     }
 
     private new void Update() {
@@ -24,7 +24,7 @@ public class SpiderMinigunController : RotatingWeapon {
         
         base.Update();
 
-        if (Input.GetKeyDown(activationKey) && _shootingReset == false) {
+        if (!isAiControled && Input.GetKeyDown(activationKey) && _shootingReset == false) {
             if (isRotating) {
                 isActive = false; // deactivates listening for keys but does not deactivate rotation
                 ProjectileCount = 3;

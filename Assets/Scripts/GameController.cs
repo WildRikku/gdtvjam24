@@ -53,10 +53,9 @@ public class GameController : MonoBehaviour {
         }
 
         menuController.TurnTimeIsUp += OnTurnTimeIsUp;
-        menuController.WeaponChangedByUser += OnWeaponChangedByUser;
+        menuController.WeaponChangedByUser += ChangeWeapon;
     }
-
-    private void OnWeaponChangedByUser(int teamWeaponIndex) {
+    public void ChangeWeapon(int teamWeaponIndex) {
         teams[activeTeam].GetActivePlayer().ChangeWeapon(teams[activeTeam].weaponPrefabs[teamWeaponIndex], teamWeaponIndex);
         FollowProjectile();
     }

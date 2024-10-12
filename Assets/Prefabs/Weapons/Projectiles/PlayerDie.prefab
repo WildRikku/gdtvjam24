@@ -200,10 +200,10 @@ MonoBehaviour:
     type: 3}
   radius: 120
   damage: 10
-  projectileCollider: {fileID: 5061946580784646974}
   destroyTimer: 0.5
   impactSounds: []
   timerAlertSound: 
+  projectileCollider: {fileID: 5061946580784646974}
 --- !u!1 &5319203220862553152
 GameObject:
   m_ObjectHideFlags: 0

@@ -212,5 +212,6 @@ MonoBehaviour:
   destroyTimer: 0
   impactSounds: []
   timerAlertSound: 
+  projectileCollider: {fileID: 1269258756628739360}
   fallDistance: 1.5
   <health>k__BackingField: 10

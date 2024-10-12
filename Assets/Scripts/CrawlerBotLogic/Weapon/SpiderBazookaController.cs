@@ -3,6 +3,13 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
+public enum ShootingStates : int {
+    Idle,
+    WaitingForAngle,
+    WaitingForForce,
+    Shot
+}
+
 public class SpiderBazookaController : RotatingWeapon {
     public Transform shotTriggerPoint;
     public GameObject bombPrefab;
@@ -15,15 +22,13 @@ public class SpiderBazookaController : RotatingWeapon {
     public CanvasGroup crosshairCG;
     public Image speedBar;
 
-    private bool _waitingForShot;
-    
     [FormerlySerializedAs("effectName")]
     public string shootEffectName;
 
-    protected new void Start() {
+    protected new void Awake() {
         speedBarCG.alpha = 0;
         crosshairCG.alpha = 0;
-        base.Start();
+        base.Awake();
     }
 
     protected new void Update() {
@@ -32,41 +37,48 @@ public class SpiderBazookaController : RotatingWeapon {
         }
 
         base.Update();
-        
-        if (_waitingForShot) {
-            SelectShootingForce();
+
+        if (_shootingState == ShootingStates.WaitingForForce) {
+            shootingForceFactor = Mathf.Lerp(0, 1, (Mathf.Sin(Time.time * 0.5f * Mathf.PI * 2) + 1) / 2);
+            speedBar.fillAmount = shootingForceFactor;
         }
-        else if (Input.GetKeyDown(activationKey) && !_waitingForShot) {
-            if (isRotating) {
+
+        if (!isAiControled && Input.GetKeyDown(activationKey)) {
+            if (_shootingState != ShootingStates.Shot) {
+                NextState();
+            }
+        }
+        
+    }
+    public void NextState() {
+        switch (_shootingState) {
+            case ShootingStates.WaitingForForce:
+                // let player define force       
+                isActive = false; // deactivate
+                Invoke(nameof(TriggerShot), 0.1f);
+                break;
+            case ShootingStates.WaitingForAngle:
                 AudioManager.Instance.PlaySFX("BazookaLoad");
-                _waitingForShot = true;
                 isRotating = false;
                 speedBarCG.DOFade(1, 0.2f);
-            }
-            else {
+                break;
+            case ShootingStates.Idle:
                 AudioManager.Instance.PlaySFX("BazookaReload");
                 isRotating = true;
                 crosshairCG.alpha = 1;
-            }
+                break;
         }
+        _shootingState++;
     }
 
     private void SelectShootingForce() {
-        // let player define force       
-        shootingForceFactor = Mathf.Lerp(0, 1, (Mathf.Sin(Time.time * 0.5f * Mathf.PI * 2) + 1) / 2);
-        speedBar.fillAmount = shootingForceFactor;
 
-        if (Input.GetKeyDown(activationKey)) {
-            isActive = false; // deactivate
-            Invoke(nameof(TriggerShot), 0.1f);
-            _waitingForShot = false; // reset
-        }
     }
 
     protected void TriggerShot() {
         AudioManager.Instance.PlaySFX(shootEffectName);
         Recoil(10f * Mathf.Max(0.5f, shootingForceFactor));
-        
+
         ProjectileCount = 1;
         muzzleParticle.Emit(40);
         GameObject bomb = SpawnProjectile(bombPrefab, shotTriggerPoint.position, shotTriggerPoint.rotation);
