@@ -10,7 +10,6 @@ public class SpiderMinigunController : RotatingWeapon {
 
     public CanvasGroup crosshairCG;
     private int _firedProjectiles;
-    private bool _shootingReset;
 
     private new void Awake() {
         crosshairCG.alpha = 0;
@@ -24,18 +23,25 @@ public class SpiderMinigunController : RotatingWeapon {
         
         base.Update();
 
-        if (!isAiControled && Input.GetKeyDown(activationKey) && _shootingReset == false) {
-            if (isRotating) {
+        if (!isAiControled && Input.GetKeyDown(activationKey)) {
+            NextState();
+        }
+    }
+
+    public void NextState() {
+        switch (shootingState) {
+            case ShootingStates.WaitingForAngle:
                 isActive = false; // deactivates listening for keys but does not deactivate rotation
                 ProjectileCount = 3;
                 InvokeRepeating(nameof(TriggerShot), 0, 0.05f);
-            }
-            else {
+                break;
+            case ShootingStates.Idle:
                 AudioManager.Instance.PlaySFX("MinigunReload");
                 isRotating = true;
                 crosshairCG.alpha = 1;
-            }
+                break;
         }
+        shootingState++;
     }
 
     private void TriggerShot() {
@@ -57,12 +63,6 @@ public class SpiderMinigunController : RotatingWeapon {
             isFadeOutRotation = true;
             CancelInvoke(nameof(TriggerShot));
             crosshairCG.DOFade(0, 0.2f);
-            _shootingReset = true;
-            Invoke(nameof(InvokeShootingReset), 3f);
         }
-    }
-
-    private void InvokeShootingReset() {
-        _shootingReset = false;
     }
 }
