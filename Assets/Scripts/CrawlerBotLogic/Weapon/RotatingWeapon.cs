@@ -12,14 +12,15 @@ public class RotatingWeapon : ProjectileWeapon {
         get => _isActive;
         set {
             _isActive = value;
-            _shootingState = ShootingStates.Idle;
+            shootingState = ShootingStates.Idle;
         }
     }
 
-    protected ShootingStates _shootingState = ShootingStates.Idle;
+    public ShootingStates shootingState { get; protected set; } = ShootingStates.Idle;
     protected bool isRotating; // not a state but an effect
     private bool _rotatingToMax = true;
     private float _rotationTempSpeed;
+    public float currentZRotation;
     protected bool isFadeOutRotation;
     private Rigidbody2D botRb;
 
@@ -46,7 +47,7 @@ public class RotatingWeapon : ProjectileWeapon {
     }
 
     private void Rotate() {
-        float currentZRotation = weaponRotationPoint.localEulerAngles.z;
+        currentZRotation = weaponRotationPoint.localEulerAngles.z;
 
         if (_rotatingToMax) {
             currentZRotation = Mathf.MoveTowards(currentZRotation, maxZRotation, _rotationTempSpeed * Time.deltaTime);

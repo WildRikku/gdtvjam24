@@ -15,7 +15,7 @@ public class SpiderBazookaController : RotatingWeapon {
     public GameObject bombPrefab;
 
     public float shootingSpeed = 10f;
-    protected float shootingForceFactor;
+    public float shootingForceFactor;
 
     public ParticleSystem muzzleParticle;
     public CanvasGroup speedBarCG;
@@ -38,20 +38,20 @@ public class SpiderBazookaController : RotatingWeapon {
 
         base.Update();
 
-        if (_shootingState == ShootingStates.WaitingForForce) {
+        if (shootingState == ShootingStates.WaitingForForce) {
             shootingForceFactor = Mathf.Lerp(0, 1, (Mathf.Sin(Time.time * 0.5f * Mathf.PI * 2) + 1) / 2);
             speedBar.fillAmount = shootingForceFactor;
         }
 
         if (!isAiControled && Input.GetKeyDown(activationKey)) {
-            if (_shootingState != ShootingStates.Shot) {
+            if (shootingState != ShootingStates.Shot) {
                 NextState();
             }
         }
         
     }
     public void NextState() {
-        switch (_shootingState) {
+        switch (shootingState) {
             case ShootingStates.WaitingForForce:
                 // let player define force       
                 isActive = false; // deactivate
@@ -68,11 +68,7 @@ public class SpiderBazookaController : RotatingWeapon {
                 crosshairCG.alpha = 1;
                 break;
         }
-        _shootingState++;
-    }
-
-    private void SelectShootingForce() {
-
+        shootingState++;
     }
 
     protected void TriggerShot() {

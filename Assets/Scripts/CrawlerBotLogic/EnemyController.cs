@@ -57,12 +57,41 @@ public class EnemyController : SpiderController {
             case 3:
                 // activate dynamite
                 // TOOD: chose weapon
-                _gameController.ChangeWeapon(0);
-                // fire
-                playerController.weapon.Trigger();
+                _gameController.ChangeWeapon(1);
                 actionState = 4;
                 break;
             case 4:
+                // fire
+                // TODO ineffizient
+                if (playerController.weapon.GetType() == typeof(SpiderBazookaController) || playerController.weapon.GetType() == typeof(SpiderGrenadeController)) {
+                    SpiderBazookaController bazWeapon = ((SpiderBazookaController)playerController.weapon);
+                    switch (bazWeapon.shootingState) {
+                        case ShootingStates.Idle:
+                            bazWeapon.NextState();
+                            break;
+                        case ShootingStates.WaitingForAngle:
+                            float tol = 3f;
+                            float targetAngle = 120f;
+                            if(targetAngle - tol < bazWeapon.currentZRotation && targetAngle + tol > bazWeapon.currentZRotation) {
+                                bazWeapon.NextState();
+                            }
+                            break;
+                        case ShootingStates.WaitingForForce:
+                            float forceTol = .3f;
+                            float targetForce = .45f;
+                            if (targetForce - forceTol < bazWeapon.shootingForceFactor && targetForce + forceTol > bazWeapon.shootingForceFactor) {
+                                bazWeapon.NextState();
+                                actionState = 5;
+                            }
+                            break;
+                    }
+                }
+                else {
+                    playerController.weapon.Trigger();
+                    actionState = 5;
+                }
+                break;
+            case 5:
                 // retreat from dynamite
                 MoveSideways(-xDir);
                 break;
