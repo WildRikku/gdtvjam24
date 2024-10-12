@@ -53,11 +53,11 @@ public class EnemyController : SpiderController {
                 // wait for landing if necessary
                 if (Mathf.Abs(_rb.velocity.y) < Mathf.Epsilon)
                     actionState = 3;
-                    break;
+                break;
             case 3:
                 // activate dynamite
                 // TOOD: chose weapon
-                _gameController.ChangeWeapon(1);
+                _gameController.ChangeWeapon(Random.Range(0, 4));
                 actionState = 4;
                 break;
             case 4:
@@ -72,7 +72,7 @@ public class EnemyController : SpiderController {
                             break;
                         case ShootingStates.WaitingForAngle:
                             float tol = 3f;
-                            if(targetAngle - tol < bazWeapon.currentZRotation && targetAngle + tol > bazWeapon.currentZRotation) {
+                            if (targetAngle - tol < bazWeapon.currentZRotation && targetAngle + tol > bazWeapon.currentZRotation) {
                                 bazWeapon.NextState();
                             }
                             break;
