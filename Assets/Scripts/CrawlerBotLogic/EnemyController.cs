@@ -63,6 +63,7 @@ public class EnemyController : SpiderController {
             case 4:
                 // fire
                 // TODO ineffizient
+                float targetAngle = xDir > 0 ? 120f : 240f;
                 if (playerController.weapon.GetType() == typeof(SpiderBazookaController) || playerController.weapon.GetType() == typeof(SpiderGrenadeController)) {
                     SpiderBazookaController bazWeapon = ((SpiderBazookaController)playerController.weapon);
                     switch (bazWeapon.shootingState) {
@@ -71,7 +72,6 @@ public class EnemyController : SpiderController {
                             break;
                         case ShootingStates.WaitingForAngle:
                             float tol = 3f;
-                            float targetAngle = 120f;
                             if(targetAngle - tol < bazWeapon.currentZRotation && targetAngle + tol > bazWeapon.currentZRotation) {
                                 bazWeapon.NextState();
                             }
@@ -94,7 +94,6 @@ public class EnemyController : SpiderController {
                             break;
                         case ShootingStates.WaitingForAngle:
                             float tol = 3f;
-                            float targetAngle = 120f;
                             if (targetAngle - tol < minigun.currentZRotation && targetAngle + tol > minigun.currentZRotation) {
                                 minigun.NextState();
                                 actionState = 5;
