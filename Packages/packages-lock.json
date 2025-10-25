@@ -1,14 +1,14 @@
 {
   "dependencies": {
     "com.singularitygroup.hotreload": {
-      "version": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.12.12",
+      "version": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.13.11",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.ugui": "1.0.0",
         "com.unity.modules.unitywebrequest": "1.0.0"
       },
-      "hash": "56b69dfe27d695bee44ce09f419003c3c4ca9731"
+      "hash": "418da38db7660aeace39d62b620a6366ce1a8b15"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -188,9 +188,9 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {
+        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.director": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
       },
       "url": "https://packages.unity.com"
